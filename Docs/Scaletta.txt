@@ -1,0 +1,59 @@
+1. Analisi e Preparazione
+
+	Definire obiettivi specifici del sistema
+	Identificare i tipi di file da gestire
+	Stabilire i criteri di organizzazione
+	Creare dataset di test con vari tipi di file
+
+2. Sviluppo della Knowledge Base
+
+	Creare ontologia di base usando Protégé
+
+		Definire classi (tipi di file)
+		Definire proprietà (metadata)
+		Stabilire relazioni tra entità
+
+
+	Sviluppare regole di inferenza
+
+		Regole per la classificazione automatica
+		Regole per la risoluzione di conflitti
+		Regole per suggerimenti di organizzazione
+
+3. Estrazione di Feature
+
+	Implementare sistema di estrazione dei metadati dai file
+	Sviluppare feature aggiuntive (es. analisi di similarità)
+	Creare rappresentazione vettoriale dei file
+
+4. Componente di Machine Learning
+
+	Implementare kernel personalizzato per SVM
+	Sviluppare sistema di clustering per identificare gruppi di file simili
+	Creare meccanismo di apprendimento dai pattern di organizzazione
+
+5. Sistema di Integrazione
+
+	Combinare output della KB con i risultati del ML
+	Implementare meccanismo di decisione finale
+	Sviluppare sistema di feedback per migliorare le decisioni future
+
+6. Implementazione dell'Organizzatore
+
+	Creare interfaccia per l'analisi dei file
+	Sviluppare sistema di raccomandazione per la riorganizzazione
+	Implementare meccanismo di esecuzione della riorganizzazione
+
+7. Valutazione e Testing
+
+	Definire metriche di valutazione
+	Condurre test con cross-validation
+	Analizzare la complessità della KB
+	Confrontare con baseline e approcci alternativi
+
+8. Documentazione
+
+	Documentare decisioni di progetto
+	Descrivere la struttura della KB
+	Analizzare i risultati sperimentali
+	Discutere limitazioni e possibili miglioramenti

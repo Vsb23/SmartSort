@@ -1,0 +1,25 @@
+L'obiettivo del progetto è quello di creare un agente in grado di organizzare vari tipi di documenti, per il momento testuali, in varie cartelle senza che l'utente debba fare alcun intervento, eccezion fatta per la fornitura dei vari documenti. 
+
+Il sistema dovrà dunque cercare di costruire le relazioni tra i vari documenti e cercare il modo migliore di organizzarli, a seconda del contenuto.
+
+I tipi di file da categorizzare saranno i seguenti:
+
+	Pdf 
+	txt
+	tex, con i suoi vari file aggiuntivi
+	.tar
+	file di codice (la maggior parte in python)
+	html (pagine web)
+	.xlsx
+	.docx
+
+Quindi essenzialmente avremo dei documenti scientifici, degli appunti universitari, dei programmi, dei progetti personali e delle pagine web 
+
+I criteri di organizzazione saranno dunque i seguenti: 
+
+Gli appunti universitari devono essere catalogati in base 
+
+	
+	
+	
+	

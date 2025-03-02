@@ -1,0 +1,49 @@
+\documentclass[a4paper,10pt,titlepage]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[a4paper]{geometry}
+\usepackage[italian]{babel}
+\usepackage{cancel}
+\usepackage{multicol}
+\usepackage{fancyvrb}
+\usepackage{fancyhdr, lastpage}
+\usepackage{xcolor}
+\usepackage{wrapfig}
+\usepackage{subfig}
+\usepackage{tikz,lmodern}
+\usepackage[most]{tcolorbox}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{dirtree}
+\pagestyle{fancy}
+\lhead{Appunti di Ingegneria della Conoscenza}
+\rhead{Vito Stefano Birardi}
+\cfoot{\ }
+\rfoot{Pagina \thepage\ di \pageref{LastPage}}
+\usepackage{etoolbox}
+\patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{}
+\title{directory source tree}
+\author{Vito Stefano Birardi}
+\date{\today}
+
+\begin{document}
+    
+\begin{titlepage}
+    \centering
+    \maketitle
+\end{titlepage}
+    
+\tableofcontents
+\newpage
+
+
+\dirtree{%
+.1 /.
+.2 Plinio.
+.3 Introduzione.
+.4 Paolo.
+}
+
+
+
+\end{document}
