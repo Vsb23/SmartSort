@@ -105,6 +105,38 @@
     <Declaration>
         <Class IRI="#Woodcutting"/>
     </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#belongsTo"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#contains"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasLocation"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isRelatedTo"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="#Code"/>
+        <Class IRI="#Code_link"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Docs"/>
+        <Class IRI="#Docs_link"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Esercizi"/>
+        <Class IRI="#Esercizi_link"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Libri_link"/>
+        <Class IRI="#Programming"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Slide"/>
+        <Class IRI="#Slide_link"/>
+    </EquivalentClasses>
     <SubClassOf>
         <Class IRI="#A.A"/>
         <Class IRI="#Università"/>
@@ -213,6 +245,18 @@
         <Class IRI="#Woodcutting"/>
         <Class IRI="#Textbook"/>
     </SubClassOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#contains"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <ObjectPropertyDomain>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+        <Class IRI="#Code"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+        <Class IRI="#Code_link"/>
+    </ObjectPropertyDomain>
 </Ontology>
 
 
