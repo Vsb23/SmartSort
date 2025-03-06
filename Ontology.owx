@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/stefa/ontologies/2025/2/untitled-ontology-3"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/stefa/ontologies/2025/2/untitled-ontology-3">
+    <Prefix name="" IRI="http://www.semanticweb.org/stefa/ontologies/2025/2/untitled-ontology-3/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#A.A"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Administration"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Appunti"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Articles"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Book"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Code"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Code_link"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Corso"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Design"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Docs"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Docs_link"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Electronics"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Esercizi"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Esercizi_link"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GP"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Healthcare"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Ittiology"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Latex"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Libri_link"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Materiale"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Programming"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Science"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Slide"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Slide_link"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Templates"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Textbook"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Università"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#VSB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Woodcutting"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#A.A"/>
+        <Class IRI="#Università"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Appunti"/>
+        <Class IRI="#Corso"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Articles"/>
+        <Class IRI="#Book"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Code"/>
+        <Class IRI="#Materiale"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Code_link"/>
+        <Class IRI="#Appunti"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Corso"/>
+        <Class IRI="#A.A"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Design"/>
+        <Class IRI="#Articles"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Docs"/>
+        <Class IRI="#Administration"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Docs_link"/>
+        <Class IRI="#Università"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Electronics"/>
+        <Class IRI="#Textbook"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Esercizi"/>
+        <Class IRI="#Materiale"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Esercizi_link"/>
+        <Class IRI="#Appunti"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GP"/>
+        <Class IRI="#Healthcare"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Healthcare"/>
+        <Class IRI="#Administration"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Ittiology"/>
+        <Class IRI="#Textbook"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LB"/>
+        <Class IRI="#Healthcare"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Latex"/>
+        <Class IRI="#Templates"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Libri_link"/>
+        <Class IRI="#Materiale"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MB"/>
+        <Class IRI="#Healthcare"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Materiale"/>
+        <Class IRI="#A.A"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Programming"/>
+        <Class IRI="#Textbook"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Science"/>
+        <Class IRI="#Articles"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Slide"/>
+        <Class IRI="#Materiale"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Slide_link"/>
+        <Class IRI="#Appunti"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Textbook"/>
+        <Class IRI="#Book"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#VSB"/>
+        <Class IRI="#Healthcare"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Woodcutting"/>
+        <Class IRI="#Textbook"/>
+    </SubClassOf>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
