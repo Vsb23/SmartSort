@@ -1,0 +1,54 @@
+1. Differenza tra Risorse e Posizioni
+
+    Risorse: Sono gli oggetti che hanno una posizione. Ad esempio:
+
+        Un file LaTeX (Latex).
+
+        Un documento di elettronica (Electronics).
+
+        Un libro di programmazione (Programming).
+
+        Una ricevuta ospedaliera (Healthcare).
+
+        Una slide (Slide).
+
+        Un esercizio (Esercizi).
+
+    Posizioni: Sono i luoghi in cui le risorse sono collocate. Ad esempio:
+
+        Una cartella (Corso, Healthcare).
+
+        Un link a una cartella (Code_link, Slide_link, Docs_link).
+
+2. Perché Alcune Classi Sono Considerate Risorse
+
+Ecco perché alcune classi nel tuo range attuale sono considerate risorse:
+Classi che Rappresentano Risorse:
+
+    Latex: Rappresenta file LaTeX (ad esempio, template o documenti). Questi sono contenuti, non posizioni.
+
+    Electronics: Rappresenta materiale elettronico (ad esempio, schemi, progetti). Anche questi sono contenuti.
+
+    Programming: Rappresenta materiale di programmazione (ad esempio, codice, tutorial). Ancora una volta, sono contenuti.
+
+    Woodcutting: Rappresenta materiale sul taglio del legno. È un contenuto.
+
+    Ittiology: Rappresenta materiale sull'ittiologia (studio dei pesci). È un contenuto.
+
+Classi che Rappresentano Posizioni:
+
+    Corso: Rappresenta una cartella per un corso specifico. È una posizione.
+
+    Healthcare: Rappresenta una cartella per documenti clinici. È una posizione.
+
+    Code_link, Slide_link, Docs_link, Esercizi_link, Libri_link: Rappresentano collegamenti a cartelle o risorse esterne. Sono posizioni (anche se sono link).
+
+3. Perché è Importante Distinguere tra Risorse e Posizioni
+
+Distinguere tra risorse e posizioni è fondamentale per mantenere l'ontologia chiara e coerente:
+
+    Risorse: Devono essere nel dominio di hasLocation, poiché sono gli oggetti che hanno una posizione.
+
+    Posizioni: Devono essere nel range di hasLocation, poiché rappresentano dove le risorse sono collocate.
+
+Se mescoli risorse e posizioni nel range, rischi di creare confusione e inconsistenze nell'ontologia.
