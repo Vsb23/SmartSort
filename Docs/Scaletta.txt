@@ -1,16 +1,16 @@
 1. Analisi e Preparazione
 
-	Definire obiettivi specifici del sistema
-	Identificare i tipi di file da gestire
-	Stabilire i criteri di organizzazione
-	Creare dataset di test con vari tipi di file
+✓ 	Definire obiettivi specifici del sistema
+✓ 	Identificare i tipi di file da gestire
+✓ 	Stabilire i criteri di organizzazione
+✓ 	Creare dataset di test con vari tipi di file
 
 2. Sviluppo della Knowledge Base
 
-	Creare ontologia di base usando Protégé
+✓ 	Creare ontologia di base usando Protégé
 
-		Definire classi (tipi di file)
-		Definire proprietà (metadata)
+✓ 		Definire classi (tipi di file)
+✓ 		Definire proprietà (metadata)
 		Stabilire relazioni tra entità
 
 
