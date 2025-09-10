@@ -67,6 +67,9 @@
         <Class IRI="#LB"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#LDP"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#Latex"/>
     </Declaration>
     <Declaration>
