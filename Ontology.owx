@@ -1,824 +1,875 @@
 <?xml version="1.0"?>
 <Ontology xmlns="http://www.w3.org/2002/07/owl#"
-    xml:base="http://www.semanticweb.org/stefa/ontologies/2025/2/untitled-ontology-3"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:xml="http://www.w3.org/XML/1998/namespace"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    ontologyIRI="http://www.semanticweb.org/stefa/ontologies/2025/2/untitled-ontology-3">
-    <Prefix name="" IRI="http://www.semanticweb.org/stefa/ontologies/2025/2/untitled-ontology-3/" />
-    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#" />
-    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#" />
-    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace" />
-    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#" />
-    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#" />
+     xml:base="http://www.semanticweb.org/stefa/ontologies/2025/2/untitled-ontology-3"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/stefa/ontologies/2025/2/untitled-ontology-3">
+    <Prefix name="" IRI="http://www.semanticweb.org/stefa/ontologies/2025/2/untitled-ontology-3/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
     <Declaration>
-        <Class IRI="#A.A" />
+        <Class IRI="#A.A"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Administration" />
+        <Class IRI="#Administration"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Appunti" />
+        <Class IRI="#Appunti"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Articles" />
+        <Class IRI="#Articles"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Book" />
+        <Class IRI="#Book"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Code" />
+        <Class IRI="#C"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Code_link" />
+        <Class IRI="#Code"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Corso" />
+        <Class IRI="#Code_link"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Design" />
+        <Class IRI="#Corso"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Docs" />
+        <Class IRI="#Design"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Docs_link" />
+        <Class IRI="#Docs"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Electronics" />
+        <Class IRI="#Docs_link"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Esercizi" />
+        <Class IRI="#Electronics"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Esercizi_link" />
+        <Class IRI="#Esercizi"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#GP" />
+        <Class IRI="#Esercizi_link"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Healthcare" />
+        <Class IRI="#GP"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Ittiology" />
+        <Class IRI="#Healthcare"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#LB" />
+        <Class IRI="#Ittiology"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#LDP" />
+        <Class IRI="#Java"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Latex" />
+        <Class IRI="#LB"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Libri_link" />
+        <Class IRI="#LDP"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#MB" />
+        <Class IRI="#Latex"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Materiale" />
+        <Class IRI="#Libri_link"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Programming" />
+        <Class IRI="#MB"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Science" />
+        <Class IRI="#Materiale"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Slide" />
+        <Class IRI="#Programming"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Slide_link" />
+        <Class IRI="#Python"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Templates" />
+        <Class IRI="#SQL"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Textbook" />
+        <Class IRI="#Science"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Università" />
+        <Class IRI="#Scripts"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#VSB" />
+        <Class IRI="#Slide"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Woodcutting" />
+        <Class IRI="#Slide_link"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#belongsTo" />
+        <Class IRI="#Templates"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#containes_materiale" />
+        <Class IRI="#Textbook"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#contains" />
+        <Class IRI="#Università"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#contains_A.A" />
+        <Class IRI="#VSB"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#contains_administration" />
+        <Class IRI="#Web"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#contains_appunti" />
+        <Class IRI="#Woodcutting"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#contains_articles" />
+        <Class IRI="#C++"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#contains_book" />
+        <ObjectProperty IRI="#belongsTo"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#contains_corso" />
+        <ObjectProperty IRI="#containes_materiale"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#contains_healthcare" />
+        <ObjectProperty IRI="#contains"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#contains_templates" />
+        <ObjectProperty IRI="#contains_A.A"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#contains_textbook" />
+        <ObjectProperty IRI="#contains_administration"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#contains_università" />
+        <ObjectProperty IRI="#contains_appunti"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#hasLocation" />
+        <ObjectProperty IRI="#contains_articles"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#isRelatedTo" />
+        <ObjectProperty IRI="#contains_book"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#isRelatedTo_Code" />
+        <ObjectProperty IRI="#contains_corso"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#isRelatedTo_Docs" />
+        <ObjectProperty IRI="#contains_healthcare"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#isRelatedTo_Esercizi" />
+        <ObjectProperty IRI="#contains_templates"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#isRelatedTo_Libri" />
+        <ObjectProperty IRI="#contains_textbook"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#isRelatedTo_Slide" />
+        <ObjectProperty IRI="#contains_università"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasLocation"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isRelatedTo"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isRelatedTo_Code"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isRelatedTo_Docs"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isRelatedTo_Esercizi"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isRelatedTo_Libri"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isRelatedTo_Slide"/>
     </Declaration>
     <EquivalentClasses>
-        <Class IRI="#Code" />
-        <Class IRI="#Code_link" />
+        <Class IRI="#Code"/>
+        <Class IRI="#Code_link"/>
     </EquivalentClasses>
     <EquivalentClasses>
-        <Class IRI="#Docs" />
-        <Class IRI="#Docs_link" />
+        <Class IRI="#Docs"/>
+        <Class IRI="#Docs_link"/>
     </EquivalentClasses>
     <EquivalentClasses>
-        <Class IRI="#Esercizi" />
-        <Class IRI="#Esercizi_link" />
+        <Class IRI="#Esercizi"/>
+        <Class IRI="#Esercizi_link"/>
     </EquivalentClasses>
     <EquivalentClasses>
-        <Class IRI="#Libri_link" />
-        <Class IRI="#Programming" />
+        <Class IRI="#Libri_link"/>
+        <Class IRI="#Programming"/>
     </EquivalentClasses>
     <EquivalentClasses>
-        <Class IRI="#Slide" />
-        <Class IRI="#Slide_link" />
+        <Class IRI="#Slide"/>
+        <Class IRI="#Slide_link"/>
     </EquivalentClasses>
     <SubClassOf>
-        <Class IRI="#A.A" />
-        <Class IRI="#Università" />
+        <Class IRI="#A.A"/>
+        <Class IRI="#Università"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Appunti" />
-        <Class IRI="#Corso" />
+        <Class IRI="#Appunti"/>
+        <Class IRI="#Corso"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Articles" />
-        <Class IRI="#Book" />
+        <Class IRI="#Articles"/>
+        <Class IRI="#Book"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Code" />
-        <Class IRI="#Materiale" />
+        <Class IRI="#C"/>
+        <Class IRI="#LDP"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Code_link" />
-        <Class IRI="#Appunti" />
+        <Class IRI="#Code"/>
+        <Class IRI="#Materiale"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Corso" />
-        <Class IRI="#A.A" />
+        <Class IRI="#Code_link"/>
+        <Class IRI="#Appunti"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Design" />
-        <Class IRI="#Articles" />
+        <Class IRI="#Corso"/>
+        <Class IRI="#A.A"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Docs" />
-        <Class IRI="#Administration" />
+        <Class IRI="#Design"/>
+        <Class IRI="#Articles"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Docs_link" />
-        <Class IRI="#Università" />
+        <Class IRI="#Docs"/>
+        <Class IRI="#Administration"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Electronics" />
-        <Class IRI="#Textbook" />
+        <Class IRI="#Docs_link"/>
+        <Class IRI="#Università"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Esercizi" />
-        <Class IRI="#Materiale" />
+        <Class IRI="#Electronics"/>
+        <Class IRI="#Textbook"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Esercizi_link" />
-        <Class IRI="#Appunti" />
+        <Class IRI="#Esercizi"/>
+        <Class IRI="#Materiale"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#GP" />
-        <Class IRI="#Healthcare" />
+        <Class IRI="#Esercizi_link"/>
+        <Class IRI="#Appunti"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Healthcare" />
-        <Class IRI="#Administration" />
+        <Class IRI="#GP"/>
+        <Class IRI="#Healthcare"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Ittiology" />
-        <Class IRI="#Textbook" />
+        <Class IRI="#Healthcare"/>
+        <Class IRI="#Administration"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#LB" />
-        <Class IRI="#Healthcare" />
+        <Class IRI="#Ittiology"/>
+        <Class IRI="#Textbook"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Latex" />
-        <Class IRI="#Templates" />
+        <Class IRI="#Java"/>
+        <Class IRI="#LDP"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Libri_link" />
-        <Class IRI="#Materiale" />
+        <Class IRI="#LB"/>
+        <Class IRI="#Healthcare"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#MB" />
-        <Class IRI="#Healthcare" />
+        <Class IRI="#Latex"/>
+        <Class IRI="#Templates"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Materiale" />
-        <Class IRI="#A.A" />
+        <Class IRI="#Libri_link"/>
+        <Class IRI="#Materiale"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Programming" />
-        <Class IRI="#Textbook" />
+        <Class IRI="#MB"/>
+        <Class IRI="#Healthcare"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Science" />
-        <Class IRI="#Articles" />
+        <Class IRI="#Materiale"/>
+        <Class IRI="#A.A"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Slide" />
-        <Class IRI="#Materiale" />
+        <Class IRI="#Programming"/>
+        <Class IRI="#Textbook"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Slide_link" />
-        <Class IRI="#Appunti" />
+        <Class IRI="#Python"/>
+        <Class IRI="#LDP"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Textbook" />
-        <Class IRI="#Book" />
+        <Class IRI="#SQL"/>
+        <Class IRI="#LDP"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#VSB" />
-        <Class IRI="#Healthcare" />
+        <Class IRI="#Science"/>
+        <Class IRI="#Articles"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Woodcutting" />
-        <Class IRI="#Textbook" />
+        <Class IRI="#Scripts"/>
+        <Class IRI="#LDP"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Slide"/>
+        <Class IRI="#Materiale"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Slide_link"/>
+        <Class IRI="#Appunti"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Textbook"/>
+        <Class IRI="#Book"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#VSB"/>
+        <Class IRI="#Healthcare"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Web"/>
+        <Class IRI="#LDP"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Woodcutting"/>
+        <Class IRI="#Textbook"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#C++"/>
+        <Class IRI="#LDP"/>
     </SubClassOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#containes_materiale" />
-        <ObjectProperty IRI="#contains_A.A" />
+        <ObjectProperty IRI="#containes_materiale"/>
+        <ObjectProperty IRI="#contains_A.A"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_A.A" />
-        <ObjectProperty IRI="#contains_università" />
+        <ObjectProperty IRI="#contains_A.A"/>
+        <ObjectProperty IRI="#contains_università"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_administration" />
-        <ObjectProperty IRI="#contains" />
+        <ObjectProperty IRI="#contains_administration"/>
+        <ObjectProperty IRI="#contains"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_appunti" />
-        <ObjectProperty IRI="#contains_corso" />
+        <ObjectProperty IRI="#contains_appunti"/>
+        <ObjectProperty IRI="#contains_corso"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_articles" />
-        <ObjectProperty IRI="#contains_book" />
+        <ObjectProperty IRI="#contains_articles"/>
+        <ObjectProperty IRI="#contains_book"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_book" />
-        <ObjectProperty IRI="#contains" />
+        <ObjectProperty IRI="#contains_book"/>
+        <ObjectProperty IRI="#contains"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_corso" />
-        <ObjectProperty IRI="#contains_A.A" />
+        <ObjectProperty IRI="#contains_corso"/>
+        <ObjectProperty IRI="#contains_A.A"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_healthcare" />
-        <ObjectProperty IRI="#contains_administration" />
+        <ObjectProperty IRI="#contains_healthcare"/>
+        <ObjectProperty IRI="#contains_administration"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_templates" />
-        <ObjectProperty IRI="#contains" />
+        <ObjectProperty IRI="#contains_templates"/>
+        <ObjectProperty IRI="#contains"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_textbook" />
-        <ObjectProperty IRI="#contains_book" />
+        <ObjectProperty IRI="#contains_textbook"/>
+        <ObjectProperty IRI="#contains_book"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_università" />
-        <ObjectProperty IRI="#contains" />
+        <ObjectProperty IRI="#contains_università"/>
+        <ObjectProperty IRI="#contains"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isRelatedTo_Code" />
-        <ObjectProperty IRI="#isRelatedTo" />
+        <ObjectProperty IRI="#isRelatedTo_Code"/>
+        <ObjectProperty IRI="#isRelatedTo"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isRelatedTo_Docs" />
-        <ObjectProperty IRI="#isRelatedTo" />
+        <ObjectProperty IRI="#isRelatedTo_Docs"/>
+        <ObjectProperty IRI="#isRelatedTo"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isRelatedTo_Esercizi" />
-        <ObjectProperty IRI="#isRelatedTo" />
+        <ObjectProperty IRI="#isRelatedTo_Esercizi"/>
+        <ObjectProperty IRI="#isRelatedTo"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isRelatedTo_Libri" />
-        <ObjectProperty IRI="#isRelatedTo" />
+        <ObjectProperty IRI="#isRelatedTo_Libri"/>
+        <ObjectProperty IRI="#isRelatedTo"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isRelatedTo_Slide" />
-        <ObjectProperty IRI="#isRelatedTo" />
+        <ObjectProperty IRI="#isRelatedTo_Slide"/>
+        <ObjectProperty IRI="#isRelatedTo"/>
     </SubObjectPropertyOf>
     <InverseObjectProperties>
-        <ObjectProperty IRI="#belongsTo" />
-        <ObjectProperty IRI="#contains" />
+        <ObjectProperty IRI="#belongsTo"/>
+        <ObjectProperty IRI="#contains"/>
     </InverseObjectProperties>
     <SymmetricObjectProperty>
-        <ObjectProperty IRI="#isRelatedTo_Code" />
+        <ObjectProperty IRI="#isRelatedTo_Code"/>
     </SymmetricObjectProperty>
     <SymmetricObjectProperty>
-        <ObjectProperty IRI="#isRelatedTo_Docs" />
+        <ObjectProperty IRI="#isRelatedTo_Docs"/>
     </SymmetricObjectProperty>
     <SymmetricObjectProperty>
-        <ObjectProperty IRI="#isRelatedTo_Esercizi" />
+        <ObjectProperty IRI="#isRelatedTo_Esercizi"/>
     </SymmetricObjectProperty>
     <SymmetricObjectProperty>
-        <ObjectProperty IRI="#isRelatedTo_Libri" />
+        <ObjectProperty IRI="#isRelatedTo_Libri"/>
     </SymmetricObjectProperty>
     <SymmetricObjectProperty>
-        <ObjectProperty IRI="#isRelatedTo_Slide" />
+        <ObjectProperty IRI="#isRelatedTo_Slide"/>
     </SymmetricObjectProperty>
     <TransitiveObjectProperty>
-        <ObjectProperty IRI="#hasLocation" />
+        <ObjectProperty IRI="#hasLocation"/>
     </TransitiveObjectProperty>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#containes_materiale" />
-        <Class IRI="#Materiale" />
+        <ObjectProperty IRI="#containes_materiale"/>
+        <Class IRI="#Materiale"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains" />
-        <Class IRI="#Administration" />
+        <ObjectProperty IRI="#contains"/>
+        <Class IRI="#Administration"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains" />
-        <Class IRI="#Book" />
+        <ObjectProperty IRI="#contains"/>
+        <Class IRI="#Book"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains" />
-        <Class IRI="#Templates" />
+        <ObjectProperty IRI="#contains"/>
+        <Class IRI="#Templates"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains" />
-        <Class IRI="#Università" />
+        <ObjectProperty IRI="#contains"/>
+        <Class IRI="#Università"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_A.A" />
-        <Class IRI="#A.A" />
+        <ObjectProperty IRI="#contains_A.A"/>
+        <Class IRI="#A.A"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_administration" />
-        <Class IRI="#Administration" />
+        <ObjectProperty IRI="#contains_administration"/>
+        <Class IRI="#Administration"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_appunti" />
-        <Class IRI="#Appunti" />
+        <ObjectProperty IRI="#contains_appunti"/>
+        <Class IRI="#Appunti"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_articles" />
-        <Class IRI="#Articles" />
+        <ObjectProperty IRI="#contains_articles"/>
+        <Class IRI="#Articles"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_book" />
-        <Class IRI="#Book" />
+        <ObjectProperty IRI="#contains_book"/>
+        <Class IRI="#Book"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_corso" />
-        <Class IRI="#Corso" />
+        <ObjectProperty IRI="#contains_corso"/>
+        <Class IRI="#Corso"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_healthcare" />
-        <Class IRI="#Healthcare" />
+        <ObjectProperty IRI="#contains_healthcare"/>
+        <Class IRI="#Healthcare"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_templates" />
-        <Class IRI="#Templates" />
+        <ObjectProperty IRI="#contains_templates"/>
+        <Class IRI="#Templates"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_textbook" />
-        <Class IRI="#Textbook" />
+        <ObjectProperty IRI="#contains_textbook"/>
+        <Class IRI="#Textbook"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_università" />
-        <Class IRI="#Università" />
+        <ObjectProperty IRI="#contains_università"/>
+        <Class IRI="#Università"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Code" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Code"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Design" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Design"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Docs" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Docs"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Electronics" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Electronics"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Esercizi" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Esercizi"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#GP" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#GP"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Ittiology" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Ittiology"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#LB" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#LB"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Latex" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Latex"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#MB" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#MB"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Programming" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Programming"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Science" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Science"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Slide" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Slide"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#VSB" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#VSB"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Woodcutting" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Woodcutting"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Code" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Code"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Code_link" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Code_link"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Docs" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Docs"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Docs_link" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Docs_link"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Esercizi" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Esercizi"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Esercizi_link" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Esercizi_link"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Libri_link" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Libri_link"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Programming" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Programming"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Slide" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Slide"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Slide_link" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Slide_link"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo_Code" />
-        <Class IRI="#Code_link" />
+        <ObjectProperty IRI="#isRelatedTo_Code"/>
+        <Class IRI="#Code_link"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo_Docs" />
-        <Class IRI="#Docs_link" />
+        <ObjectProperty IRI="#isRelatedTo_Docs"/>
+        <Class IRI="#Docs_link"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo_Esercizi" />
-        <Class IRI="#Esercizi_link" />
+        <ObjectProperty IRI="#isRelatedTo_Esercizi"/>
+        <Class IRI="#Esercizi_link"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo_Libri" />
-        <Class IRI="#Libri_link" />
+        <ObjectProperty IRI="#isRelatedTo_Libri"/>
+        <Class IRI="#Libri_link"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo_Slide" />
-        <Class IRI="#Slide_link" />
+        <ObjectProperty IRI="#isRelatedTo_Slide"/>
+        <Class IRI="#Slide_link"/>
     </ObjectPropertyDomain>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale" />
-        <Class IRI="#Code" />
+        <ObjectProperty IRI="#containes_materiale"/>
+        <Class IRI="#Code"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale" />
-        <Class IRI="#Code_link" />
+        <ObjectProperty IRI="#containes_materiale"/>
+        <Class IRI="#Code_link"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale" />
-        <Class IRI="#Esercizi" />
+        <ObjectProperty IRI="#containes_materiale"/>
+        <Class IRI="#Esercizi"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale" />
-        <Class IRI="#Esercizi_link" />
+        <ObjectProperty IRI="#containes_materiale"/>
+        <Class IRI="#Esercizi_link"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale" />
-        <Class IRI="#Libri_link" />
+        <ObjectProperty IRI="#containes_materiale"/>
+        <Class IRI="#Libri_link"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale" />
-        <Class IRI="#Programming" />
+        <ObjectProperty IRI="#containes_materiale"/>
+        <Class IRI="#Programming"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale" />
-        <Class IRI="#Slide" />
+        <ObjectProperty IRI="#containes_materiale"/>
+        <Class IRI="#Slide"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale" />
-        <Class IRI="#Slide_link" />
+        <ObjectProperty IRI="#containes_materiale"/>
+        <Class IRI="#Slide_link"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains" />
-        <Class IRI="#A.A" />
+        <ObjectProperty IRI="#contains"/>
+        <Class IRI="#A.A"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains" />
-        <Class IRI="#Articles" />
+        <ObjectProperty IRI="#contains"/>
+        <Class IRI="#Articles"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains" />
-        <Class IRI="#Docs" />
+        <ObjectProperty IRI="#contains"/>
+        <Class IRI="#Docs"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains" />
-        <Class IRI="#Healthcare" />
+        <ObjectProperty IRI="#contains"/>
+        <Class IRI="#Healthcare"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains" />
-        <Class IRI="#Latex" />
+        <ObjectProperty IRI="#contains"/>
+        <Class IRI="#Latex"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains" />
-        <Class IRI="#Textbook" />
+        <ObjectProperty IRI="#contains"/>
+        <Class IRI="#Textbook"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_A.A" />
-        <Class IRI="#Corso" />
+        <ObjectProperty IRI="#contains_A.A"/>
+        <Class IRI="#Corso"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_A.A" />
-        <Class IRI="#Materiale" />
+        <ObjectProperty IRI="#contains_A.A"/>
+        <Class IRI="#Materiale"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_administration" />
-        <Class IRI="#Docs" />
+        <ObjectProperty IRI="#contains_administration"/>
+        <Class IRI="#Docs"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_administration" />
-        <Class IRI="#Docs_link" />
+        <ObjectProperty IRI="#contains_administration"/>
+        <Class IRI="#Docs_link"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_administration" />
-        <Class IRI="#Healthcare" />
+        <ObjectProperty IRI="#contains_administration"/>
+        <Class IRI="#Healthcare"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_appunti" />
-        <Class IRI="#Code" />
+        <ObjectProperty IRI="#contains_appunti"/>
+        <Class IRI="#Code"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_appunti" />
-        <Class IRI="#Code_link" />
+        <ObjectProperty IRI="#contains_appunti"/>
+        <Class IRI="#Code_link"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_appunti" />
-        <Class IRI="#Esercizi" />
+        <ObjectProperty IRI="#contains_appunti"/>
+        <Class IRI="#Esercizi"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_appunti" />
-        <Class IRI="#Esercizi_link" />
+        <ObjectProperty IRI="#contains_appunti"/>
+        <Class IRI="#Esercizi_link"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_appunti" />
-        <Class IRI="#Slide" />
+        <ObjectProperty IRI="#contains_appunti"/>
+        <Class IRI="#Slide"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_appunti" />
-        <Class IRI="#Slide_link" />
+        <ObjectProperty IRI="#contains_appunti"/>
+        <Class IRI="#Slide_link"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_articles" />
-        <Class IRI="#Design" />
+        <ObjectProperty IRI="#contains_articles"/>
+        <Class IRI="#Design"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_articles" />
-        <Class IRI="#Science" />
+        <ObjectProperty IRI="#contains_articles"/>
+        <Class IRI="#Science"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_book" />
-        <Class IRI="#Articles" />
+        <ObjectProperty IRI="#contains_book"/>
+        <Class IRI="#Articles"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_book" />
-        <Class IRI="#Textbook" />
+        <ObjectProperty IRI="#contains_book"/>
+        <Class IRI="#Textbook"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_corso" />
-        <Class IRI="#Appunti" />
+        <ObjectProperty IRI="#contains_corso"/>
+        <Class IRI="#Appunti"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_healthcare" />
-        <Class IRI="#GP" />
+        <ObjectProperty IRI="#contains_healthcare"/>
+        <Class IRI="#GP"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_healthcare" />
-        <Class IRI="#LB" />
+        <ObjectProperty IRI="#contains_healthcare"/>
+        <Class IRI="#LB"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_healthcare" />
-        <Class IRI="#MB" />
+        <ObjectProperty IRI="#contains_healthcare"/>
+        <Class IRI="#MB"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_healthcare" />
-        <Class IRI="#VSB" />
+        <ObjectProperty IRI="#contains_healthcare"/>
+        <Class IRI="#VSB"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_templates" />
-        <Class IRI="#Latex" />
+        <ObjectProperty IRI="#contains_templates"/>
+        <Class IRI="#Latex"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_textbook" />
-        <Class IRI="#Electronics" />
+        <ObjectProperty IRI="#contains_textbook"/>
+        <Class IRI="#Electronics"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_textbook" />
-        <Class IRI="#Ittiology" />
+        <ObjectProperty IRI="#contains_textbook"/>
+        <Class IRI="#Ittiology"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_textbook" />
-        <Class IRI="#Libri_link" />
+        <ObjectProperty IRI="#contains_textbook"/>
+        <Class IRI="#Libri_link"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_textbook" />
-        <Class IRI="#Programming" />
+        <ObjectProperty IRI="#contains_textbook"/>
+        <Class IRI="#Programming"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_textbook" />
-        <Class IRI="#Woodcutting" />
+        <ObjectProperty IRI="#contains_textbook"/>
+        <Class IRI="#Woodcutting"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_università" />
-        <Class IRI="#A.A" />
+        <ObjectProperty IRI="#contains_università"/>
+        <Class IRI="#A.A"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_università" />
-        <Class IRI="#Docs" />
+        <ObjectProperty IRI="#contains_università"/>
+        <Class IRI="#Docs"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_università" />
-        <Class IRI="#Docs_link" />
+        <ObjectProperty IRI="#contains_università"/>
+        <Class IRI="#Docs_link"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#A.A" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#A.A"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Administration" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Administration"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Articles" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Articles"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Healthcare" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Healthcare"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Templates" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Templates"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasLocation" />
-        <Class IRI="#Textbook" />
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Textbook"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Code" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Code"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Code_link" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Code_link"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Docs" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Docs"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Docs_link" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Docs_link"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Esercizi" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Esercizi"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Esercizi_link" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Esercizi_link"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Libri_link" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Libri_link"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Programming" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Programming"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Slide" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Slide"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo" />
-        <Class IRI="#Slide_link" />
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Slide_link"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo_Code" />
-        <Class IRI="#Code" />
+        <ObjectProperty IRI="#isRelatedTo_Code"/>
+        <Class IRI="#Code"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo_Docs" />
-        <Class IRI="#Docs" />
+        <ObjectProperty IRI="#isRelatedTo_Docs"/>
+        <Class IRI="#Docs"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo_Esercizi" />
-        <Class IRI="#Esercizi" />
+        <ObjectProperty IRI="#isRelatedTo_Esercizi"/>
+        <Class IRI="#Esercizi"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo_Libri" />
-        <Class IRI="#Programming" />
+        <ObjectProperty IRI="#isRelatedTo_Libri"/>
+        <Class IRI="#Programming"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo_Slide" />
-        <Class IRI="#Slide" />
+        <ObjectProperty IRI="#isRelatedTo_Slide"/>
+        <Class IRI="#Slide"/>
     </ObjectPropertyRange>
 </Ontology>
 
 
+
 <!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
