@@ -202,6 +202,10 @@
         <Class IRI="#Esercizi_link"/>
     </EquivalentClasses>
     <EquivalentClasses>
+        <Class IRI="#Esercizi"/>
+        <Class IRI="#LDP"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
         <Class IRI="#Libri_link"/>
         <Class IRI="#Programming"/>
     </EquivalentClasses>
