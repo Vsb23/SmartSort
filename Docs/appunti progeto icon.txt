@@ -1,0 +1,19 @@
+Per la  parte di ml, è creare un modello che classifica i files a livell odi argomenti trattati. 
+
+Tu definisu i una serie di argoemnti (da vedere) e il modello dato in input un oducemnto, restituisce l'arogeomtno/ categoria. Potremmo valutare una multilabel calssification: restituisce in output le tre migliro categorie, in base ad un parametro definito. 
+
+Al posto id far eun'onotologia, che definisce delle regole dove si inseriscon oe categorie, si può dfare un'ontologia per le varie caegorie: se magari questo odcumento ha una categoria, ma anche un'altra o una percentuale di essa, allora è più adatta. MULTI LABEL CLASSIFICATION, non multi class. 
+Oltre alle classi sarebbe utile avere la percentuale di similarita ad una determinata categoria, estesa a le prime tre (miglior iper similarità). 
+
+i passi: 
+
+Si passa il documento a l modello
+il modello ti dà le classi di appartenenza e la percentuale corrispondente per ognuna di esse 
+con questi elementi riiusciamo a effettuare i vair inserimenti nelle cartelle  
+
+Possiamo implementare anche dei CSP, con la sintassi per cui viene chhiesto alla knoledge base se esistono degli elelementi che soddisfano il vincolo (proprietà) domandato, e il modello risposnde o con sì, elencando quindi gli elelemnti che soddisfano il vinoclo, o con no. 
+
+Utilizzare un csp che tramite le cateogrie ottneute dal ml e le percentuali, trovi la cartella migliore per io ldocuemnto e i vincoli del csp vengono definite in una kb (prolog). 
+
+
+ 
