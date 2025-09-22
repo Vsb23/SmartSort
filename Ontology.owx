@@ -1,879 +1,156 @@
 <?xml version="1.0"?>
-<Ontology xmlns="http://www.w3.org/2002/07/owl#"
-     xml:base="http://www.semanticweb.org/stefa/ontologies/2025/2/untitled-ontology-3"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     ontologyIRI="http://www.semanticweb.org/stefa/ontologies/2025/2/untitled-ontology-3">
-    <Prefix name="" IRI="http://www.semanticweb.org/stefa/ontologies/2025/2/untitled-ontology-3/"/>
-    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
-    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
-    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
-    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
-    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
-    <Declaration>
-        <Class IRI="#A.A"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Administration"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Appunti"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Articles"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Book"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#C"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Code"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Code_link"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Corso"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Design"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Docs"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Docs_link"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Electronics"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Esercizi"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Esercizi_link"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#GP"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Healthcare"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Ittiology"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Java"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#LB"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#LDP"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Latex"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Libri_link"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#MB"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Materiale"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Programming"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Python"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#SQL"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Science"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Scripts"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Slide"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Slide_link"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Templates"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Textbook"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Università"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#VSB"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Web"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Woodcutting"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#C++"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#belongsTo"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#containes_materiale"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#contains"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#contains_A.A"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#contains_administration"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#contains_appunti"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#contains_articles"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#contains_book"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#contains_corso"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#contains_healthcare"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#contains_templates"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#contains_textbook"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#contains_università"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#hasLocation"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isRelatedTo"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isRelatedTo_Code"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isRelatedTo_Docs"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isRelatedTo_Esercizi"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isRelatedTo_Libri"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isRelatedTo_Slide"/>
-    </Declaration>
-    <EquivalentClasses>
-        <Class IRI="#Code"/>
-        <Class IRI="#Code_link"/>
-    </EquivalentClasses>
-    <EquivalentClasses>
-        <Class IRI="#Docs"/>
-        <Class IRI="#Docs_link"/>
-    </EquivalentClasses>
-    <EquivalentClasses>
-        <Class IRI="#Esercizi"/>
-        <Class IRI="#Esercizi_link"/>
-    </EquivalentClasses>
-    <EquivalentClasses>
-        <Class IRI="#Esercizi"/>
-        <Class IRI="#LDP"/>
-    </EquivalentClasses>
-    <EquivalentClasses>
-        <Class IRI="#Libri_link"/>
-        <Class IRI="#Programming"/>
-    </EquivalentClasses>
-    <EquivalentClasses>
-        <Class IRI="#Slide"/>
-        <Class IRI="#Slide_link"/>
-    </EquivalentClasses>
-    <SubClassOf>
-        <Class IRI="#A.A"/>
-        <Class IRI="#Università"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Appunti"/>
-        <Class IRI="#Corso"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Articles"/>
-        <Class IRI="#Book"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#C"/>
-        <Class IRI="#LDP"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Code"/>
-        <Class IRI="#Materiale"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Code_link"/>
-        <Class IRI="#Appunti"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Corso"/>
-        <Class IRI="#A.A"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Design"/>
-        <Class IRI="#Articles"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Docs"/>
-        <Class IRI="#Administration"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Docs_link"/>
-        <Class IRI="#Università"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Electronics"/>
-        <Class IRI="#Textbook"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Esercizi"/>
-        <Class IRI="#Materiale"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Esercizi_link"/>
-        <Class IRI="#Appunti"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#GP"/>
-        <Class IRI="#Healthcare"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Healthcare"/>
-        <Class IRI="#Administration"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Ittiology"/>
-        <Class IRI="#Textbook"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Java"/>
-        <Class IRI="#LDP"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#LB"/>
-        <Class IRI="#Healthcare"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Latex"/>
-        <Class IRI="#Templates"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Libri_link"/>
-        <Class IRI="#Materiale"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#MB"/>
-        <Class IRI="#Healthcare"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Materiale"/>
-        <Class IRI="#A.A"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Programming"/>
-        <Class IRI="#Textbook"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Python"/>
-        <Class IRI="#LDP"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#SQL"/>
-        <Class IRI="#LDP"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Science"/>
-        <Class IRI="#Articles"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Scripts"/>
-        <Class IRI="#LDP"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Slide"/>
-        <Class IRI="#Materiale"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Slide_link"/>
-        <Class IRI="#Appunti"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Textbook"/>
-        <Class IRI="#Book"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#VSB"/>
-        <Class IRI="#Healthcare"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Web"/>
-        <Class IRI="#LDP"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Woodcutting"/>
-        <Class IRI="#Textbook"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#C++"/>
-        <Class IRI="#LDP"/>
-    </SubClassOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#containes_materiale"/>
-        <ObjectProperty IRI="#contains_A.A"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_A.A"/>
-        <ObjectProperty IRI="#contains_università"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_administration"/>
-        <ObjectProperty IRI="#contains"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_appunti"/>
-        <ObjectProperty IRI="#contains_corso"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_articles"/>
-        <ObjectProperty IRI="#contains_book"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_book"/>
-        <ObjectProperty IRI="#contains"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_corso"/>
-        <ObjectProperty IRI="#contains_A.A"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_healthcare"/>
-        <ObjectProperty IRI="#contains_administration"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_templates"/>
-        <ObjectProperty IRI="#contains"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_textbook"/>
-        <ObjectProperty IRI="#contains_book"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains_università"/>
-        <ObjectProperty IRI="#contains"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isRelatedTo_Code"/>
-        <ObjectProperty IRI="#isRelatedTo"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isRelatedTo_Docs"/>
-        <ObjectProperty IRI="#isRelatedTo"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isRelatedTo_Esercizi"/>
-        <ObjectProperty IRI="#isRelatedTo"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isRelatedTo_Libri"/>
-        <ObjectProperty IRI="#isRelatedTo"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isRelatedTo_Slide"/>
-        <ObjectProperty IRI="#isRelatedTo"/>
-    </SubObjectPropertyOf>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#belongsTo"/>
-        <ObjectProperty IRI="#contains"/>
-    </InverseObjectProperties>
-    <SymmetricObjectProperty>
-        <ObjectProperty IRI="#isRelatedTo_Code"/>
-    </SymmetricObjectProperty>
-    <SymmetricObjectProperty>
-        <ObjectProperty IRI="#isRelatedTo_Docs"/>
-    </SymmetricObjectProperty>
-    <SymmetricObjectProperty>
-        <ObjectProperty IRI="#isRelatedTo_Esercizi"/>
-    </SymmetricObjectProperty>
-    <SymmetricObjectProperty>
-        <ObjectProperty IRI="#isRelatedTo_Libri"/>
-    </SymmetricObjectProperty>
-    <SymmetricObjectProperty>
-        <ObjectProperty IRI="#isRelatedTo_Slide"/>
-    </SymmetricObjectProperty>
-    <TransitiveObjectProperty>
-        <ObjectProperty IRI="#hasLocation"/>
-    </TransitiveObjectProperty>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#containes_materiale"/>
-        <Class IRI="#Materiale"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains"/>
-        <Class IRI="#Administration"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains"/>
-        <Class IRI="#Book"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains"/>
-        <Class IRI="#Templates"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains"/>
-        <Class IRI="#Università"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_A.A"/>
-        <Class IRI="#A.A"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_administration"/>
-        <Class IRI="#Administration"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_appunti"/>
-        <Class IRI="#Appunti"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_articles"/>
-        <Class IRI="#Articles"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_book"/>
-        <Class IRI="#Book"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_corso"/>
-        <Class IRI="#Corso"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_healthcare"/>
-        <Class IRI="#Healthcare"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_templates"/>
-        <Class IRI="#Templates"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_textbook"/>
-        <Class IRI="#Textbook"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains_università"/>
-        <Class IRI="#Università"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Code"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Design"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Docs"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Electronics"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Esercizi"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#GP"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Ittiology"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#LB"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Latex"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#MB"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Programming"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Science"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Slide"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#VSB"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Woodcutting"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Code"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Code_link"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Docs"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Docs_link"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Esercizi"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Esercizi_link"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Libri_link"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Programming"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Slide"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Slide_link"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo_Code"/>
-        <Class IRI="#Code_link"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo_Docs"/>
-        <Class IRI="#Docs_link"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo_Esercizi"/>
-        <Class IRI="#Esercizi_link"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo_Libri"/>
-        <Class IRI="#Libri_link"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRelatedTo_Slide"/>
-        <Class IRI="#Slide_link"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale"/>
-        <Class IRI="#Code"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale"/>
-        <Class IRI="#Code_link"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale"/>
-        <Class IRI="#Esercizi"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale"/>
-        <Class IRI="#Esercizi_link"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale"/>
-        <Class IRI="#Libri_link"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale"/>
-        <Class IRI="#Programming"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale"/>
-        <Class IRI="#Slide"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#containes_materiale"/>
-        <Class IRI="#Slide_link"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains"/>
-        <Class IRI="#A.A"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains"/>
-        <Class IRI="#Articles"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains"/>
-        <Class IRI="#Docs"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains"/>
-        <Class IRI="#Healthcare"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains"/>
-        <Class IRI="#Latex"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains"/>
-        <Class IRI="#Textbook"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_A.A"/>
-        <Class IRI="#Corso"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_A.A"/>
-        <Class IRI="#Materiale"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_administration"/>
-        <Class IRI="#Docs"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_administration"/>
-        <Class IRI="#Docs_link"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_administration"/>
-        <Class IRI="#Healthcare"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_appunti"/>
-        <Class IRI="#Code"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_appunti"/>
-        <Class IRI="#Code_link"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_appunti"/>
-        <Class IRI="#Esercizi"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_appunti"/>
-        <Class IRI="#Esercizi_link"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_appunti"/>
-        <Class IRI="#Slide"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_appunti"/>
-        <Class IRI="#Slide_link"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_articles"/>
-        <Class IRI="#Design"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_articles"/>
-        <Class IRI="#Science"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_book"/>
-        <Class IRI="#Articles"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_book"/>
-        <Class IRI="#Textbook"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_corso"/>
-        <Class IRI="#Appunti"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_healthcare"/>
-        <Class IRI="#GP"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_healthcare"/>
-        <Class IRI="#LB"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_healthcare"/>
-        <Class IRI="#MB"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_healthcare"/>
-        <Class IRI="#VSB"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_templates"/>
-        <Class IRI="#Latex"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_textbook"/>
-        <Class IRI="#Electronics"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_textbook"/>
-        <Class IRI="#Ittiology"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_textbook"/>
-        <Class IRI="#Libri_link"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_textbook"/>
-        <Class IRI="#Programming"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_textbook"/>
-        <Class IRI="#Woodcutting"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_università"/>
-        <Class IRI="#A.A"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_università"/>
-        <Class IRI="#Docs"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains_università"/>
-        <Class IRI="#Docs_link"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#A.A"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Administration"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Articles"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Healthcare"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Templates"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Textbook"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Code"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Code_link"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Docs"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Docs_link"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Esercizi"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Esercizi_link"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Libri_link"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Programming"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Slide"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo"/>
-        <Class IRI="#Slide_link"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo_Code"/>
-        <Class IRI="#Code"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo_Docs"/>
-        <Class IRI="#Docs"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo_Esercizi"/>
-        <Class IRI="#Esercizi"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo_Libri"/>
-        <Class IRI="#Programming"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRelatedTo_Slide"/>
-        <Class IRI="#Slide"/>
-    </ObjectPropertyRange>
-</Ontology>
+<!DOCTYPE rdf:RDF [
+    <!ENTITY xsd "entity-value">
+]>
+<rdf:RDF xmlns="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#"
+    xml:base="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
+    <owl:Ontology rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11" />
 
+    <!-- Class Hierarchy -->
+    <owl:Class rdf:ID="Scienza" />
 
-<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+    <owl:Class rdf:ID="Medicina">
+        <rdfs:subClassOf rdf:resource="#Scienza" />
+    </owl:Class>
 
+    <owl:Class rdf:ID="Alimentazione">
+        <rdfs:subClassOf rdf:resource="#Medicina" />
+    </owl:Class>
+
+    <owl:Class rdf:ID="Cardiologia">
+        <rdfs:subClassOf rdf:resource="#Medicina" />
+    </owl:Class>
+
+    <owl:Class rdf:ID="Oncologia">
+        <rdfs:subClassOf rdf:resource="#Medicina" />
+    </owl:Class>
+
+    <owl:Class rdf:ID="Biologia">
+        <rdfs:subClassOf rdf:resource="#Scienza" />
+    </owl:Class>
+
+    <owl:Class rdf:ID="Ambiente">
+        <rdfs:subClassOf rdf:resource="#Biologia" />
+    </owl:Class>
+
+    <owl:Class rdf:ID="Ecologia">
+        <rdfs:subClassOf rdf:resource="#Biologia" />
+    </owl:Class>
+
+    <owl:Class rdf:ID="Fisica">
+        <rdfs:subClassOf rdf:resource="#Scienza" />
+    </owl:Class>
+
+    <owl:Class rdf:ID="Spazio">
+        <rdfs:subClassOf rdf:resource="#Fisica" />
+    </owl:Class>
+
+    <owl:Class rdf:ID="Energia">
+        <rdfs:subClassOf rdf:resource="#Fisica" />
+    </owl:Class>
+
+    <owl:Class rdf:ID="Economia">
+        <rdfs:subClassOf rdf:resource="#Scienza" />
+    </owl:Class>
+
+    <owl:Class rdf:ID="Politiche_di_stato">
+        <rdfs:subClassOf rdf:resource="#Economia" />
+    </owl:Class>
+
+    <owl:Class rdf:ID="Informatica">
+        <rdfs:subClassOf rdf:resource="#Scienza" />
+    </owl:Class>
+
+    <owl:Class rdf:ID="AI_ML">
+        <rdfs:subClassOf rdf:resource="#Informatica" />
+    </owl:Class>
+
+    <owl:Class rdf:ID="Comunicazione">
+        <rdfs:subClassOf rdf:resource="#Informatica" />
+    </owl:Class>
+
+    <owl:Class rdf:ID="Security">
+        <rdfs:subClassOf rdf:resource="#Informatica" />
+    </owl:Class>
+
+    <!-- Other necessary classes -->
+    <owl:Class rdf:ID="Documento" />
+    <owl:Class rdf:ID="Autore" />
+    <owl:Class rdf:ID="Pubblicazione" />
+    <owl:Class rdf:ID="Progetto" />
+    <owl:Class rdf:ID="Tema" />
+
+    <!-- Data Properties -->
+    <owl:DatatypeProperty rdf:ID="hasTitle">
+        <rdfs:domain rdf:resource="#Documento" />
+        <rdfs:range rdf:resource="&xsd;string" />
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:ID="hasPublicationYear">
+        <rdfs:domain rdf:resource="#Documento" />
+        <rdfs:range rdf:resource="&xsd;integer" />
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:ID="hasPageCount">
+        <rdfs:domain rdf:resource="#Documento" />
+        <rdfs:range rdf:resource="&xsd;integer" />
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:ID="hasDOI">
+        <rdfs:domain rdf:resource="#Documento" />
+        <rdfs:range rdf:resource="&xsd;string" />
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:ID="hasAuthorName">
+        <rdfs:domain rdf:resource="#Autore" />
+        <rdfs:range rdf:resource="&xsd;string" />
+    </owl:DatatypeProperty>
+
+    <!-- Object Properties -->
+    <owl:ObjectProperty rdf:ID="hasAuthor">
+        <rdfs:domain rdf:resource="#Documento" />
+        <rdfs:range rdf:resource="#Autore" />
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:ID="belongsToCategory">
+        <rdfs:domain rdf:resource="#Documento" />
+        <rdfs:range rdf:resource="#Scienza" />
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:ID="hasSubCategory">
+        <rdfs:domain rdf:resource="#Scienza" />
+        <rdfs:range rdf:resource="#Scienza" />
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:ID="hasRelatedDocument">
+        <rdfs:domain rdf:resource="#Documento" />
+        <rdfs:range rdf:resource="#Documento" />
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:ID="publishedInVenue">
+        <rdfs:domain rdf:resource="#Documento" />
+        <rdfs:range rdf:resource="#Pubblicazione" />
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:ID="collaboratesWith">
+        <rdfs:domain rdf:resource="#Autore" />
+        <rdfs:range rdf:resource="#Autore" />
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:ID="hasTopic">
+        <rdfs:domain rdf:resource="#Documento" />
+        <rdfs:range rdf:resource="#Tema" />
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:ID="isPartOfProject">
+        <rdfs:domain rdf:resource="#Documento" />
+        <rdfs:range rdf:resource="#Progetto" />
+    </owl:ObjectProperty>
+
+</rdf:RDF>
