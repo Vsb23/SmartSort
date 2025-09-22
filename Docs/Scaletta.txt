@@ -3,11 +3,11 @@
 ## **FASE 1: Preparazione e Design (Settimane 1-2)**
 
 ### 1.1 Definizione delle Categorie e Tassonomia
-- [ ] Analisi del dominio target e tipi di documenti
-- [ ] Definizione delle categorie principali (es: Tecnologia, Finanza, Legale, etc.)
-- [ ] Creazione della struttura gerarchica delle categorie
-- [ ] Definizione dei livelli di granularità (macro/micro categorie)
-- [ ] Validazione della tassonomia con stakeholder
+- [X] Analisi del dominio target e tipi di documenti
+- [X] Definizione delle categorie principali (es: Tecnologia, Finanza, Legale, etc.)
+- [X] Creazione della struttura gerarchica delle categorie
+- [X] Definizione dei livelli di granularità (macro/micro categorie)
+- [X] Validazione della tassonomia con stakeholder
 
 ### 1.2 Dataset e Preparazione Dati
 - [ ] Raccolta corpus di documenti rappresentativi
