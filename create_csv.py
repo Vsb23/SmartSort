@@ -16,7 +16,7 @@ def extract_metadata_from_pdf(pdf_path):
             if not title or title.strip() == '':
                 print(f"Erorre con il titolo del file {os.path.basename(pdf_path)}")
                 title = os.path.splitext(os.path.basename(pdf_path))[0]
-            author = metadata.get('/Author', 'Unknown') if metadata else "Unknown"
+            author = metadata.get('/Author', os.path.basename(pdf_path)) if metadata else None
             if "," in author:
                  author = author.replace(",", "; ") # Sostituisce le virgole con punti e virgola
             # Se autore mancante, inserisci Unknown
@@ -32,8 +32,8 @@ def extract_metadata_from_pdf(pdf_path):
                 
             category = "Scienza"
             
-
-            return title,author,year,category
+            extension = os.path.splitext(os.path.basename(pdf_path))[1]
+            return title,author,year,category,extension
             
     except Exception as e:
         print(f"Errore nel processare {pdf_path}: {str(e)}")
@@ -41,14 +41,14 @@ def extract_metadata_from_pdf(pdf_path):
 def write_to_csv(data, output_csv):
     
     with open(output_csv, 'w', newline='', encoding='utf-8') as csvfile:
-        fieldnames = ['titolo', 'autore', 'anno', 'category']
+        fieldnames = ['titolo', 'autore', 'anno', 'category', 'extension']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for entry in data:
-            titolo, autore, anno, category = entry
+            titolo, autore, anno, category, extension = entry
           
 
-            writer.writerow({'titolo': titolo, 'autore': autore, 'anno': anno, 'category': category})
+            writer.writerow({'titolo': titolo, 'autore': autore, 'anno': anno, 'category': category, 'extension': extension})
 
 
 # Filtra solo i file PDF
