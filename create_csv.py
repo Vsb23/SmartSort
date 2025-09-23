@@ -13,7 +13,9 @@ def extract_metadata_from_pdf(pdf_path):
             
             title = metadata.get('/Title', os.path.basename(pdf_path)) if metadata else os.path.basename(pdf_path)
             author = metadata.get('/Author', 'Unknown') if metadata else "Unknown"
-            
+            if "," in author:
+                 author = author.replace(",", "; ") # Sostituisce le virgole con punti e virgola
+
             # Usa metadata per ottenere la data di creazione
             creation_date = metadata.get('/CreationDate') if metadata else None
             if creation_date and len(str(creation_date)) > 6:
