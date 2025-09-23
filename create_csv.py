@@ -32,7 +32,8 @@ def extract_metadata_from_pdf(pdf_path):
         print(f"Errore nel processare {pdf_path}: {str(e)}")
         return os.path.basename(pdf_path), "Unknown", "Unknown", "Unknown"
 def write_to_csv(data, output_csv):
-    with open(output_csv, 'a', newline='', encoding='utf-8') as csvfile:
+    
+    with open(output_csv, 'w', newline='', encoding='utf-8') as csvfile:
         fieldnames = ['titolo', 'autore', 'anno', 'category']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
@@ -45,14 +46,16 @@ def write_to_csv(data, output_csv):
 
 
 # Filtra solo i file PDF
+all_data = []
 for f in pdfpath:
     if f.lower().endswith('.pdf'):
         full_path = os.path.join("./References", f)
-        print(extract_metadata_from_pdf(full_path))
         titolo, autore, anno, category = extract_metadata_from_pdf(full_path)
-        data = [f"{titolo},{autore},{anno},{category}"]
-        write_to_csv(data, 'output.csv')
-        print(f"Metadata estratti per {f} e scritti in output.csv")
+        all_data.append(f"{titolo},{autore},{anno},{category}")
     else:
         print(f"Saltando file non-PDF: {f}")
+        
+write_to_csv(all_data, 'output.csv')
+print("File CSV scritto.")
+
 
