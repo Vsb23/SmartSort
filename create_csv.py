@@ -12,6 +12,8 @@ def extract_metadata_from_pdf(pdf_path):
             if not title or title.strip() == '':
                 title = os.path.splitext(os.path.basename(pdf_path))[0]
 
+            filename= os.path.basename(pdf_path) 
+
             author = metadata.get('/Author', None) if metadata else None
             if not author or author.strip() == '':
                 author = "Unknown"
@@ -26,8 +28,8 @@ def extract_metadata_from_pdf(pdf_path):
 
             category = "Scienza"
             extension = os.path.splitext(pdf_path)[1].lower()
-
-            return title, author, year, category, extension, "file"
+            print(title, filename, author, year, category, extension)
+            return title, filename, author, year, category, extension, "file"
     except Exception as e:
         # In caso di errore (es. file non leggibile come PDF)
         name_no_ext = os.path.splitext(os.path.basename(pdf_path))[0]
@@ -40,7 +42,7 @@ def explore_folder_recursive(base_path):
         for d in dirs:
             full_path = os.path.join(root, d)
             relative_path = os.path.relpath(full_path, base_path)
-            all_data.append((d, "Unknown", "Unknown", "Unknown", "", "folder", relative_path))
+            all_data.append((d, "", "Unknown", "Unknown", "Unknown", "", "folder", relative_path))
         for f in files:
             full_path = os.path.join(root, f)
             containing_folder = os.path.dirname(full_path)
@@ -53,13 +55,14 @@ def explore_folder_recursive(base_path):
 
 def write_to_csv(data, output_csv):
     with open(output_csv, 'w', newline='', encoding='utf-8') as csvfile:
-        fieldnames = ['titolo', 'autore', 'anno', 'category', 'extension', 'type', 'relative_path']
+        fieldnames = ['titolo','filename', 'autore', 'anno', 'category', 'extension', 'type', 'relative_path']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for entry in data:
-            titolo, autore, anno, categoria, estensione, tipo, relpath = entry
+            titolo, filename, autore, anno, categoria, estensione, tipo, relpath = entry
             writer.writerow({
                 'titolo': titolo,
+                'filename': filename,
                 'autore': autore,
                 'anno': anno,
                 'category': categoria,
