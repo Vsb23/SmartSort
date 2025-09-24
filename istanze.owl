@@ -1,0 +1,1082 @@
+@prefix icon: <http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+icon:document_0 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension "NaN"^^xsd:double ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "websites" ;
+    icon:path "websites" .
+
+icon:document_1 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "20 Years of MIMO Radar" ;
+    icon:path "." .
+
+icon:document_10 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Ad hoc Grid: An Adaptive and Self-Organizing Peer-to-Peer Computing Grid" ;
+    icon:path "." .
+
+icon:document_100 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "diagram-of-a-plane-designed-to-transport-large-turbine-blad" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_101 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "electric-substation-aerial-view-with-security-zones-marked-" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_102 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "enterprise-page-code" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_103 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "google-analytics_analytics" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_104 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "google-analytics_analytics_002" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_105 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".mjs" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "iabTracking.31cf81e3384788188e0d.bundle" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_106 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "iabTracking.7f23064d1f64f976ca2f.bundle" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_107 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "illustration-of-a-plasma-thruster-concept" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_108 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "image" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_109 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".mjs" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "main.defdfeb3de149b091756.bundle" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_11 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "pinuccio" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "An application of novel communications protocol to high throughput satellites" ;
+    icon:path "." .
+
+icon:document_110 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "main.f9564e78412a50587407.bundle" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_111 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "osano" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_112 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "runtime.6ced9032f04547e7d96b.bundle" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_113 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".mjs" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "runtime.8343b4df7bb0cd316091.bundle" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_114 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "smiling-portrait-of-carolina-moreira-delci" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_115 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".css" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "social-ux-non-critical" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_116 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "a-coin-shaped-metal-object-displaying-a-radioactive-symbol-" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_117 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".html" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "a" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_118 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "enterprise-page-code" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_119 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "google-analytics_analytics" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_12 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Applying Web-based instruction to food nutrition course" ;
+    icon:path "." .
+
+icon:document_120 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "google-analytics_analytics_002" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_121 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".mjs" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "iabTracking.31cf81e3384788188e0d.bundle" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_122 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "iabTracking.7f23064d1f64f976ca2f.bundle" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_123 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "image" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_124 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".mjs" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "main.defdfeb3de149b091756.bundle" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_125 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "main.f9564e78412a50587407.bundle" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_126 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "osano" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_127 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "runtime.6ced9032f04547e7d96b.bundle" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_128 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".mjs" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "runtime.8343b4df7bb0cd316091.bundle" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_129 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".css" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "social-ux-non-critical" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_13 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "A &#x201C;Living Sensor&#x201D; Based on Sansevieria Plant for Measurement of UV-A Radiation" ;
+    icon:path "." .
+
+icon:document_130 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "two-cylindrical-metal-machines-stacked-on-top-of-each-other" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_131 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "two-human-hands-using-instruments-to-manipulate-the-pieces-" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_132 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "yellow-cylinder-with-nuclear-symbol-plus-minus-signs-castin" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_133 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "yellow-cylinder-with-nuclear-symbol-plus-minus-signs-ca_002" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_134 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "yellow-cylinder-with-nuclear-symbol-plus-minus-signs-ca_003" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_14 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Biological applications of" ;
+    icon:path "." .
+
+icon:document_15 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "nat 107 (Page 107)" ;
+    icon:path "." .
+
+icon:document_16 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Cell versus protoplasm: revisionist history" ;
+    icon:path "." .
+
+icon:document_17 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "CellBiologyEducation" ;
+    icon:path "." .
+
+icon:document_18 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Circular RNA in cardiovascular disease" ;
+    icon:path "." .
+
+icon:document_19 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Cellular origin tumour progression and pathogenic mechanisms of cutaneous neurofibromas revealed by mice with Nf1 knockout in boundary cap cells" ;
+    icon:path "." .
+
+icon:document_2 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "360-degree-view-of-earth-with-embedding-field-data-represen" ;
+    icon:path "." .
+
+icon:document_20 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Content_Based_Automated_File_Organization_Using_Ma" ;
+    icon:path "." .
+
+icon:document_21 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "cost effectiveness of radiation " ;
+    icon:path "." .
+
+icon:document_22 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Crimini Chicago.docx" ;
+    icon:path "." .
+
+icon:document_23 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2024" ;
+    icon:hasTitle "Developing a 3D-Printed Parallel Manipulator for Enhancing Robotics Education" ;
+    icon:path "." .
+
+icon:document_24 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Development of an AR Food Education System to Support Elementary School Nutrition Education" ;
+    icon:path "." .
+
+icon:document_25 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Digital Forensic Analysis of Online Dating Applications on Android Using the Digital Forensic Research Workshop 2001 Investigation Model" ;
+    icon:path "." .
+
+icon:document_26 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Emerging trends in Digital Forensic and Cyber security- An Overview" ;
+    icon:path "." .
+
+icon:document_27 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Enhancing Mediterranean Agriculture: Towards a Sensor Based Decision Support Tool for Efficient Irrigation Management in Smallholder Orchards" ;
+    icon:path "." .
+
+icon:document_28 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "enterprise-page-code" ;
+    icon:path "." .
+
+icon:document_29 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "File Type Classification for Adaptive Object File System" ;
+    icon:path "." .
+
+icon:document_3 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "360-degree-view-of-earth-with-embedding-field-data-repr_002" ;
+    icon:path "." .
+
+icon:document_30 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Moonson" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "IET Submission Template" ;
+    icon:path "." .
+
+icon:document_31 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Cannavacciuolo" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "foodlifestyle-04-2018" ;
+    icon:path "." .
+
+icon:document_32 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Forecast of Economic Development in Russia 2022-2035" ;
+    icon:path "." .
+
+icon:document_33 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Fuzzy file management" ;
+    icon:path "." .
+
+icon:document_34 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "google-analytics_analytics" ;
+    icon:path "." .
+
+icon:document_35 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "google-analytics_analytics_002" ;
+    icon:path "." .
+
+icon:document_36 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Humanized neurofibroma model from induced pluripotent stem cells delineates tumor pathogenesis and developmental origins " ;
+    icon:path "." .
+
+icon:document_37 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".mjs" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "iabTracking.31cf81e3384788188e0d.bundle" ;
+    icon:path "." .
+
+icon:document_38 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "iabTracking.7f23064d1f64f976ca2f.bundle" ;
+    icon:path "." .
+
+icon:document_39 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Susanna Godinho" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "JCB_Susana Godinho Placing" ;
+    icon:path "." .
+
+icon:document_4 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "360-degree-view-of-earth-with-embedding-field-data-repr_003" ;
+    icon:path "." .
+
+icon:document_40 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".mjs" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "main.defdfeb3de149b091756.bundle" ;
+    icon:path "." .
+
+icon:document_41 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "main.f9564e78412a50587407.bundle" ;
+    icon:path "." .
+
+icon:document_42 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Lin Liu" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Miniature microbial solar cells to power wireless sensor networks" ;
+    icon:path "." .
+
+icon:document_43 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Modeling and simulation of loss of power in nuclear power plant" ;
+    icon:path "." .
+
+icon:document_44 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Modeling file system organizations in a local area network environment" ;
+    icon:path "." .
+
+icon:document_45 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Modeling of Inter-Satellite Link Protocol for Satellite Constellation" ;
+    icon:path "." .
+
+icon:document_46 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "pinuccio; pinao" ;
+    icon:hasPublicationYear "2013" ;
+    icon:hasTitle "Multi-Hop_Conjugation_Based_Bacteria_Nanonetworks" ;
+    icon:path "." .
+
+icon:document_47 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "osano" ;
+    icon:path "." .
+
+icon:document_48 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Perspectives of Digital TV applications development in Russia" ;
+    icon:path "." .
+
+icon:document_49 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "ping pong" ;
+    icon:path "." .
+
+icon:document_5 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Haitao Cui; Shida Miao; Timothy Esworthy; Xuan Zhou; Se-jun Lee; Chengyu Liu; Zu-xi Yu; John P. Fisher; Muhammad Mohiuddin; Lijie Grace Zhang" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "3D bioprinting for cardiovascular regeneration and pharmacology" ;
+    icon:path "." .
+
+icon:document_50 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2007" ;
+    icon:hasTitle "Power_amp_energy_optimization...ated_solar_power_systems" ;
+    icon:path "." .
+
+icon:document_51 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Quantitative cell biology" ;
+    icon:path "." .
+
+icon:document_52 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Real-time capable file system for scalable media: Algorithms &amp; caching strategy for exploiting scalability on file system level" ;
+    icon:path "." .
+
+icon:document_53 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Recapitulating human cardio- pulmonary" ;
+    icon:path "." .
+
+icon:document_54 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Research on Multi-objective Optimization of Economic Performance of Solar Thermal Power System" ;
+    icon:path "." .
+
+icon:document_55 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "He Yong-xiu;Wang Wei;He Qun;Wang Da-wei" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Research on Relationship between Cycles of Electric Power and the Economy Growth in China Based on Maximum Entropy Method" ;
+    icon:path "." .
+
+icon:document_56 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "runtime.6ced9032f04547e7d96b.bundle" ;
+    icon:path "." .
+
+icon:document_57 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".mjs" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "runtime.8343b4df7bb0cd316091.bundle" ;
+    icon:path "." .
+
+icon:document_58 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Satellite Networks: Past Present and Future Challenges" ;
+    icon:path "." .
+
+icon:document_59 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "SEAL: Secure and Efficient Authentication using Linkage for Blockchain Networks" ;
+    icon:path "." .
+
+icon:document_6 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "A national radiation oncology medical student clerkship survey" ;
+    icon:path "." .
+
+icon:document_60 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".css" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "social-ux-non-critical" ;
+    icon:path "." .
+
+icon:document_61 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Status of the nuclear measurement stations for the process control of spent fuel reprocessing at AREVA NC/La Hague" ;
+    icon:path "." .
+
+icon:document_62 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Study on the feasibility of improving the indoor air quality from the perspective of circular economy by activation of biological calcium" ;
+    icon:path "." .
+
+icon:document_63 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "The Development of a Digital Forensic Framework for Ease of Forensic Analysis" ;
+    icon:path "." .
+
+icon:document_64 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "doi:10.1016/S0167-7799(01)01740-1" ;
+    icon:path "." .
+
+icon:document_65 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Time-domain based feature space at FLUXNET sites for vegetation patterns identification" ;
+    icon:path "." .
+
+icon:document_66 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Transmitarrays for Wireless Power Transfer on Earth and in Space" ;
+    icon:path "." .
+
+icon:document_67 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Ultrasound and MR findings in tumor" ;
+    icon:path "." .
+
+icon:document_68 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Manuel B. Garcia" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Virtual Dietitian: A Nutrition Knowledge-Based System Using Forward Chaining Algorithm" ;
+    icon:path "." .
+
+icon:document_69 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension "NaN"^^xsd:double ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_7 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".jff" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "a star" ;
+    icon:path "." .
+
+icon:document_70 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension "NaN"^^xsd:double ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_71 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension "NaN"^^xsd:double ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" ;
+    icon:path "websites\\Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum_files" .
+
+icon:document_72 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".html" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "Google DeepMind's AlphaEarth Tracks Earth's Changes - IEEE Spectrum" ;
+    icon:path "websites" .
+
+icon:document_73 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".html" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum" ;
+    icon:path "websites" .
+
+icon:document_74 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".html" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum" ;
+    icon:path "websites" .
+
+icon:document_75 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".html" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "Nuclear Batteries_ Energy Storage for Decades - IEEE Spectrum" ;
+    icon:path "websites" .
+
+icon:document_76 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".html" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "a" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_77 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "enterprise-page-code" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_78 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "google-analytics_analytics" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_79 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "google-analytics_analytics_002" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_8 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".html" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "a" ;
+    icon:path "." .
+
+icon:document_80 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".mjs" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "iabTracking.31cf81e3384788188e0d.bundle" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_81 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "iabTracking.7f23064d1f64f976ca2f.bundle" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_82 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".mjs" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "main.defdfeb3de149b091756.bundle" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_83 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "main.f9564e78412a50587407.bundle" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_84 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "osano" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_85 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".js" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "runtime.6ced9032f04547e7d96b.bundle" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_86 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".mjs" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "runtime.8343b4df7bb0cd316091.bundle" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_87 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "smiling-portrait-of-carolina-moreira-delci" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_88 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "smiling-portrait-of-carolina-moreira-delci_002" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_89 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "smiling-portrait-of-carolina-moreira-delci_003" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_9 a icon:Documento ;
+    icon:belongsToCategory "Scienza" ;
+    icon:extension ".pdf" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "2025" ;
+    icon:hasTitle "Additive Manufacturing of Antennas and RF Components for SATCOM: A Review" ;
+    icon:path "." .
+
+icon:document_90 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".css" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "social-ux-non-critical" ;
+    icon:path "websites\\Innovating Smart Infrastructure With 4D Tech - IEEE Spectrum_files" .
+
+icon:document_91 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "360-degree-view-of-earth-with-embedding-field-data-represen" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_92 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "a-man-looks-at-the-starry-night-sky" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_93 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "a-rendering-of-the-windrunner-aircraft-in-flight-over-mount" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_94 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "a-rendering-of-the-windrunner-aircraft-in-flight-over-m_002" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_95 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "a-rendering-of-the-windrunner-aircraft-in-flight-over-m_003" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_96 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "a-rendering-of-the-windrunner-aircraft-on-a-dirt-track-in-t" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_97 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".html" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "a" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_98 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".webp" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "aerial-diagram-of-windrunner-airplane-design-with-annotated" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
+
+icon:document_99 a icon:Documento ;
+    icon:belongsToCategory "Unknown" ;
+    icon:extension ".html" ;
+    icon:hasAuthorName "Unknown" ;
+    icon:hasPublicationYear "Unknown" ;
+    icon:hasTitle "a_002" ;
+    icon:path "websites\\Meerkat Substation Security_ Protecting Energy Networks from Threats - IEEE Spectrum_files" .
