@@ -153,8 +153,8 @@ def process_all_documents(csv_path, output_csv):
             pdf_path = os.path.normpath(pdf_path)  # pulisce eventuali "/./" o doppi slash
 
             # Usa file_name se presente e non vuoto, altrimenti titolo + .pdf
-            if 'file_name' in row and pd.notna(row['file_name']) and row['file_name'].strip() != '':
-                pdf_filename = row['file_name']
+            if 'filename' in row and pd.notna(row['filename']) and row['filename'].strip() != '':
+                pdf_filename = row['filename']
             else:
                 pdf_filename = row['titolo'] + '.pdf'
 
