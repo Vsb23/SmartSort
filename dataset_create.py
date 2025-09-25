@@ -54,6 +54,7 @@ def dummy_labeling(df):
 # 4) Split dati
 def split_dataset(df):
     train, temp = train_test_split(df, test_size=0.3, random_state=42, stratify=df['category'])
+    print(temp['category'].value_counts())
     val, test = train_test_split(temp, test_size=0.5, random_state=42, stratify=temp['category'])
     return train, val, test
 
