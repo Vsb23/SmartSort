@@ -6,7 +6,6 @@
 *.tex
 *.toc
 *.zip
-*.csv
 *.vscode
 *.png
 *.pkl

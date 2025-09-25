@@ -25,11 +25,11 @@ def load_ontology_categories_recursive(ontology_path):
     g = Graph()
     g.parse(ontology_path, format='xml')
     NS = Namespace("http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#")
-    # Inizia dalla radice 'Scienza e Progetto'
+    # Inizia dalla radice 'Scienza e Studi_umanistici'
     categories = set(['Scienza'])
     categories |= get_all_subclasses(g, NS['Scienza'])
-    categories.add('Progetto')
-    categories |= get_all_subclasses(g, NS['Progetto'])
+    categories.add('Studi_umanistici')
+    categories |= get_all_subclasses(g, NS['Studi_umanistici'])
     return sorted(categories)
 
 def extract_text_from_pdf(pdf_path):
