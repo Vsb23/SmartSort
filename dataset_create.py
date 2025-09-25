@@ -11,15 +11,25 @@ from rdflib import Graph, Namespace, RDFS
 import numpy as np
 import ast
 
-def load_ontology_categories(ontology_path):
+def get_all_subclasses(g, base_class_uri):
+    # Ricorsivamente cerca tutte le sottoclassi
+    subclasses = set()
+    direct_subclasses = set(s for s, p, o in g.triples((None, RDFS.subClassOf, base_class_uri)))
+    for subclass in direct_subclasses:
+        subclasses.add(str(subclass).split('#')[-1])
+        # Ricorsione: prendi anche sottoclassi di questa sottoclasse
+        subclasses |= get_all_subclasses(g, subclass)
+    return subclasses
+
+def load_ontology_categories_recursive(ontology_path):
     g = Graph()
     g.parse(ontology_path, format='xml')
     NS = Namespace("http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#")
-    categories = set()
-    categories.add('Scienza')
-    for s, p, o in g.triples((None, RDFS.subClassOf, NS['Scienza'])):
-        class_name = str(s).split('#')[-1]
-        categories.add(class_name)
+    # Inizia dalla radice 'Scienza e Progetto'
+    categories = set(['Scienza'])
+    categories |= get_all_subclasses(g, NS['Scienza'])
+    categories.add('Progetto')
+    categories |= get_all_subclasses(g, NS['Progetto'])
     return sorted(categories)
 
 def extract_text_from_pdf(pdf_path):
@@ -112,9 +122,17 @@ if __name__ == "__main__":
     base_folder = "./References"
     csv_file = "training_set.csv"  # File CSV con colonna 'category' compilata manualmente
 
-    ontology_categories = load_ontology_categories(ontology_path)
-
+    ontology_categories = load_ontology_categories_recursive(ontology_path)
     df_train = load_dataset_with_category_labels(csv_file, base_folder)
+    
+    
+    print("Categorie estratte dall'ontologia:")
+    print(ontology_categories)
+
+    print("\nCategorie presenti nel dataset:")
+    from collections import Counter
+    labels_flat = [lbl for sublist in df_train['labels'] for lbl in sublist]
+    print(Counter(labels_flat))
 
     train, val = train_test_split(df_train, test_size=0.2, random_state=42,
                                   stratify=df_train['labels'].apply(lambda x: x[0]))
