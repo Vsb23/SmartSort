@@ -5,7 +5,6 @@
 *.synctex.gz
 *.tex
 *.toc
-*.pdf
 *.zip
 *.csv
 *.vscode
