@@ -36,7 +36,7 @@ def load_and_prepare_dataset(csv_file, base_folder):
     texts = []
     for idx, row in df.iterrows():
         if row['type'] == 'file' and row['extension'] == '.pdf':
-            pdf_file_path = os.path.join(base_folder, row['relative_path'], row['titolo'] + row['extension'])
+            pdf_file_path = os.path.join(base_folder, row['filename'])
             text = extract_text_from_pdf(pdf_file_path)
             text = preprocess_text(text)
         else:
@@ -87,7 +87,7 @@ def train_model(train, val):
 
 # === MAIN ===
 base_folder = "./References"
-csv_file = "output.csv"
+csv_file = "output_with_text.csv"
 
 df = load_and_prepare_dataset(csv_file, base_folder)
 df = dummy_labeling(df)
