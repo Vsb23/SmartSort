@@ -1,156 +1,537 @@
 <?xml version="1.0"?>
-<!DOCTYPE rdf:RDF [
-    <!ENTITY xsd "entity-value">
-]>
 <rdf:RDF xmlns="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#"
-    xml:base="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11"
-    xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:xml="http://www.w3.org/XML/1998/namespace"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+     xml:base="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11"/>
+    
 
-    <owl:Ontology rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11" />
 
-    <!-- Class Hierarchy -->
-    <owl:Class rdf:ID="Scienza" />
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
 
-    <owl:Class rdf:ID="Medicina">
-        <rdfs:subClassOf rdf:resource="#Scienza" />
-    </owl:Class>
+    
 
-    <owl:Class rdf:ID="Alimentazione">
-        <rdfs:subClassOf rdf:resource="#Medicina" />
-    </owl:Class>
 
-    <owl:Class rdf:ID="Cardiologia">
-        <rdfs:subClassOf rdf:resource="#Medicina" />
-    </owl:Class>
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#belongsToCategory -->
 
-    <owl:Class rdf:ID="Oncologia">
-        <rdfs:subClassOf rdf:resource="#Medicina" />
-    </owl:Class>
-
-    <owl:Class rdf:ID="Biologia">
-        <rdfs:subClassOf rdf:resource="#Scienza" />
-    </owl:Class>
-
-    <owl:Class rdf:ID="Ambiente">
-        <rdfs:subClassOf rdf:resource="#Biologia" />
-    </owl:Class>
-
-    <owl:Class rdf:ID="Ecologia">
-        <rdfs:subClassOf rdf:resource="#Biologia" />
-    </owl:Class>
-
-    <owl:Class rdf:ID="Fisica">
-        <rdfs:subClassOf rdf:resource="#Scienza" />
-    </owl:Class>
-
-    <owl:Class rdf:ID="Spazio">
-        <rdfs:subClassOf rdf:resource="#Fisica" />
-    </owl:Class>
-
-    <owl:Class rdf:ID="Energia">
-        <rdfs:subClassOf rdf:resource="#Fisica" />
-    </owl:Class>
-
-    <owl:Class rdf:ID="Economia">
-        <rdfs:subClassOf rdf:resource="#Scienza" />
-    </owl:Class>
-
-    <owl:Class rdf:ID="Politiche_di_stato">
-        <rdfs:subClassOf rdf:resource="#Economia" />
-    </owl:Class>
-
-    <owl:Class rdf:ID="Informatica">
-        <rdfs:subClassOf rdf:resource="#Scienza" />
-    </owl:Class>
-
-    <owl:Class rdf:ID="AI_ML">
-        <rdfs:subClassOf rdf:resource="#Informatica" />
-    </owl:Class>
-
-    <owl:Class rdf:ID="Comunicazione">
-        <rdfs:subClassOf rdf:resource="#Informatica" />
-    </owl:Class>
-
-    <owl:Class rdf:ID="Security">
-        <rdfs:subClassOf rdf:resource="#Informatica" />
-    </owl:Class>
-
-    <!-- Other necessary classes -->
-    <owl:Class rdf:ID="Documento" />
-    <owl:Class rdf:ID="Autore" />
-    <owl:Class rdf:ID="Pubblicazione" />
-    <owl:Class rdf:ID="Progetto" />
-    <owl:Class rdf:ID="Tema" />
-
-    <!-- Data Properties -->
-    <owl:DatatypeProperty rdf:ID="hasTitle">
-        <rdfs:domain rdf:resource="#Documento" />
-        <rdfs:range rdf:resource="&xsd;string" />
-    </owl:DatatypeProperty>
-
-    <owl:DatatypeProperty rdf:ID="hasPublicationYear">
-        <rdfs:domain rdf:resource="#Documento" />
-        <rdfs:range rdf:resource="&xsd;integer" />
-    </owl:DatatypeProperty>
-
-    <owl:DatatypeProperty rdf:ID="hasPageCount">
-        <rdfs:domain rdf:resource="#Documento" />
-        <rdfs:range rdf:resource="&xsd;integer" />
-    </owl:DatatypeProperty>
-
-    <owl:DatatypeProperty rdf:ID="hasDOI">
-        <rdfs:domain rdf:resource="#Documento" />
-        <rdfs:range rdf:resource="&xsd;string" />
-    </owl:DatatypeProperty>
-
-    <owl:DatatypeProperty rdf:ID="hasAuthorName">
-        <rdfs:domain rdf:resource="#Autore" />
-        <rdfs:range rdf:resource="&xsd;string" />
-    </owl:DatatypeProperty>
-
-    <!-- Object Properties -->
-    <owl:ObjectProperty rdf:ID="hasAuthor">
-        <rdfs:domain rdf:resource="#Documento" />
-        <rdfs:range rdf:resource="#Autore" />
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#belongsToCategory">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
     </owl:ObjectProperty>
+    
 
-    <owl:ObjectProperty rdf:ID="belongsToCategory">
-        <rdfs:domain rdf:resource="#Documento" />
-        <rdfs:range rdf:resource="#Scienza" />
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#collaboratesWith -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#collaboratesWith">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore"/>
     </owl:ObjectProperty>
+    
 
-    <owl:ObjectProperty rdf:ID="hasSubCategory">
-        <rdfs:domain rdf:resource="#Scienza" />
-        <rdfs:range rdf:resource="#Scienza" />
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthor -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthor">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore"/>
     </owl:ObjectProperty>
+    
 
-    <owl:ObjectProperty rdf:ID="hasRelatedDocument">
-        <rdfs:domain rdf:resource="#Documento" />
-        <rdfs:range rdf:resource="#Documento" />
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthorName -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthorName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valuestring"/>
     </owl:ObjectProperty>
+    
 
-    <owl:ObjectProperty rdf:ID="publishedInVenue">
-        <rdfs:domain rdf:resource="#Documento" />
-        <rdfs:range rdf:resource="#Pubblicazione" />
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasDOI -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasDOI">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valuestring"/>
     </owl:ObjectProperty>
+    
 
-    <owl:ObjectProperty rdf:ID="collaboratesWith">
-        <rdfs:domain rdf:resource="#Autore" />
-        <rdfs:range rdf:resource="#Autore" />
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPageCount -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPageCount">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valueinteger"/>
     </owl:ObjectProperty>
+    
 
-    <owl:ObjectProperty rdf:ID="hasTopic">
-        <rdfs:domain rdf:resource="#Documento" />
-        <rdfs:range rdf:resource="#Tema" />
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPublicationYear -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPublicationYear">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valueinteger"/>
     </owl:ObjectProperty>
+    
 
-    <owl:ObjectProperty rdf:ID="isPartOfProject">
-        <rdfs:domain rdf:resource="#Documento" />
-        <rdfs:range rdf:resource="#Progetto" />
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasRelatedDocument -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasRelatedDocument">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
     </owl:ObjectProperty>
+    
 
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasSubCategory -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasSubCategory">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTitle -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTitle">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valuestring"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTopic -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTopic">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Tema"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#isPartOfProject -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#isPartOfProject">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Progetto"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#publishedInVenue -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#publishedInVenue">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Pubblicazione"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthorName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthorName"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasDOI -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasDOI"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPageCount -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPageCount"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPublicationYear -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPublicationYear"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTitle -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTitle"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valueinteger -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valueinteger"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valuestring -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valuestring"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#AI_ML -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#AI_ML">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Alimentazione -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Alimentazione">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Ambiente -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Ambiente">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Animale -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Animale">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Archeologia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Archeologia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Botanica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Botanica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Cardiologia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Cardiologia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Comunicazione -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Comunicazione">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Contemporanea -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Contemporanea">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Culturale -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Culturale">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Ecologia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Ecologia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Economia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Economia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Energia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Energia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Fisica"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Epitemologia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Epitemologia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Filosofia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Estetica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Estetica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Filosofia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Etica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Etica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Filosofia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Filosofia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Filosofia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Fisica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Fisica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Linguistica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Linguistica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Logica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Logica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Filosofia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Metafisica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Metafisica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Filosofia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Moderna -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Moderna">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Oncologia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Oncologia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Politica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Politica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Filosofia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Politiche_di_stato -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Politiche_di_stato">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Economia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Preistoria -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Preistoria">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Progetto -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Progetto"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Pubblicazione -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Pubblicazione"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Security -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Security">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Spazio -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Spazio">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Fisica"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Tema -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Tema"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Umana -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Umana">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia"/>
+    </owl:Class>
 </rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
