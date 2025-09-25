@@ -312,6 +312,30 @@
     
 
 
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Data_analysis -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Data_analysis">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Database -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Database">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#DevOps_infrastructure -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#DevOps_infrastructure">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
@@ -382,6 +406,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Game_development -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Game_development">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica">
@@ -418,6 +450,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Metafisica">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Filosofia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Mobile_development -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Mobile_development">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
     </owl:Class>
     
 
@@ -518,6 +558,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#System_programming -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#System_programming">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Tema -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Tema"/>
@@ -528,6 +576,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Umana">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Web_development -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Web_development">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
     </owl:Class>
 </rdf:RDF>
 
