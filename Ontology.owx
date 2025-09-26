@@ -258,6 +258,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Architettura -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Architettura">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore"/>
@@ -284,6 +292,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Cardiologia">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Chimica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Chimica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
     </owl:Class>
     
 

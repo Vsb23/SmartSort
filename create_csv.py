@@ -16,7 +16,7 @@ def extract_metadata_from_pdf(pdf_path):
             
             author = metadata.get('/Author', None) if metadata else None
             if not author or author.strip() == '':
-                author = "Unknown"
+                author = ""
             if "," in author:
                 author = author.replace(",", "; ")
 
@@ -24,17 +24,17 @@ def extract_metadata_from_pdf(pdf_path):
             if creation_date and len(str(creation_date)) > 6:
                 year = str(creation_date)[2:6]
             else:
-                year = "Unknown"
+                year = ""
 
-            category = "Scienza"
+            category = ""
             extension = os.path.splitext(pdf_path)[1].lower()
             
             return title, filename, author, year, category, extension, "file"
     except Exception as e:
         name_no_ext = os.path.splitext(os.path.basename(pdf_path))[0]
         extension = os.path.splitext(pdf_path)[1].lower()
-        category = "Unknown"
-        return name_no_ext, name_no_ext, "Unknown", "Unknown", category, extension, "file"
+        category = ""
+        return name_no_ext, name_no_ext, "", "", category, extension, "file"
 
 
 def explore_folder_recursive(base_path):
@@ -43,7 +43,7 @@ def explore_folder_recursive(base_path):
         for d in dirs:
             full_path = os.path.join(root, d)
             relative_path = os.path.relpath(full_path, base_path)
-            all_data.append((d, d, "Unknown", "Unknown", "Unknown", "", "folder", relative_path))
+            all_data.append((d, d, "", "", "", "", "folder", relative_path))
         for f in files:
             full_path = os.path.join(root, f)
             containing_folder = os.path.dirname(full_path)
