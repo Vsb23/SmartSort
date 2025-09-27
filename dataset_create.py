@@ -164,7 +164,7 @@ def undersample_general_classes(df, label_col='labels', general_labels=None, thr
 if __name__ == "__main__":
     ontology_path = "./Ontology.owx"
     base_folder = "./References"
-    csv_file = "training_set.csv"
+    csv_file = "training_set_all_files_25percent.csv"
  
     g = Graph()
     g.parse(ontology_path, format='xml')
