@@ -58,7 +58,7 @@ def categorize_all_files_single_category(percentage=85):
         'Energia': ['energy', 'power', 'renewable', 'solar', 'wind', 'nuclear', 'battery', 'fuel', 'electricity'],
         'Spazio': ['space', 'satellite', 'orbit', 'planetary', 'astronomy', 'astrophysics', 'cosmic', 'rocket', 'aerospace'],
         'Informatica': ['computer', 'computing', 'algorithm', 'programming', 'software', 'hardware', 'technology', 'digital', 'it'],
-        'AI_ML': ['artificial intelligence', 'machine learning', 'neural network', 'deep learning', 'ai', 'ml', 'classification', 'prediction'],
+        'AI_ML': ['artificial intelligence', 'machine learning', 'neural network', 'deep learning', 'ml', 'classification', 'prediction'],
         'Web_development': ['web', 'website', 'html', 'css', 'javascript', 'frontend', 'backend', 'server', 'browser', 'http'],
         'System_programming': ['system', 'operating system', 'kernel', 'linux', 'unix', 'driver', 'embedded', 'real-time'],
         'Comunicazione': ['communication', 'media', 'social', 'network', 'information', 'signal', 'broadcast', 'telecom'],
