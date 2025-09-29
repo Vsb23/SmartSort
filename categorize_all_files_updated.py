@@ -1,39 +1,55 @@
-
 import pandas as pd
 import re
 import random
 from collections import defaultdict, Counter
 
-def categorize_all_files_partial_with_altro(percentage=85):
+
+def categorize_all_files_single_category(percentage=85):
     """
     Categorizza una percentuale di TUTTI i file (non solo PDF)
-    Include categorizzazione basata su estensione per file senza titoli chiari
-    AGGIORNA: Include la categoria "Altro" per gestire casi edge
-
+    MODIFICATO: Assegna SOLO UNA categoria (la più specifica) per ogni file
+    
     Args:
         percentage (int): Percentuale di file da categorizzare (80-90)
     """
-
+    
     if not 80 <= percentage <= 90:
         print("ERRORE: La percentuale deve essere tra 80 e 90")
         return
 
     # Leggi il CSV file
-    df = pd.read_csv('training_set.csv')
+    df = pd.read_csv('output_with_text.csv')
     print(f"📁 Dataset totale: {len(df):,} file")
 
-    # Categorie richieste - AGGIORNATE con "Altro"
-    categories = [
-        'Biologia', 'Ambiente', 'Ecologia', 'Chimica',
-        'Fisica', 'Energia', 'Spazio', 'Informatica', 'AI_ML', 'Web_development', 'System_programming',
-        'Comunicazione', 'Data_analysis', 'Database','Security',
-        'Medicina', 'Alimentazione', 'Cardiologia', 'Oncologia', 'Antropologia', 'Archeologia', 'Linguistica', 'Culturale',
-        'Filosofia', 'Paleontologia', 'Animale','Botanica', 'Umana', 'Storia', 'antica', 'moderna', 'contemporanea', 'Preistoria', 'Altro'
-    ]
+    # Categorie richieste - ORGANIZZATE per specificità (dalla più specifica alla più generale)
+    categories_by_specificity = {
+        # Categorie MOLTO SPECIFICHE (foglie dell'albero)
+        'very_specific': [
+            'AI_ML', 'Web_development', 'System_programming', 'Data_analysis', 'Database', 'Security',
+            'Ambiente', 'Ecologia', 'Energia', 'Spazio', 'Alimentazione', 'Cardiologia', 'Oncologia',
+            'Archeologia', 'antica', 'moderna', 'contemporanea', 'Preistoria', 'Animale', 'Botanica', 'Umana'
+        ],
+        # Categorie SPECIFICHE (nodi intermedi)
+        'specific': [
+            'Informatica', 'Biologia', 'Fisica', 'Medicina', 'Chimica', 'Comunicazione',
+            'Antropologia', 'Linguistica', 'Culturale', 'Filosofia', 'Paleontologia', 'Storia'
+        ],
+        # Categorie GENERALI (rami principali - da evitare quando possibile)
+        'general': [
+            'Scienza', 'Studi_umanistici'
+        ],
+        # Categoria FALLBACK
+        'fallback': ['Altro']
+    }
+    
+    # Lista piatta di tutte le categorie per backward compatibility
+    all_categories = (categories_by_specificity['very_specific'] + 
+                     categories_by_specificity['specific'] + 
+                     categories_by_specificity['general'] + 
+                     categories_by_specificity['fallback'])
 
-    # Sistema di categorizzazione ESTESO - AGGIORNATO con "Altro"
+    # Sistema di categorizzazione con focus sulla specificità
     category_keywords = {
-      
         'Biologia': ['biology', 'biological', 'organism', 'cell', 'genetic', 'dna', 'rna', 'protein', 'enzyme', 'evolution', 'molecular', 'bio'],
         'Ambiente': ['environment', 'environmental', 'climate', 'pollution', 'sustainability', 'green', 'ecosystem', 'conservation', 'eco'],
         'Ecologia': ['ecology', 'ecological', 'ecosystem', 'biodiversity', 'habitat', 'species', 'wildlife', 'conservation'],
@@ -67,55 +83,35 @@ def categorize_all_files_partial_with_altro(percentage=85):
         'moderna': ['modern', 'renaissance', 'enlightenment', 'industrial revolution'],
         'contemporanea': ['contemporary', 'modern', '19th', '20th', '21st', 'world war'],
         'Preistoria': ['prehistory', 'prehistoric', 'stone age', 'bronze age', 'iron age'],
-
-        # NUOVA CATEGORIA "Altro"
-        'Altro': []
+        'Altro': []  # Categoria catch-all senza keywords specifiche
     }
 
-    # Mappatura estensioni -> categorie AGGIORNATA con "Altro"
+    # Mappatura estensioni -> categorie SPECIFICHE (non generali)
     extension_categories = {
-        # Documenti e testi
-        '.pdf': ['Scienza', 'Studi_umanistici'],
-        '.doc': ['Scienza', 'Studi_umanistici'],
-        '.docx': ['Comunicazione', 'Informatica'],
-        '.txt': ['Informatica', 'Comunicazione'],
-        '.rtf': ['Comunicazione', 'Informatica'],
-
-        # Web development
         '.html': ['Web_development'],
-        '.css': ['Web_development'],
+        '.css': ['Web_development'], 
         '.js': ['Web_development'],
         '.php': ['Web_development'],
-        '.asp': ['Web_development'],
-
-        # Programmazione
-        '.py': ['Informatica', 'AI_ML', 'Data_analysis'],
-        '.java': ['Informatica', 'System_programming', 'Mobile_development'],
-        '.cpp': ['Informatica', 'System_programming'],
-        '.c': ['System_programming', 'Informatica', 'Security'],
-        '.cs': ['Informatica', 'System_programming'],
-        '.rb': ['Web_development', 'Informatica', 'System_programming'],
-        '.go': ['System_programming', 'Web_development', 'Informatica'],
-        '.rs': ['System_programming', 'Security', 'Informatica'],
-
-        # Database,
-        '.sql': ['Database', 'Informatica'],
-        '.db': ['Database', 'Informatica'],
-        '.sqlite': ['Database', 'Mobile_development'],
-
-        # Dati
+        '.py': ['AI_ML'],
+        '.java': ['System_programming'],
+        '.cpp': ['System_programming'],
+        '.c': ['System_programming'],
+        '.sql': ['Database'],
         '.csv': ['Data_analysis'],
-        '.xlsx': ['Data_analysis'],
-        '.xml': ['Data_analysis'],
         '.json': ['Data_analysis'],
-
-        # Default per estensioni sconosciute - AGGIORNATO
+        # Per estensioni generiche, usa categoria più specifica possibile
+        '.pdf': ['Altro'],  # Troppo generico, lascia che le keywords decidano
+        '.doc': ['Altro'], 
+        '.txt': ['Altro'],
         '.unknown': ['Altro']
     }
 
-    def comprehensive_categorize_paper_with_altro(row):
-        """Categorizzazione completa per tutti i tipi di file - AGGIORNATA con Altro"""
-
+    def find_most_specific_category(row):
+        """
+        NUOVA FUNZIONE: Trova la categoria PIÙ SPECIFICA per un documento
+        Prioritizza le categorie foglia (very_specific) rispetto a quelle generali
+        """
+        
         # Estrai informazioni
         titolo = str(row.get('titolo', '')).lower()
         filename = str(row.get('filename', '')).lower()
@@ -125,84 +121,57 @@ def categorize_all_files_partial_with_altro(percentage=85):
 
         full_text = f"{titolo} {filename} {abstract} {clean_text}"
 
-        # Calcola punteggi basati su parole chiave
+        # Calcola punteggi per tutte le categorie
         category_scores = defaultdict(int)
         for category, keywords in category_keywords.items():
-            for keyword in keywords:
-                if keyword in full_text:
-                    weight = len(keyword.split())
-                    frequency = full_text.count(keyword)
-                    category_scores[category] += weight * frequency
+            if keywords:  # Solo per categorie con keywords definite
+                for keyword in keywords:
+                    if keyword in full_text:
+                        # Peso maggiore per keyword più lunghe e specifiche
+                        weight = len(keyword.split()) * 2
+                        frequency = full_text.count(keyword)
+                        category_scores[category] += weight * frequency
 
-        # Seleziona categorie con punteggio più alto
-        sorted_categories = sorted(category_scores.items(), key=lambda x: x[1], reverse=True)
-        assigned = [cat for cat, score in sorted_categories if score > 0]
-
-        # Se non ci sono abbastanze categorie dal contenuto, usa l'estensione
-        if len(assigned) < 3 and extension in extension_categories:
-            ext_cats = extension_categories[extension]
-            for ext_cat in ext_cats:
-                if ext_cat not in assigned:
-                    assigned.append(ext_cat)
-
-        # LOGICA AGGIORNATA: Se ancora non ci sono abbastanza categorie, usa "Altro"
-        if len(assigned) < 3:
-            # Aggiungi "Altro" come categoria generica
-            if 'Altro' not in assigned:
-                assigned.append('Altro')
-
-            # Aggiungi categorie generiche basate su tipo di file
-            if extension.startswith('.'):
-                if extension in ['.exe', '.dll', '.sys', '.ko']:
-                    defaults = ['System_programming']
-                elif extension in ['.log', '.tmp', '.bak']:
-                    defaults = ['System_programming']
-                elif extension in ['.conf', '.cfg', '.ini']:
-                    defaults = ['System_programming']
-                else:
-                    defaults = ['Altro']
-            else:
-                defaults = ['Altro']
-
-            for default in defaults:
-                if len(assigned) >= 3:
+        # STRATEGIA DI SELEZIONE: Priorità alla specificità
+        best_category = None
+        best_score = 0
+        
+        # 1. Prima priorità: Categorie MOLTO SPECIFICHE con punteggio > 0
+        for category in categories_by_specificity['very_specific']:
+            score = category_scores.get(category, 0)
+            if score > best_score:
+                best_score = score
+                best_category = category
+        
+        # 2. Se non troviamo nulla di molto specifico, cerca nelle SPECIFICHE
+        if best_category is None:
+            for category in categories_by_specificity['specific']:
+                score = category_scores.get(category, 0)
+                if score > best_score:
+                    best_score = score
+                    best_category = category
+        
+        # 3. Usa estensione solo se non troviamo nulla dalle keywords
+        if best_category is None and extension in extension_categories:
+            ext_categories = extension_categories[extension]
+            if ext_categories and ext_categories[0] != 'Altro':
+                best_category = ext_categories[0]
+        
+        # 4. Come ultima risorsa, usa categoria generale solo se ha un punteggio alto
+        if best_category is None:
+            for category in categories_by_specificity['general']:
+                score = category_scores.get(category, 0)
+                if score > 3:  # Soglia più alta per categorie generali
+                    best_category = category
                     break
-                if default not in assigned:
-                    assigned.append(default)
+        
+        # 5. Fallback finale
+        if best_category is None:
+            best_category = 'Altro'
+        
+        return best_category
 
-        # Aggiungi connessioni interdisciplinari - AGGIORNATE
-        interdisciplinary = {
-            'AI_ML': ['Informatica', 'Data_analysis'],
-            'Medicina': ['Biologia', 'Chimica'],
-            'Web_development': ['Informatica', 'Comunicazione'],
-            'Mobile_development': ['Informatica', 'Comunicazione'],
-            'Security': ['Informatica', 'System_programming'],
-            'Game_development': ['Informatica', 'Comunicazione'],
-            'Database': ['Informatica', 'Data_analysis'],
-            'Altro': ['Informatica', 'Comunicazione']  # NUOVO
-        }
-
-        for category in assigned[:]:
-            if category in interdisciplinary:
-                for related in interdisciplinary[category]:
-                    if related not in assigned and len(assigned) < 5:
-                        assigned.append(related)
-
-        # Assicurati di avere almeno 3 categorie, inclusa "Altro" se necessario
-        while len(assigned) < 3:
-            remaining = [cat for cat in categories if cat not in assigned]
-            if remaining:
-                # Prioritizza "Altro" per documenti difficili da classificare
-                if 'Altro' in remaining and 'Altro' not in assigned:
-                    assigned.append('Altro')
-                else:
-                    assigned.append(remaining[0])
-            else:
-                break
-
-        return '; '.join(assigned[:5])
-
-    # Resto del codice rimane uguale...
+    # Resto del codice...
     files_to_categorize = int(len(df) * percentage / 100)
     print(f"🎯 File da categorizzare: {files_to_categorize:,} ({percentage}% del totale)")
 
@@ -227,67 +196,82 @@ def categorize_all_files_partial_with_altro(percentage=85):
     # Inizializza colonna vuota
     df['category'] = ''
 
-    # Categorizza solo i file selezionati
-    print("\n🔄 Categorizzazione in corso...")
+    # Categorizza solo i file selezionati - UNA CATEGORIA per file
+    print("\n🔄 Categorizzazione SINGLE-CATEGORY in corso...")
     for idx in selected_indices:
-        df.at[idx, 'category'] = comprehensive_categorize_paper_with_altro(df.loc[idx])
+        single_category = find_most_specific_category(df.loc[idx])
+        df.at[idx, 'category'] = single_category  # UNA sola categoria, no ";"
 
     # Salva risultato
-    output_file = f'training_set_all_files_with_altro_{percentage}percent.csv'
+    output_file = f'training_set_single_category_{percentage}percent.csv'
     df.to_csv(output_file, index=False)
 
-    # Statistiche dettagliate
+    # Statistiche dettagliate SINGLE-CATEGORY
     categorized_df = df[df['category'] != '']
-    all_categories = []
-    for cat_str in categorized_df['category']:
-        if pd.notna(cat_str) and cat_str:
-            all_categories.extend(cat_str.split('; '))
-
-    category_counts = Counter(all_categories)
+    
+    # Conta categorie (ora è più semplice, una per file)
+    category_counts = Counter(categorized_df['category'])
 
     print(f"\n✅ COMPLETATO! File salvato: {output_file}")
-    print(f"\n📊 STATISTICHE FINALI:")
+    print(f"\n📊 STATISTICHE FINALI (SINGLE-CATEGORY):")
     print("=" * 70)
     print(f"File totali nel dataset: {len(df):,}")
     print(f"File categorizzati: {len(categorized_df):,} ({len(categorized_df)/len(df)*100:.1f}%)")
     print(f"File non categorizzati: {len(df) - len(categorized_df):,}")
-    print(f"Media categorie per file: {len(all_categories) / len(categorized_df):.1f}")
+    print(f"Categoria per file: 1 (single-label)")
 
-    print(f"\n📈 DISTRIBUZIONE PER CATEGORIA (incluso 'Altro'):")
+    print(f"\n📈 DISTRIBUZIONE PER CATEGORIA:")
     print("-" * 70)
-    in_target = 0
-    total_used = 0
-    for category in sorted(categories):
-        count = category_counts.get(category, 0)
-        if count > 0:
-            total_used += 1
-            if 15 <= count <= 20:
-                status = "✅ TARGET"
-                in_target += 1
-            elif count == 0:
-                status = "❌ NON USATA"
-            elif count < 15:
-                status = f"⬇️ SOTTO ({15-count} mancanti)"
-            else:
-                status = f"⬆️ SOPRA (+{count-20})"
-            print(f"{status:20} {category:25}: {count:3d} file")
+    
+    # Statistiche per livello di specificità
+    very_specific_count = 0
+    specific_count = 0
+    general_count = 0
+    altro_count = 0
+    
+    for category, count in category_counts.most_common():
+        if category in categories_by_specificity['very_specific']:
+            level = "🎯 MOLTO_SPECIFICA"
+            very_specific_count += count
+        elif category in categories_by_specificity['specific']:
+            level = "📊 SPECIFICA     "
+            specific_count += count
+        elif category in categories_by_specificity['general']:
+            level = "⚠️ GENERALE      "
+            general_count += count
+        else:  # Altro
+            level = "🆘 ALTRO         "
+            altro_count += count
+        
+        percentage_of_total = (count / len(categorized_df)) * 100
+        print(f"{level} {category:25}: {count:4d} file ({percentage_of_total:5.1f}%)")
 
-    # Statistiche speciali per "Altro"
-    altro_count = category_counts.get('Altro', 0)
-    print(f"\n🎯 CATEGORIA 'ALTRO': {altro_count} file ({altro_count/len(categorized_df)*100:.1f}% del totale categorizzato)")
-
-    print(f"\n🎯 RIEPILOGO:")
+    print(f"\n🎯 RIEPILOGO PER SPECIFICITÀ:")
     print("-" * 50)
-    print(f"Categorie utilizzate: {total_used}/{len(categories)}")
-    print(f"Categorie nel target (15-20): {in_target}")
-    print(f"File con minimo 3 categorie: {sum(1 for cat_str in categorized_df['category'] if len(cat_str.split('; ')) >= 3)}")
+    print(f"Molto specifiche: {very_specific_count:4d} ({very_specific_count/len(categorized_df)*100:5.1f}%)")
+    print(f"Specifiche:       {specific_count:4d} ({specific_count/len(categorized_df)*100:5.1f}%)")
+    print(f"Generali:         {general_count:4d} ({general_count/len(categorized_df)*100:5.1f}%)")
+    print(f"Altro:            {altro_count:4d} ({altro_count/len(categorized_df)*100:5.1f}%)")
+    
+    # Verifica qualità: % di categorie specifiche vs generali
+    specific_total = very_specific_count + specific_count
+    quality_score = (specific_total / len(categorized_df)) * 100
+    print(f"\n📈 QUALITÀ CLASSIFICAZIONE: {quality_score:.1f}% categorie specifiche")
+    
+    if quality_score > 80:
+        print("✅ OTTIMA qualità - Prevalenza di categorie specifiche")
+    elif quality_score > 60:
+        print("⚠️ BUONA qualità - Buon bilanciamento") 
+    else:
+        print("❌ MIGLIORABILE - Troppe categorie generali")
 
     return df
 
-# Esegui la categorizzazione completa con "Altro"
+
+# Esegui la categorizzazione SINGLE-CATEGORY
 if __name__ == "__main__":
     import sys
-
+    
     # Leggi percentuale da argomenti o usa default 85%
     if len(sys.argv) > 1:
         try:
@@ -297,11 +281,11 @@ if __name__ == "__main__":
     else:
         percentage = 85
 
-    print(f"🚀 CATEGORIZZAZIONE COMPLETA AL {percentage}% - CON CATEGORIA 'ALTRO'")
-    print("Include TUTTI i tipi di file (PDF, HTML, immagini, codice, etc.)")
-    print("NOVITÀ: Categoria 'Altro' per gestire documenti difficili da classificare")
+    print(f"🚀 CATEGORIZZAZIONE SINGLE-CATEGORY AL {percentage}%")
+    print("NOVITÀ: UNA sola categoria (la più specifica) per ogni file")
+    print("Priorità: Categorie foglia > Categorie specifiche > Categorie generali > Altro")
     print("=" * 80)
 
     # Set seed per riproducibilità
     random.seed(42)
-    result = categorize_all_files_partial_with_altro(percentage)
+    result = categorize_all_files_single_category(percentage)

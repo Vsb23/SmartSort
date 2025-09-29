@@ -1,4 +1,3 @@
-
 import os
 import pandas as pd
 import PyPDF2
@@ -9,24 +8,26 @@ from sklearn.multiclass import OneVsRestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import f1_score, classification_report
+from sklearn.metrics import f1_score, classification_report, accuracy_score
 from rdflib import Graph, Namespace, RDFS
 import numpy as np
 from collections import Counter
 
+
 def get_all_subclasses(g, base_class_uri):
-    """Ottiene tutte le sottoclassi di una classe base - AGGIORNATO per includere 'Altro'"""
+    """Ottiene tutte le sottoclassi di una classe base"""
     subclasses = set()
     direct_subclasses = set(s for s, p, o in g.triples((None, RDFS.subClassOf, base_class_uri)))
-
+    
     for subclass in direct_subclasses:
         subclass_name = str(subclass).split('#')[-1]
         subclasses.add(subclass_name)
         subclasses |= get_all_subclasses(g, subclass)
-
-    # AGGIUNTA: Includi sempre "Altro" come categoria valida per ogni ramo
+    
+    # Includi "Altro" come categoria valida
     subclasses.add('Altro')
     return subclasses
+
 
 def get_superclasses(g, cls_uri):
     """Ottiene tutte le superclassi di una classe"""
@@ -38,19 +39,43 @@ def get_superclasses(g, cls_uri):
             superclasses |= get_superclasses(g, o)
     return superclasses
 
-def enrich_labels(labels, g, ns):
-    """Arricchisce le etichette con informazioni gerarchiche - AGGIORNATO per 'Altro'"""
-    enriched = set(labels)
 
-    for label in labels:
+def get_most_specific_category(labels, g, ns):
+    """
+    NUOVA FUNZIONE: Restituisce SOLO la categoria più specifica
+    Invece di aggiungere superclassi, trova la foglia più specifica
+    """
+    if not labels:
+        return ['Altro']  # Default fallback
+    
+    # Se c'è "Altro", usalo solo se è l'unico
+    if len(labels) == 1 and labels[0] == 'Altro':
+        return ['Altro']
+    
+    # Rimuovi "Altro" se ci sono categorie più specifiche
+    filtered_labels = [label for label in labels if label != 'Altro']
+    if not filtered_labels:
+        return ['Altro']
+    
+    # Trova la categoria più specifica (quella senza sottoclassi)
+    most_specific = []
+    
+    for label in filtered_labels:
         try:
-            # Se è "Altro", non aggiungere superclassi (è già una categoria terminale)
-            if label != 'Altro':
-                enriched |= get_superclasses(g, ns[label])
+            # Controlla se questa categoria ha sottoclassi
+            subclasses = get_all_subclasses(g, ns[label])
+            # Se non ha sottoclassi tra le etichette correnti, è specifica
+            has_subclass_in_labels = any(sub in filtered_labels for sub in subclasses if sub != label and sub != 'Altro')
+            
+            if not has_subclass_in_labels:
+                most_specific.append(label)
         except:
-            pass  # Ignora se label non è in ontologia
+            # Se non è nell'ontologia, considerala specifica
+            most_specific.append(label)
+    
+    # Se non troviamo nulla di specifico, prendi la prima categoria
+    return most_specific[:1] if most_specific else [filtered_labels[0]]
 
-    return list(enriched)
 
 def extract_text_from_pdf(pdf_path):
     """Estrae testo da PDF"""
@@ -64,6 +89,7 @@ def extract_text_from_pdf(pdf_path):
         print(f"Errore estrazione testo PDF {pdf_path}: {e}")
     return text
 
+
 def preprocess_text(text):
     """Preprocessa il testo per l'analisi"""
     text = text.lower()
@@ -71,6 +97,7 @@ def preprocess_text(text):
     text = re.sub(r'[^\w\s]', ' ', text)
     text = re.sub(r'\s+', ' ', text).strip()
     return text
+
 
 def parse_labels(label_str):
     """Parsa le etichette da stringa a lista"""
@@ -85,12 +112,15 @@ def parse_labels(label_str):
             unique_labels.append(lbl)
     return unique_labels
 
-def load_dataset_with_category_labels(csv_file, base_folder, g, ns):
-    """Carica dataset con etichette di categoria - AGGIORNATO per supportare 'Altro'"""
+
+def load_dataset_with_single_category(csv_file, base_folder, g, ns):
+    """
+    MODIFICATA: Carica dataset con UNA SOLA categoria per documento
+    """
     df = pd.read_csv(csv_file, low_memory=False)
     texts = []
-    labels = []
-
+    single_labels = []
+    
     for idx, row in df.iterrows():
         if row['type'] == 'file' and row['extension'] == '.pdf':
             pdf_file_path = os.path.join(base_folder, row['filename'])
@@ -98,265 +128,242 @@ def load_dataset_with_category_labels(csv_file, base_folder, g, ns):
             text = preprocess_text(text)
         else:
             text = ""
-
+        
         texts.append(text)
         raw_labels = parse_labels(row['category'])
-
-        # AGGIORNAMENTO: Gestisci "Altro" in modo speciale
-        if 'Altro' in raw_labels:
-            # "Altro" non ha superclassi specifiche, mantieni come categoria terminale
-            enriched_labels = raw_labels
-        else:
-            enriched_labels = enrich_labels(raw_labels, g, ns)
-
-        labels.append(enriched_labels)
-
+        
+        # CHIAVE: Ottieni SOLO la categoria più specifica
+        specific_label = get_most_specific_category(raw_labels, g, ns)
+        single_labels.append(specific_label[0])  # Solo UNA categoria
+    
     df['text'] = texts
-    df['labels'] = labels
-    df_train = df[df['labels'].map(len) > 0].copy()  # Solo con almeno una label
-
+    df['single_label'] = single_labels
+    df_train = df[df['single_label'].notna()].copy()  # Solo con label valida
+    
     return df_train
 
-def encode_labels(labels_list, all_labels):
-    """Codifica etichette in formato binario per classificazione multi-label"""
-    arr = np.zeros(len(all_labels))
-    for label in labels_list:
-        if label in all_labels:
-            idx = all_labels.index(label)
-            arr[idx] = 1
-    return arr
 
-def train_eval_model(name, clf, X_train, y_train, X_val, y_val, all_labels):
-    """Addestra e valuta un modello di classificazione"""
-    print(f"---- Training {name} ----")
+def train_eval_single_label_model(name, clf, X_train, y_train, X_val, y_val, all_labels):
+    """
+    MODIFICATA: Addestra e valuta modello per classificazione SINGLE-LABEL
+    """
+    print(f"---- Training {name} (Single-Label) ----")
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_val)
-    f1 = f1_score(y_val, y_pred, average="micro")
-    print(f"{name} F1 micro: {f1}")
-    print(classification_report(y_val, y_pred, target_names=all_labels, zero_division=0))
+    
+    # Metriche per single-label
+    accuracy = accuracy_score(y_val, y_pred)
+    f1 = f1_score(y_val, y_pred, average="weighted")
+    
+    print(f"{name} Accuracy: {accuracy:.4f}")
+    print(f"{name} F1 weighted: {f1:.4f}")
+    print(classification_report(y_val, y_pred, target_names=None, zero_division=0))
     return clf
 
-def filter_general_superclasses(predicted_labels, g, ns):
-    """Filtra superclassi generali mantenendo solo le più specifiche"""
-    filtered = set(predicted_labels)
 
-    for label in predicted_labels:
-        try:
-            # Non filtrare "Altro" - è sempre valido
-            if label == 'Altro':
-                continue
-
-            superclasses = get_superclasses(g, ns[label])
-            filtered -= superclasses
-        except:
-            pass  # Mantieni se non in ontologia
-
-    return list(filtered)
-
-def predict_top_categories(df, clf, vectorizer, all_labels):
-    """Predice le top categorie per i documenti"""
+def predict_single_category(df, clf, vectorizer, all_labels):
+    """
+    NUOVA: Predice UNA SOLA categoria per documento
+    """
     X = vectorizer.transform(df['text'])
-    probs = clf.predict_proba(X)
+    predictions = clf.predict(X)
+    probabilities = clf.predict_proba(X)
+    
+    # Ottieni confidenze
+    confidences = []
+    for i, pred in enumerate(predictions):
+        pred_idx = all_labels.index(pred) if pred in all_labels else 0
+        confidence = probabilities[i][pred_idx]
+        confidences.append(confidence)
+    
+    df_result = df.copy()
+    df_result['predicted_category'] = predictions
+    df_result['confidence'] = confidences
+    return df_result
 
-    top_categories = []
-    for prob in probs:
-        top_idx = np.argsort(prob)[::-1][:3]
-        top_cats = [all_labels[i] for i in top_idx]
-        top_categories.append(top_cats)
 
-    df['predicted_category'] = top_categories
-    return df
+def balance_single_label_dataset(df, label_col='single_label', max_samples_per_class=100):
+    """
+    NUOVA: Bilancia dataset per classificazione single-label
+    """
+    counter = Counter(df[label_col])
+    print(f"📊 Distribuzione originale:")
+    for label, count in counter.most_common(10):
+        print(f"  {label}: {count}")
+    
+    # Sottocampiona classi con troppi esempi
+    balanced_indices = []
+    class_counts = Counter()
+    
+    # Priorità: prima le classi con meno esempi
+    sorted_indices = df.index.tolist()
+    np.random.shuffle(sorted_indices)  # Randomizza per evitare bias
+    
+    for idx in sorted_indices:
+        label = df.loc[idx, label_col]
+        if class_counts[label] < max_samples_per_class:
+            balanced_indices.append(idx)
+            class_counts[label] += 1
+    
+    df_balanced = df.loc[balanced_indices].copy()
+    
+    print(f"📊 Distribuzione bilanciata:")
+    counter_balanced = Counter(df_balanced[label_col])
+    for label, count in counter_balanced.most_common(10):
+        print(f"  {label}: {count}")
+    
+    return df_balanced
 
-def undersample_general_classes(df, label_col='labels', general_labels=None, threshold=0.5):
-    """Sottocampiona classi generali per bilanciare il dataset - AGGIORNATO per 'Altro'"""
-    if general_labels is None:
-        # AGGIORNAMENTO: Includi "Altro" nelle categorie da sottocampionare
-        general_labels = ['Scienza', 'Studi_umanistici', 'Altro']
 
-    counter = Counter()
-    for labels in df[label_col]:
-        counter.update(labels)
-
-    max_counts = {}
-    for label in counter:
-        if label in general_labels:
-            # Per "Altro", usiamo una soglia più bassa per evitare over-representation
-            if label == 'Altro':
-                max_counts[label] = int(threshold * 0.5 * counter[label])
-            else:
-                max_counts[label] = int(threshold * counter[label])
-        else:
-            max_counts[label] = counter[label]
-
-    current_counts = Counter()
-    selected_indices = []
-
-    for idx in df.index:
-        labels = df.loc[idx, label_col]
-        keep = True
-        for lab in labels:
-            if current_counts[lab] >= max_counts.get(lab, 0):
-                keep = False
-                break
-
-        if keep:
-            selected_indices.append(idx)
-            current_counts.update(labels)
-
-    return df.loc[selected_indices]
-
-def create_hierarchical_features(df, ontology_keywords):
-    """Crea features gerarchiche basate su keywords ontologiche"""
-    hierarchical_features = []
-
-    for _, row in df.iterrows():
-        features = {}
-        text = str(row['text']).lower()
-
-        # Features per ogni categoria
-        for category, keywords in ontology_keywords.items():
-            keyword_count = sum(text.count(keyword.lower()) for keyword in keywords)
-            features[f'{category}_keywords'] = keyword_count
-
-        hierarchical_features.append(features)
-
-    return pd.DataFrame(hierarchical_features)
-
-# AGGIORNAMENTO: Keywords per categoria "Altro"
+# Keywords ontologiche (stesse di prima)
 ONTOLOGY_KEYWORDS = {
-   'Biologia': ['biology', 'biological', 'organism', 'cell', 'genetic', 'dna', 'rna', 'protein', 'enzyme', 'evolution', 'molecular', 'bio'],
-        'Ambiente': ['environment', 'environmental', 'climate', 'pollution', 'sustainability', 'green', 'ecosystem', 'conservation', 'eco'],
-        'Ecologia': ['ecology', 'ecological', 'ecosystem', 'biodiversity', 'habitat', 'species', 'wildlife', 'conservation'],
-        'Chimica': ['chemistry', 'chemical', 'compound', 'molecule', 'reaction', 'synthesis', 'catalyst', 'polymer', 'organic'],
-        'Fisica': ['physics', 'physical', 'quantum', 'mechanics', 'thermodynamics', 'electromagnetic', 'optics', 'particle'],
-        'Energia': ['energy', 'power', 'renewable', 'solar', 'wind', 'nuclear', 'battery', 'fuel', 'electricity'],
-        'Spazio': ['space', 'satellite', 'orbit', 'planetary', 'astronomy', 'astrophysics', 'cosmic', 'rocket', 'aerospace'],
-        'Informatica': ['computer', 'computing', 'algorithm', 'programming', 'software', 'hardware', 'technology', 'digital', 'it'],
-        'AI_ML': ['artificial intelligence', 'machine learning', 'neural network', 'deep learning', 'ai', 'ml', 'classification', 'prediction'],
-        'Web_development': ['web', 'website', 'html', 'css', 'javascript', 'frontend', 'backend', 'server', 'browser', 'http'],
-        'System_programming': ['system', 'operating system', 'kernel', 'linux', 'unix', 'driver', 'embedded', 'real-time'],
-        'Comunicazione': ['communication', 'media', 'social', 'network', 'information', 'signal', 'broadcast', 'telecom'],
-        'Data_analysis': ['data', 'analysis', 'statistics', 'analytics', 'visualization', 'mining', 'big data', 'dataset'],
-        'Database': ['database', 'sql', 'nosql', 'storage', 'dbms', 'query', 'indexing', 'data management'],
-        'Security': ['security', 'cybersecurity', 'encryption', 'authentication', 'firewall', 'forensic', 'cryptography'],
-        'Medicina': ['medicine', 'medical', 'health', 'healthcare', 'clinical', 'patient', 'treatment', 'diagnosis'],
-        'Alimentazione': ['nutrition', 'food', 'diet', 'meal', 'dietary', 'eating', 'vitamin', 'dietitian'],
-        'Cardiologia': ['cardiology', 'heart', 'cardiac', 'cardiovascular', 'coronary', 'artery'],
-        'Oncologia': ['oncology', 'cancer', 'tumor', 'malignant', 'chemotherapy', 'radiation'],
-        'Antropologia': ['anthropology', 'anthropological', 'human', 'culture', 'society', 'social'],
-        'Archeologia': ['archaeology', 'archaeological', 'artifact', 'excavation', 'ancient'],
-        'Linguistica': ['linguistic', 'language', 'linguistics', 'sociolinguistics'],
-        'Culturale': ['cultural', 'culture', 'ethnography', 'ritual', 'tradition'],
-        'Filosofia': ['philosophy', 'philosophical', 'ethics', 'metaphysics', 'logic'],
-        'Paleontologia': ['paleontology', 'fossil', 'prehistoric', 'evolution', 'extinct'],
-        'Animale': ['animal', 'fossil animal', 'vertebrate', 'mammal'],
-        'Botanica': ['plant', 'fossil plant', 'botanical', 'flora'],
-        'Umana': ['human evolution', 'hominid', 'ancestor', 'primitive human'],
-        'Storia': ['history', 'historical', 'past', 'chronology', 'period', 'era'],
-        'antica': ['ancient', 'antiquity', 'classical', 'roman', 'greek'],
-        'moderna': ['modern', 'renaissance', 'enlightenment', 'industrial revolution'],
-        'contemporanea': ['contemporary', 'modern', '19th', '20th', '21st', 'world war'],
-        'Preistoria': ['prehistory', 'prehistoric', 'stone age', 'bronze age', 'iron age'],
-        'Altro': []
-
+    'Biologia': ['biology', 'biological', 'organism', 'cell', 'genetic', 'dna', 'rna', 'protein', 'enzyme', 'evolution', 'molecular', 'bio'],
+    'Ambiente': ['environment', 'environmental', 'climate', 'pollution', 'sustainability', 'green', 'ecosystem', 'conservation', 'eco'],
+    'Ecologia': ['ecology', 'ecological', 'ecosystem', 'biodiversity', 'habitat', 'species', 'wildlife', 'conservation'],
+    'Chimica': ['chemistry', 'chemical', 'compound', 'molecule', 'reaction', 'synthesis', 'catalyst', 'polymer', 'organic'],
+    'Fisica': ['physics', 'physical', 'quantum', 'mechanics', 'thermodynamics', 'electromagnetic', 'optics', 'particle'],
+    'Energia': ['energy', 'power', 'renewable', 'solar', 'wind', 'nuclear', 'battery', 'fuel', 'electricity'],
+    'Spazio': ['space', 'satellite', 'orbit', 'planetary', 'astronomy', 'astrophysics', 'cosmic', 'rocket', 'aerospace'],
+    'Informatica': ['computer', 'computing', 'algorithm', 'programming', 'software', 'hardware', 'technology', 'digital', 'it'],
+    'AI_ML': ['artificial intelligence', 'machine learning', 'neural network', 'deep learning', 'ai', 'ml', 'classification', 'prediction'],
+    'Web_development': ['web', 'website', 'html', 'css', 'javascript', 'frontend', 'backend', 'server', 'browser', 'http'],
+    'System_programming': ['system', 'operating system', 'kernel', 'linux', 'unix', 'driver', 'embedded', 'real-time'],
+    'Comunicazione': ['communication', 'media', 'social', 'network', 'information', 'signal', 'broadcast', 'telecom'],
+    'Data_analysis': ['data', 'analysis', 'statistics', 'analytics', 'visualization', 'mining', 'big data', 'dataset'],
+    'Database': ['database', 'sql', 'nosql', 'storage', 'dbms', 'query', 'indexing', 'data management'],
+    'Security': ['security', 'cybersecurity', 'encryption', 'authentication', 'firewall', 'forensic', 'cryptography'],
+    'Medicina': ['medicine', 'medical', 'health', 'healthcare', 'clinical', 'patient', 'treatment', 'diagnosis'],
+    'Alimentazione': ['nutrition', 'food', 'diet', 'meal', 'dietary', 'eating', 'vitamin', 'dietitian'],
+    'Cardiologia': ['cardiology', 'heart', 'cardiac', 'cardiovascular', 'coronary', 'artery'],
+    'Oncologia': ['oncology', 'cancer', 'tumor', 'malignant', 'chemotherapy', 'radiation'],
+    'Antropologia': ['anthropology', 'anthropological', 'human', 'culture', 'society', 'social'],
+    'Archeologia': ['archaeology', 'archaeological', 'artifact', 'excavation', 'ancient'],
+    'Linguistica': ['linguistic', 'language', 'linguistics', 'sociolinguistics'],
+    'Culturale': ['cultural', 'culture', 'ethnography', 'ritual', 'tradition'],
+    'Filosofia': ['philosophy', 'philosophical', 'ethics', 'metaphysics', 'logic'],
+    'Paleontologia': ['paleontology', 'fossil', 'prehistoric', 'evolution', 'extinct'],
+    'Animale': ['animal', 'fossil animal', 'vertebrate', 'mammal'],
+    'Botanica': ['plant', 'fossil plant', 'botanical', 'flora'],
+    'Umana': ['human evolution', 'hominid', 'ancestor', 'primitive human'],
+    'Storia': ['history', 'historical', 'past', 'chronology', 'period', 'era'],
+    'antica': ['ancient', 'antiquity', 'classical', 'roman', 'greek'],
+    'moderna': ['modern', 'renaissance', 'enlightenment', 'industrial revolution'],
+    'contemporanea': ['contemporary', 'modern', '19th', '20th', '21st', 'world war'],
+    'Preistoria': ['prehistory', 'prehistoric', 'stone age', 'bronze age', 'iron age'],
+    'Altro': []  # Categoria catch-all
 }
+
 
 if __name__ == "__main__":
     # Configurazione
     ontology_path = "./Ontology.owx"
     base_folder = "./References"
-    csv_file = "training_set_all_files_with_altro_85percent.csv"  # AGGIORNATO
-
+    csv_file = "./training_set_single_category_85percent.csv"
+    
     # Carica ontologia
     g = Graph()
     g.parse(ontology_path, format='xml')
     NS = Namespace("http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#")
-
-    # Ottieni tutte le categorie - AGGIORNATO per includere "Altro"
+    
+    # Ottieni tutte le categorie
     categories = set(['Scienza'])
     categories |= get_all_subclasses(g, NS['Scienza'])
     categories.add('Studi_umanistici')
     categories |= get_all_subclasses(g, NS['Studi_umanistici'])
-
-    # Assicurati che "Altro" sia incluso
     categories.add('Altro')
-    all_labels = sorted(categories)
-
-    print(f"📊 Categorie totali (incluso 'Altro'): {len(all_labels)}")
-    print(f"Categoria 'Altro' inclusa: {'Altro' in all_labels}")
-
-    # Carica dataset
-    df_train = load_dataset_with_category_labels(csv_file, base_folder, g, NS)
+    all_labels = sorted(list(categories))
+    
+    print(f"📊 Categorie totali: {len(all_labels)}")
+    print("🔍 Prime 10 categorie:", all_labels[:10])
+    
+    # Carica dataset con UNA categoria per documento
+    df_train = load_dataset_with_single_category(csv_file, base_folder, g, NS)
     print(f"📁 Dataset caricato: {len(df_train)} documenti")
-
-    # Sottocampiona classi generali (incluso "Altro")
-    general_labels = ['Scienza', 'Studi_umanistici', 'Altro']
-    df_train_balanced = undersample_general_classes(df_train, 'labels', general_labels, threshold=0.5)
+    
+    # Bilancia dataset
+    df_train_balanced = balance_single_label_dataset(df_train, 'single_label', max_samples_per_class=50)
     print(f"⚖️ Dataset bilanciato: {len(df_train_balanced)} documenti")
-
-    # Split train/validation
-    class_counts = Counter(df_train['labels'].apply(lambda x: x[0] if x else 'Altro'))
-    can_stratify = all(count >= 2 for count in class_counts.values()) and len(df_train) >= 2
-
-    if can_stratify:
-        train, val = train_test_split(df_train, test_size=0.2, random_state=42,
-                                    stratify=df_train['labels'].apply(lambda x: x[0] if x else 'Altro'))
+    
+    # Split train/validation - SINGLE LABEL
+    if len(df_train_balanced) >= 10:  # Controllo minimo
+        unique_labels = df_train_balanced['single_label'].unique()
+        can_stratify = all(sum(df_train_balanced['single_label'] == label) >= 2 for label in unique_labels)
+        
+        if can_stratify and len(unique_labels) > 1:
+            train, val = train_test_split(df_train_balanced, test_size=0.2, random_state=42,
+                                        stratify=df_train_balanced['single_label'])
+        else:
+            train, val = train_test_split(df_train_balanced, test_size=0.2, random_state=42)
     else:
-        train, val = train_test_split(df_train, test_size=0.2, random_state=42)
-
+        print("⚠️ Dataset troppo piccolo per il training")
+        train, val = df_train_balanced, df_train_balanced.sample(frac=0.1)
+    
     # Vettorizzazione
-    vectorizer = TfidfVectorizer(max_features=5000)
+    vectorizer = TfidfVectorizer(max_features=5000, stop_words='english')
     X_train = vectorizer.fit_transform(train['text'])
     X_val = vectorizer.transform(val['text'])
-
-    y_train = np.array(train['labels'].apply(lambda labels: encode_labels(labels, all_labels)).tolist())
-    y_val = np.array(val['labels'].apply(lambda labels: encode_labels(labels, all_labels)).tolist())
-
+    
+    # Labels SINGLE - non più binary encoding
+    y_train = train['single_label'].values
+    y_val = val['single_label'].values
+    
     print(f"🔧 Features: {X_train.shape[1]}, Training samples: {X_train.shape[0]}")
-
-    # Addestramento modelli
-    print("\n🚀 ADDESTRAMENTO MODELLI:")
-    print("=" * 50)
-
-    # Logistic Regression
-    clf_lr = OneVsRestClassifier(LogisticRegression(max_iter=200))
-    model_lr = train_eval_model("Logistic Regression", clf_lr, X_train, y_train, X_val, y_val, all_labels)
-
+    print(f"📋 Unique labels in training: {len(np.unique(y_train))}")
+    
+    # Addestramento modelli SINGLE-LABEL
+    print("\n🚀 ADDESTRAMENTO MODELLI (SINGLE-LABEL):")
+    print("=" * 60)
+    
+    # Logistic Regression - NON più OneVsRestClassifier
+    clf_lr = LogisticRegression(max_iter=200, multi_class='ovr')
+    model_lr = train_eval_single_label_model("Logistic Regression", clf_lr, X_train, y_train, X_val, y_val, all_labels)
+    
     # SVM
-    clf_svm = OneVsRestClassifier(SVC(kernel="linear", probability=True))
-    model_svm = train_eval_model("SVM (linear kernel)", clf_svm, X_train, y_train, X_val, y_val, all_labels)
-
+    clf_svm = SVC(kernel="linear", probability=True)
+    model_svm = train_eval_single_label_model("SVM (linear)", clf_svm, X_train, y_train, X_val, y_val, all_labels)
+    
     # Random Forest
-    clf_rf = OneVsRestClassifier(RandomForestClassifier(n_estimators=100, random_state=42))
-    model_rf = train_eval_model("Random Forest", clf_rf, X_train, y_train, X_val, y_val, all_labels)
-
-    # Predizioni e filtraggio
-    print("\n🎯 PREDIZIONI E FILTRAGGIO:")
-    print("=" * 50)
-
-    # Predizioni per Logistic Regression
-    df_pred_lr = predict_top_categories(df_train, model_lr, vectorizer, all_labels)
-    df_pred_lr['filtered_predicted_category'] = df_pred_lr['predicted_category'].apply(
-        lambda labels: filter_general_superclasses(labels, g, NS))
-
+    clf_rf = RandomForestClassifier(n_estimators=100, random_state=42)
+    model_rf = train_eval_single_label_model("Random Forest", clf_rf, X_train, y_train, X_val, y_val, all_labels)
+    
+    # Predizioni SINGLE CATEGORY
+    print("\n🎯 PREDIZIONI SINGLE-CATEGORY:")
+    print("=" * 60)
+    
+    df_pred_lr = predict_single_category(df_train_balanced, model_lr, vectorizer, all_labels)
+    
     print("📋 Sample predictions (Logistic Regression):")
-    print(df_pred_lr[['filename', 'filtered_predicted_category']].head())
-
+    sample_preds = df_pred_lr[['filename', 'single_label', 'predicted_category', 'confidence']].head(10)
+    print(sample_preds.to_string(index=False))
+    
     # Statistiche finali
-    print("\n📊 STATISTICHE FINALI:")
-    print("=" * 50)
-
-    counter = Counter()
-    for lablist in df_train['labels']:
-        counter.update(lablist)
-
-    print(f"Distribuzione categorie (Top 10):")
-    for label, count in counter.most_common(10):
-        print(f"{label:20}: {count:4d} ({count/len(df_train)*100:.1f}%)")
-
-    # Statistiche specifiche per "Altro"
-    altro_count = counter.get('Altro', 0)
-    print(f"\n🎯 Categoria 'ALTRO': {altro_count} occorrenze ({altro_count/len(df_train)*100:.1f}% del dataset)")
-
-    print("\n✅ Addestramento completato!")
-    print(f"Modelli addestrati su {len(all_labels)} categorie (incluso 'Altro')")
+    print("\n📊 STATISTICHE FINALI (SINGLE-LABEL):")
+    print("=" * 60)
+    
+    # Distribuzione categorie reali
+    counter_real = Counter(df_train_balanced['single_label'])
+    print("🏷️ Distribuzione categorie reali (Top 10):")
+    for label, count in counter_real.most_common(10):
+        print(f"{label:20}: {count:4d} ({count/len(df_train_balanced)*100:.1f}%)")
+    
+    # Distribuzione predizioni
+    counter_pred = Counter(df_pred_lr['predicted_category'])
+    print("\n🤖 Distribuzione predizioni (Top 10):")
+    for label, count in counter_pred.most_common(10):
+        print(f"{label:20}: {count:4d} ({count/len(df_pred_lr)*100:.1f}%)")
+    
+    # Accuracy complessiva
+    correct_predictions = (df_pred_lr['single_label'] == df_pred_lr['predicted_category']).sum()
+    overall_accuracy = correct_predictions / len(df_pred_lr)
+    print(f"\n🎯 Accuracy complessiva: {overall_accuracy:.4f} ({correct_predictions}/{len(df_pred_lr)})")
+    
+    # Statistiche "Altro"
+    altro_real = counter_real.get('Altro', 0)
+    altro_pred = counter_pred.get('Altro', 0)
+    print(f"\n🎯 Categoria 'ALTRO':")
+    print(f"   Reale: {altro_real} ({altro_real/len(df_train_balanced)*100:.1f}%)")
+    print(f"   Predetta: {altro_pred} ({altro_pred/len(df_pred_lr)*100:.1f}%)")
+    
+    print("\n✅ ADDESTRAMENTO SINGLE-LABEL COMPLETATO!")
+    print("Ora ogni documento ha esattamente UNA categoria (la più specifica)")
+          
