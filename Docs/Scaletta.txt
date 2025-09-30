@@ -23,7 +23,7 @@
 
 ### 2.1 Feature Engineering
 - [X] Estrazione features testuali (TF-IDF, word embeddings)
-- [ ] Aggiungere feature di percentuale di affinamento con le top 3 categorie (necessario per implementazione di CSP)
+- [X] Aggiungere feature di percentuale di affinamento con le top 3 categorie (necessario per implementazione di CSP)
 - [ ] Assegnare nell'ontologia i ifle categorizzati
 - [ ] Usare datat properties per inserire parole chiave di ogni categoria
 - [ ] Design dell'architettura complessiva (ML + CSP + Prolog)

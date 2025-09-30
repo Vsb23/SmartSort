@@ -50,39 +50,104 @@ def categorize_all_files_single_category(percentage=85):
 
     # Sistema di categorizzazione con focus sulla specificità
     category_keywords = {
-        'Biologia': ['biology', 'biological', 'organism', 'cell', 'genetic', 'dna', 'rna', 'protein', 'enzyme', 'evolution', 'molecular', 'bio'],
-        'Ambiente': ['environment', 'environmental', 'climate', 'pollution', 'sustainability', 'green', 'ecosystem', 'conservation', 'eco'],
-        'Ecologia': ['ecology', 'ecological', 'ecosystem', 'biodiversity', 'habitat', 'species', 'wildlife', 'conservation'],
-        'Chimica': ['chemistry', 'chemical', 'compound', 'molecule', 'reaction', 'synthesis', 'catalyst', 'polymer', 'organic'],
-        'Fisica': ['physics', 'physical', 'quantum', 'mechanics', 'thermodynamics', 'electromagnetic', 'optics', 'particle'],
-        'Energia': ['energy', 'power', 'renewable', 'solar', 'wind', 'nuclear', 'battery', 'fuel', 'electricity'],
-        'Spazio': ['space', 'satellite', 'orbit', 'planetary', 'astronomy', 'astrophysics', 'cosmic', 'rocket', 'aerospace'],
-        'Informatica': ['computer', 'computing', 'algorithm', 'programming', 'software', 'hardware', 'technology', 'digital', 'it'],
-        'AI_ML': ['artificial intelligence', 'machine learning', 'neural network', 'deep learning', 'ml', 'classification', 'prediction'],
-        'Web_development': ['web', 'website', 'html', 'css', 'javascript', 'frontend', 'backend', 'server', 'browser', 'http'],
-        'System_programming': ['system', 'operating system', 'kernel', 'linux', 'unix', 'driver', 'embedded', 'real-time'],
-        'Comunicazione': ['communication', 'media', 'social', 'network', 'information', 'signal', 'broadcast', 'telecom'],
-        'Data_analysis': ['data', 'analysis', 'statistics', 'analytics', 'visualization', 'mining', 'big data', 'dataset'],
-        'Database': ['database', 'sql', 'nosql', 'storage', 'dbms', 'query', 'indexing', 'data management'],
-        'Security': ['security', 'cybersecurity', 'encryption', 'authentication', 'firewall', 'forensic', 'cryptography'],
-        'Medicina': ['medicine', 'medical', 'health', 'healthcare', 'clinical', 'patient', 'treatment', 'diagnosis'],
-        'Alimentazione': ['nutrition', 'food', 'diet', 'meal', 'dietary', 'eating', 'vitamin', 'dietitian'],
-        'Cardiologia': ['cardiology', 'heart', 'cardiac', 'cardiovascular', 'coronary', 'artery'],
-        'Oncologia': ['oncology', 'cancer', 'tumor', 'malignant', 'chemotherapy', 'radiation'],
-        'Antropologia': ['anthropology', 'anthropological', 'human', 'culture', 'society', 'social'],
-        'Archeologia': ['archaeology', 'archaeological', 'artifact', 'excavation', 'ancient'],
-        'Linguistica': ['linguistic', 'language', 'linguistics', 'sociolinguistics'],
-        'Culturale': ['cultural', 'culture', 'ethnography', 'ritual', 'tradition'],
-        'Filosofia': ['philosophy', 'philosophical', 'ethics', 'metaphysics', 'logic'],
-        'Paleontologia': ['paleontology', 'fossil', 'prehistoric', 'evolution', 'extinct'],
-        'Animale': ['animal', 'fossil animal', 'vertebrate', 'mammal'],
-        'Botanica': ['plant', 'fossil plant', 'botanical', 'flora'],
-        'Umana': ['human evolution', 'hominid', 'ancestor', 'primitive human'],
-        'Storia': ['history', 'historical', 'past', 'chronology', 'period', 'era'],
-        'antica': ['ancient', 'antiquity', 'classical', 'roman', 'greek'],
-        'moderna': ['modern', 'renaissance', 'enlightenment', 'industrial revolution'],
-        'contemporanea': ['contemporary', 'modern', '19th', '20th', '21st', 'world war'],
-        'Preistoria': ['prehistory', 'prehistoric', 'stone age', 'bronze age', 'iron age'],
+    'Biologia': ['biology', 'biological', 'organism', 'cellular', 'genetic', 'genome', 'ribonucleic', 'protein', 'enzyme', 'biotechnology'],
+    
+    'Ambiente': ['environment', 'environmental', 'climate', 'pollution', 'sustainability','green', 'ecosystem', 'conservation', 'biodiversity', 'renewable'],
+    
+    'Ecologia': ['ecology', 'ecological', 'habitat', 'species', 'wildlife', 'biome', 'population', 'community', 'niche', 'predator'],
+    
+    'Chimica': ['chemistry', 'chemical', 'compound', 'molecule', 'reaction', 'synthesis', 'catalyst', 'polymer', 'organic', 'inorganic'],
+    
+    'Fisica': ['physics', 'physical', 'quantum', 'mechanics', 'thermodynamics', 'electromagnetic', 'optics', 'particle', 'relativity', 'gravity'],
+    
+    'Energia': ['energy', 'power', 'solar', 'wind', 'nuclear', 'battery', 'fuel', 'electricity', 'turbine', 'generator'],
+    
+    'Spazio': ['space', 'satellite', 'orbit', 'planetary', 'astronomy', 'astrophysics', 'cosmic', 'rocket', 'aerospace', 'telescope'],
+    
+    'Informatica': ['computer', 'computing', 'algorithm', 'programming', 'software','hardware', 'digital', 'coding', 'processor', 'binary'],
+    
+    'AI_ML': ['artificial intelligence', 'machine learning', 'neural network', 'deep learning', 'classification', 'prediction', 'supervised', 'unsupervised', 'regression', 'clustering'],
+    
+    'Web_development': ['website', 'html', 'stylesheet', 'javascript', 'frontend', 'backend', 'server', 'browser', 'http', 'responsive'],
+    
+    'System_programming': ['system', 'operating system', 'kernel', 'linux', 'unix', 'driver', 'embedded', 'real-time', 'firmware', 'compiler'],
+    
+    'Comunicazione': ['communication', 'media', 'broadcast', 'information', 'messaging', 'signal', 'telecom', 'wireless', 'protocol', 'transmission'],
+    
+    'Data_analysis': ['data', 'analysis', 'statistics', 'analytics', 'visualization', 'mining', 'dataset', 'metrics', 'correlation', 'trend'],
+    
+    'Database': ['database', 'query', 'nosql', 'storage', 'dbms', 'indexing', 'table', 'schema', 'transaction', 'relational'],
+    
+    'Security': ['security', 'cybersecurity', 'encryption', 'authentication', 'firewall','forensic', 'cryptography', 'vulnerability', 'malware', 'intrusion'],
+    
+    'Medicina': ['medicine', 'medical', 'health', 'healthcare', 'clinical', 'patient', 'treatment', 'diagnosis', 'therapy', 'pharmaceutical'],
+    
+    'Alimentazione': ['nutrition', 'food', 'diet', 'meal', 'dietary','eating', 'vitamin', 'dietitian', 'calorie', 'nutrient'],
+    
+    'Cardiologia': ['cardiology', 'heart', 'cardiac', 'cardiovascular', 'coronary', 'artery', 'blood pressure', 'valve', 'rhythm', 'circulation'],
+    
+    'Oncologia': ['oncology', 'cancer', 'tumor', 'malignant', 'chemotherapy','radiation', 'metastasis', 'biopsy', 'carcinogen', 'remission'],
+    
+    'Antropologia': ['anthropology', 'anthropological', 'human', 'society', 'kinship','tribal', 'primitive', 'fieldwork', 'ethnology', 'cultural anthropology'],
+    
+    'Archeologia': ['archaeology', 'archaeological', 'artifact', 'excavation', 'site','pottery', 'burial', 'stratigraphy', 'dating', 'ruins'],
+    
+    'Linguistica': ['linguistic', 'language', 'linguistics', 'sociolinguistics', 'phonetics','grammar', 'syntax', 'semantics', 'morphology', 'dialect'],
+    
+    'Culturale': [
+        'cultural', 'folklore', 'tradition', 'custom', 'belief', 
+        'identity', 'heritage', 'ceremonial', 'symbolic', 'intercultural'
+    ],
+    
+    'Filosofia': [
+        'philosophy', 'philosophical', 'ethics', 'metaphysics', 'logic', 
+        'epistemology', 'ontology', 'moral', 'reason', 'wisdom'
+    ],
+    
+    'Paleontologia': [
+        'paleontology', 'fossil', 'evolution', 'extinct', 'dinosaur', 
+        'paleozoic', 'mesozoic', 'cenozoic', 'sedimentary', 'trilobite'
+    ],
+    
+    'Animale': [
+        'animal', 'vertebrate', 'mammal', 'reptile', 'amphibian', 
+        'bird', 'fish', 'skeleton', 'bone', 'spine'
+    ],
+    
+    'Botanica': [
+        'plant', 'botanical', 'flora', 'leaf', 'root', 
+        'stem', 'flower', 'seed', 'photosynthesis', 'chlorophyll'
+    ],
+    
+    'Umana': [
+        'human evolution', 'hominid', 'ancestor', 'primitive human', 'homo sapiens', 
+        'neanderthal', 'bipedal', 'cranium', 'primates', 'australopithecus'
+    ],
+    
+    'Storia': [
+        'history', 'historical', 'past', 'chronology', 'period', 
+        'epoch', 'civilization', 'empire', 'dynasty', 'chronicle'
+    ],
+    
+    'antica': [
+        'antiquity', 'classical', 'roman', 'greek', 'egypt', 
+        'mesopotamia', 'babylon', 'pharaoh', 'gladiator', 'colosseum'
+    ],
+    
+    'moderna': [
+        'modern', 'renaissance', 'enlightenment', 'industrial revolution', 'reformation', 
+        'capitalism', 'colonialism', 'nationalism', 'democracy', 'monarchy'
+    ],
+    
+    'contemporanea': [
+        'contemporary', '19th', '20th', '21st', 'world war', 
+        'globalization', 'digitalization', 'internet age', 'terrorism', 'pandemic'
+    ],
+    
+    'Preistoria': [
+        'prehistory', 'stone age', 'bronze age', 'iron age', 'neolithic', 
+        'paleolithic', 'hunter gatherer', 'cave painting', 'megalith', 'dolmen'
+    ],
         'Altro': []  # Categoria catch-all senza keywords specifiche
     }
 
@@ -120,17 +185,30 @@ def categorize_all_files_single_category(percentage=85):
         clean_text = str(row.get('clean_text', '')).lower() if 'clean_text' in row else ''
 
         full_text = f"{titolo} {filename} {abstract} {clean_text}"
-
-        # Calcola punteggi per tutte le categorie
+        splitted_clean_text = clean_text.split()
+        
         category_scores = defaultdict(int)
         for category, keywords in category_keywords.items():
-            if keywords:  # Solo per categorie con keywords definite
+             if keywords:  # Solo per categorie con keywords definite
+        # Nel ciclo delle keywords:
                 for keyword in keywords:
-                    if keyword in full_text:
-                        # Peso maggiore per keyword più lunghe e specifiche
+                    # Usa regex per parole intere
+                    pattern = r'\b' + re.escape(keyword.lower()) + r'\b'
+                    matches = len(re.findall(pattern, full_text.lower()))
+                    if matches > 0:
                         weight = len(keyword.split()) * 2
-                        frequency = full_text.count(keyword)
-                        category_scores[category] += weight * frequency
+                        category_scores[category] += weight * matches
+
+        # # Calcola punteggi per tutte le categorie
+        # category_scores = defaultdict(int)
+        # for category, keywords in category_keywords.items():
+        #     if keywords:  # Solo per categorie con keywords definite
+        #         for keyword in keywords:
+        #             if keyword in splitted_clean_text:
+        #                 # Peso maggiore per keyword più lunghe e specifiche
+        #                 weight = len(keyword.split()) * 2
+        #                 frequency = clean_text.count(keyword)
+        #                 category_scores[category] += weight * frequency
 
         # STRATEGIA DI SELEZIONE: Priorità alla specificità
         best_category = None
@@ -171,7 +249,7 @@ def categorize_all_files_single_category(percentage=85):
         
         return best_category
 
-    # Resto del codice...
+    # Calcola numero di file da categorizzare
     files_to_categorize = int(len(df) * percentage / 100)
     print(f"🎯 File da categorizzare: {files_to_categorize:,} ({percentage}% del totale)")
 
