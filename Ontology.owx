@@ -1,14 +1,12 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#"
-     xml:base="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-    <owl:Ontology rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11"/>
-    
-
+    xml:base="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11" />
 
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -18,124 +16,120 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    
-
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#belongsToCategory -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#belongsToCategory">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#belongsToCategory] -->
+    <owl:ObjectProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#belongsToCategory">
+        <rdfs:domain
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento" />
+        <rdfs:range
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza" />
     </owl:ObjectProperty>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#collaboratesWith -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#collaboratesWith">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#collaboratesWith] -->
+    <owl:ObjectProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#collaboratesWith">
+        <rdfs:domain
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore" />
+        <rdfs:range
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore" />
     </owl:ObjectProperty>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthor -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthor">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthor] -->
+    <owl:ObjectProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthor">
+        <rdfs:domain
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento" />
+        <rdfs:range
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore" />
     </owl:ObjectProperty>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthorName -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthorName">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valuestring"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthorName] -->
+    <owl:ObjectProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthorName">
+        <rdfs:domain
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore" />
+        <rdfs:range
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valuestring" />
     </owl:ObjectProperty>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasDOI -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasDOI">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valuestring"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasDOI] -->
+    <owl:ObjectProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasDOI">
+        <rdfs:domain
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento" />
+        <rdfs:range
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valuestring" />
     </owl:ObjectProperty>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPageCount -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPageCount">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valueinteger"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPageCount] -->
+    <owl:ObjectProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPageCount">
+        <rdfs:domain
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento" />
+        <rdfs:range
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valueinteger" />
     </owl:ObjectProperty>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPublicationYear -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPublicationYear">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valueinteger"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPublicationYear] -->
+    <owl:ObjectProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPublicationYear">
+        <rdfs:domain
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento" />
+        <rdfs:range
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valueinteger" />
     </owl:ObjectProperty>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasRelatedDocument -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasRelatedDocument">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasRelatedDocument] -->
+    <owl:ObjectProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasRelatedDocument">
+        <rdfs:domain
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento" />
+        <rdfs:range
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento" />
     </owl:ObjectProperty>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasSubCategory -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasSubCategory">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasSubCategory] -->
+    <owl:ObjectProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasSubCategory">
+        <rdfs:domain
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza" />
+        <rdfs:range
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza" />
     </owl:ObjectProperty>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTitle -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTitle">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valuestring"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTitle] -->
+    <owl:ObjectProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTitle">
+        <rdfs:domain
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento" />
+        <rdfs:range
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valuestring" />
     </owl:ObjectProperty>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTopic -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTopic">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Tema"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTopic] -->
+    <owl:ObjectProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTopic">
+        <rdfs:domain
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento" />
+        <rdfs:range
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Tema" />
     </owl:ObjectProperty>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#isPartOfProject -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#isPartOfProject">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#isPartOfProject] -->
+    <owl:ObjectProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#isPartOfProject">
+        <rdfs:domain
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento" />
     </owl:ObjectProperty>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#publishedInVenue -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#publishedInVenue">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Pubblicazione"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#publishedInVenue] -->
+    <owl:ObjectProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#publishedInVenue">
+        <rdfs:domain
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento" />
+        <rdfs:range
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Pubblicazione" />
     </owl:ObjectProperty>
-    
-
 
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -145,38 +139,38 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthorName] -->
+    <owl:DatatypeProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthorName" />
 
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasDOI] -->
+    <owl:DatatypeProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasDOI" />
 
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthorName -->
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasKeyword] -->
+    <owl:DatatypeProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasKeyword">
+        <rdfs:domain
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza" />
+        <rdfs:domain
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici" />
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+        <rdfs:comment>Keywords associate a una categoria per la classificazione automatica dei
+            documenti</rdfs:comment>
+        <rdfs:label>has keyword</rdfs:label>
+    </owl:DatatypeProperty>
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasAuthorName"/>
-    
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPageCount] -->
+    <owl:DatatypeProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPageCount" />
 
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPublicationYear] -->
+    <owl:DatatypeProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPublicationYear" />
 
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasDOI -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasDOI"/>
-    
-
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPageCount -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPageCount"/>
-    
-
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPublicationYear -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasPublicationYear"/>
-    
-
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTitle -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTitle"/>
-    
-
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTitle] -->
+    <owl:DatatypeProperty
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#hasTitle" />
 
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -186,327 +180,602 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valueinteger] -->
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valueinteger" />
 
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valuestring] -->
+    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valuestring" />
 
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valueinteger -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valueinteger"/>
-    
-
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valuestring -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/entity-valuestring"/>
-    
-
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#AI_ML -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#AI_ML">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#AI_ML] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#AI_ML">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica" />
+        <hasKeyword>artificial intelligence</hasKeyword>
+        <hasKeyword>machine learning</hasKeyword>
+        <hasKeyword>neural network</hasKeyword>
+        <hasKeyword>deep learning</hasKeyword>
+        <hasKeyword>classification</hasKeyword>
+        <hasKeyword>prediction</hasKeyword>
+        <hasKeyword>supervised</hasKeyword>
+        <hasKeyword>unsupervised</hasKeyword>
+        <hasKeyword>regression</hasKeyword>
+        <hasKeyword>clustering</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Alimentazione -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Alimentazione">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Alimentazione] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Alimentazione">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina" />
+        <hasKeyword>nutrition</hasKeyword>
+        <hasKeyword>food</hasKeyword>
+        <hasKeyword>diet</hasKeyword>
+        <hasKeyword>meal</hasKeyword>
+        <hasKeyword>dietary</hasKeyword>
+        <hasKeyword>eating</hasKeyword>
+        <hasKeyword>vitamin</hasKeyword>
+        <hasKeyword>dietitian</hasKeyword>
+        <hasKeyword>calorie</hasKeyword>
+        <hasKeyword>nutrient</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Altro -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Altro"/>
-    
-
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Ambiente -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Ambiente">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Altro] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Altro">
+        <!-- No keywords for "Altro" - it's a catch-all category -->
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Animale -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Animale">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Ambiente] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Ambiente">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia" />
+        <hasKeyword>environment</hasKeyword>
+        <hasKeyword>environmental</hasKeyword>
+        <hasKeyword>climate</hasKeyword>
+        <hasKeyword>pollution</hasKeyword>
+        <hasKeyword>sustainability</hasKeyword>
+        <hasKeyword>green</hasKeyword>
+        <hasKeyword>ecosystem</hasKeyword>
+        <hasKeyword>conservation</hasKeyword>
+        <hasKeyword>biodiversity</hasKeyword>
+        <hasKeyword>renewable</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antica -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antica">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Animale] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Animale">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia" />
+        <hasKeyword>animal</hasKeyword>
+        <hasKeyword>vertebrate</hasKeyword>
+        <hasKeyword>mammal</hasKeyword>
+        <hasKeyword>reptile</hasKeyword>
+        <hasKeyword>amphibian</hasKeyword>
+        <hasKeyword>bird</hasKeyword>
+        <hasKeyword>fish</hasKeyword>
+        <hasKeyword>skeleton</hasKeyword>
+        <hasKeyword>bone</hasKeyword>
+        <hasKeyword>spine</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antica] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antica">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia" />
+        <hasKeyword>antiquity</hasKeyword>
+        <hasKeyword>classical</hasKeyword>
+        <hasKeyword>roman</hasKeyword>
+        <hasKeyword>greek</hasKeyword>
+        <hasKeyword>egypt</hasKeyword>
+        <hasKeyword>mesopotamia</hasKeyword>
+        <hasKeyword>babylon</hasKeyword>
+        <hasKeyword>pharaoh</hasKeyword>
+        <hasKeyword>gladiator</hasKeyword>
+        <hasKeyword>colosseum</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Archeologia -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Archeologia">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici" />
+        <hasKeyword>anthropology</hasKeyword>
+        <hasKeyword>anthropological</hasKeyword>
+        <hasKeyword>human</hasKeyword>
+        <hasKeyword>society</hasKeyword>
+        <hasKeyword>kinship</hasKeyword>
+        <hasKeyword>tribal</hasKeyword>
+        <hasKeyword>primitive</hasKeyword>
+        <hasKeyword>fieldwork</hasKeyword>
+        <hasKeyword>ethnology</hasKeyword>
+        <hasKeyword>cultural anthropology</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore"/>
-    
-
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Archeologia] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Archeologia">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia" />
+        <hasKeyword>archaeology</hasKeyword>
+        <hasKeyword>archaeological</hasKeyword>
+        <hasKeyword>artifact</hasKeyword>
+        <hasKeyword>excavation</hasKeyword>
+        <hasKeyword>site</hasKeyword>
+        <hasKeyword>pottery</hasKeyword>
+        <hasKeyword>burial</hasKeyword>
+        <hasKeyword>stratigraphy</hasKeyword>
+        <hasKeyword>dating</hasKeyword>
+        <hasKeyword>ruins</hasKeyword>
     </owl:Class>
-    
 
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Autore" />
 
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Botanica -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Botanica">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza" />
+        <hasKeyword>biology</hasKeyword>
+        <hasKeyword>biological</hasKeyword>
+        <hasKeyword>organism</hasKeyword>
+        <hasKeyword>cellular</hasKeyword>
+        <hasKeyword>genetic</hasKeyword>
+        <hasKeyword>genome</hasKeyword>
+        <hasKeyword>ribonucleic</hasKeyword>
+        <hasKeyword>protein</hasKeyword>
+        <hasKeyword>enzyme</hasKeyword>
+        <hasKeyword>biotechnology</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Cardiologia -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Cardiologia">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Botanica] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Botanica">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia" />
+        <hasKeyword>plant</hasKeyword>
+        <hasKeyword>botanical</hasKeyword>
+        <hasKeyword>flora</hasKeyword>
+        <hasKeyword>leaf</hasKeyword>
+        <hasKeyword>root</hasKeyword>
+        <hasKeyword>stem</hasKeyword>
+        <hasKeyword>flower</hasKeyword>
+        <hasKeyword>seed</hasKeyword>
+        <hasKeyword>photosynthesis</hasKeyword>
+        <hasKeyword>chlorophyll</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Chimica -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Chimica">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Cardiologia] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Cardiologia">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina" />
+        <hasKeyword>cardiology</hasKeyword>
+        <hasKeyword>heart</hasKeyword>
+        <hasKeyword>cardiac</hasKeyword>
+        <hasKeyword>cardiovascular</hasKeyword>
+        <hasKeyword>coronary</hasKeyword>
+        <hasKeyword>artery</hasKeyword>
+        <hasKeyword>blood pressure</hasKeyword>
+        <hasKeyword>valve</hasKeyword>
+        <hasKeyword>rhythm</hasKeyword>
+        <hasKeyword>circulation</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Comunicazione -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Comunicazione">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Chimica] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Chimica">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia" />
+        <hasKeyword>chemistry</hasKeyword>
+        <hasKeyword>chemical</hasKeyword>
+        <hasKeyword>compound</hasKeyword>
+        <hasKeyword>molecule</hasKeyword>
+        <hasKeyword>reaction</hasKeyword>
+        <hasKeyword>synthesis</hasKeyword>
+        <hasKeyword>catalyst</hasKeyword>
+        <hasKeyword>polymer</hasKeyword>
+        <hasKeyword>organic</hasKeyword>
+        <hasKeyword>inorganic</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Contemporanea -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Contemporanea">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Comunicazione] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Comunicazione">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica" />
+        <hasKeyword>communication</hasKeyword>
+        <hasKeyword>media</hasKeyword>
+        <hasKeyword>broadcast</hasKeyword>
+        <hasKeyword>information</hasKeyword>
+        <hasKeyword>messaging</hasKeyword>
+        <hasKeyword>signal</hasKeyword>
+        <hasKeyword>telecom</hasKeyword>
+        <hasKeyword>wireless</hasKeyword>
+        <hasKeyword>protocol</hasKeyword>
+        <hasKeyword>transmission</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Culturale -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Culturale">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Contemporanea] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Contemporanea">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia" />
+        <hasKeyword>contemporary</hasKeyword>
+        <hasKeyword>19th</hasKeyword>
+        <hasKeyword>20th</hasKeyword>
+        <hasKeyword>21st</hasKeyword>
+        <hasKeyword>world war</hasKeyword>
+        <hasKeyword>globalization</hasKeyword>
+        <hasKeyword>digitalization</hasKeyword>
+        <hasKeyword>internet age</hasKeyword>
+        <hasKeyword>terrorism</hasKeyword>
+        <hasKeyword>pandemic</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Data_analysis -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Data_analysis">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Culturale] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Culturale">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia" />
+        <hasKeyword>cultural</hasKeyword>
+        <hasKeyword>folklore</hasKeyword>
+        <hasKeyword>tradition</hasKeyword>
+        <hasKeyword>custom</hasKeyword>
+        <hasKeyword>belief</hasKeyword>
+        <hasKeyword>identity</hasKeyword>
+        <hasKeyword>heritage</hasKeyword>
+        <hasKeyword>ceremonial</hasKeyword>
+        <hasKeyword>symbolic</hasKeyword>
+        <hasKeyword>intercultural</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Database -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Database">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Data_analysis] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Data_analysis">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica" />
+        <hasKeyword>data</hasKeyword>
+        <hasKeyword>analysis</hasKeyword>
+        <hasKeyword>statistics</hasKeyword>
+        <hasKeyword>analytics</hasKeyword>
+        <hasKeyword>visualization</hasKeyword>
+        <hasKeyword>mining</hasKeyword>
+        <hasKeyword>dataset</hasKeyword>
+        <hasKeyword>metrics</hasKeyword>
+        <hasKeyword>correlation</hasKeyword>
+        <hasKeyword>trend</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento"/>
-    
-
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Ecologia -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Ecologia">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Database] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Database">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica" />
+        <hasKeyword>database</hasKeyword>
+        <hasKeyword>query</hasKeyword>
+        <hasKeyword>nosql</hasKeyword>
+        <hasKeyword>storage</hasKeyword>
+        <hasKeyword>dbms</hasKeyword>
+        <hasKeyword>indexing</hasKeyword>
+        <hasKeyword>table</hasKeyword>
+        <hasKeyword>schema</hasKeyword>
+        <hasKeyword>transaction</hasKeyword>
+        <hasKeyword>relational</hasKeyword>
     </owl:Class>
-    
 
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Documento" />
 
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Energia -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Energia">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Fisica"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Ecologia] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Ecologia">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia" />
+        <hasKeyword>ecology</hasKeyword>
+        <hasKeyword>ecological</hasKeyword>
+        <hasKeyword>habitat</hasKeyword>
+        <hasKeyword>species</hasKeyword>
+        <hasKeyword>wildlife</hasKeyword>
+        <hasKeyword>biome</hasKeyword>
+        <hasKeyword>population</hasKeyword>
+        <hasKeyword>community</hasKeyword>
+        <hasKeyword>niche</hasKeyword>
+        <hasKeyword>predator</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Filosofia -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Filosofia">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Energia] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Energia">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Fisica" />
+        <hasKeyword>energy</hasKeyword>
+        <hasKeyword>power</hasKeyword>
+        <hasKeyword>solar</hasKeyword>
+        <hasKeyword>wind</hasKeyword>
+        <hasKeyword>nuclear</hasKeyword>
+        <hasKeyword>battery</hasKeyword>
+        <hasKeyword>fuel</hasKeyword>
+        <hasKeyword>electricity</hasKeyword>
+        <hasKeyword>turbine</hasKeyword>
+        <hasKeyword>generator</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Fisica -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Fisica">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Filosofia] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Filosofia">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici" />
+        <hasKeyword>philosophy</hasKeyword>
+        <hasKeyword>philosophical</hasKeyword>
+        <hasKeyword>ethics</hasKeyword>
+        <hasKeyword>metaphysics</hasKeyword>
+        <hasKeyword>logic</hasKeyword>
+        <hasKeyword>epistemology</hasKeyword>
+        <hasKeyword>ontology</hasKeyword>
+        <hasKeyword>moral</hasKeyword>
+        <hasKeyword>reason</hasKeyword>
+        <hasKeyword>wisdom</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Fisica] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Fisica">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza" />
+        <hasKeyword>physics</hasKeyword>
+        <hasKeyword>physical</hasKeyword>
+        <hasKeyword>quantum</hasKeyword>
+        <hasKeyword>mechanics</hasKeyword>
+        <hasKeyword>thermodynamics</hasKeyword>
+        <hasKeyword>electromagnetic</hasKeyword>
+        <hasKeyword>optics</hasKeyword>
+        <hasKeyword>particle</hasKeyword>
+        <hasKeyword>relativity</hasKeyword>
+        <hasKeyword>gravity</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Linguistica -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Linguistica">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza" />
+        <hasKeyword>computer</hasKeyword>
+        <hasKeyword>computing</hasKeyword>
+        <hasKeyword>algorithm</hasKeyword>
+        <hasKeyword>programming</hasKeyword>
+        <hasKeyword>software</hasKeyword>
+        <hasKeyword>hardware</hasKeyword>
+        <hasKeyword>digital</hasKeyword>
+        <hasKeyword>coding</hasKeyword>
+        <hasKeyword>processor</hasKeyword>
+        <hasKeyword>binary</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Linguistica] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Linguistica">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia" />
+        <hasKeyword>linguistic</hasKeyword>
+        <hasKeyword>language</hasKeyword>
+        <hasKeyword>linguistics</hasKeyword>
+        <hasKeyword>sociolinguistics</hasKeyword>
+        <hasKeyword>phonetics</hasKeyword>
+        <hasKeyword>grammar</hasKeyword>
+        <hasKeyword>syntax</hasKeyword>
+        <hasKeyword>semantics</hasKeyword>
+        <hasKeyword>morphology</hasKeyword>
+        <hasKeyword>dialect</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Moderna -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Moderna">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza" />
+        <hasKeyword>medicine</hasKeyword>
+        <hasKeyword>medical</hasKeyword>
+        <hasKeyword>health</hasKeyword>
+        <hasKeyword>healthcare</hasKeyword>
+        <hasKeyword>clinical</hasKeyword>
+        <hasKeyword>patient</hasKeyword>
+        <hasKeyword>treatment</hasKeyword>
+        <hasKeyword>diagnosis</hasKeyword>
+        <hasKeyword>therapy</hasKeyword>
+        <hasKeyword>pharmaceutical</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Oncologia -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Oncologia">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Moderna] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Moderna">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia" />
+        <hasKeyword>modern</hasKeyword>
+        <hasKeyword>renaissance</hasKeyword>
+        <hasKeyword>enlightenment</hasKeyword>
+        <hasKeyword>industrial revolution</hasKeyword>
+        <hasKeyword>reformation</hasKeyword>
+        <hasKeyword>capitalism</hasKeyword>
+        <hasKeyword>colonialism</hasKeyword>
+        <hasKeyword>nationalism</hasKeyword>
+        <hasKeyword>democracy</hasKeyword>
+        <hasKeyword>monarchy</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Oncologia] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Oncologia">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Medicina" />
+        <hasKeyword>oncology</hasKeyword>
+        <hasKeyword>cancer</hasKeyword>
+        <hasKeyword>tumor</hasKeyword>
+        <hasKeyword>malignant</hasKeyword>
+        <hasKeyword>chemotherapy</hasKeyword>
+        <hasKeyword>radiation</hasKeyword>
+        <hasKeyword>metastasis</hasKeyword>
+        <hasKeyword>biopsy</hasKeyword>
+        <hasKeyword>carcinogen</hasKeyword>
+        <hasKeyword>remission</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Preistoria -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Preistoria">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici" />
+        <hasKeyword>paleontology</hasKeyword>
+        <hasKeyword>fossil</hasKeyword>
+        <hasKeyword>evolution</hasKeyword>
+        <hasKeyword>extinct</hasKeyword>
+        <hasKeyword>dinosaur</hasKeyword>
+        <hasKeyword>paleozoic</hasKeyword>
+        <hasKeyword>mesozoic</hasKeyword>
+        <hasKeyword>cenozoic</hasKeyword>
+        <hasKeyword>sedimentary</hasKeyword>
+        <hasKeyword>trilobite</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Pubblicazione -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Pubblicazione"/>
-    
-
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
-    
-
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Security -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Security">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Preistoria] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Preistoria">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia" />
+        <hasKeyword>prehistory</hasKeyword>
+        <hasKeyword>stone age</hasKeyword>
+        <hasKeyword>bronze age</hasKeyword>
+        <hasKeyword>iron age</hasKeyword>
+        <hasKeyword>neolithic</hasKeyword>
+        <hasKeyword>paleolithic</hasKeyword>
+        <hasKeyword>hunter gatherer</hasKeyword>
+        <hasKeyword>cave painting</hasKeyword>
+        <hasKeyword>megalith</hasKeyword>
+        <hasKeyword>dolmen</hasKeyword>
     </owl:Class>
-    
 
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Pubblicazione] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Pubblicazione" />
 
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Spazio -->
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza" />
 
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Spazio">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Fisica"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Security] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Security">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica" />
+        <hasKeyword>security</hasKeyword>
+        <hasKeyword>cybersecurity</hasKeyword>
+        <hasKeyword>encryption</hasKeyword>
+        <hasKeyword>authentication</hasKeyword>
+        <hasKeyword>firewall</hasKeyword>
+        <hasKeyword>forensic</hasKeyword>
+        <hasKeyword>cryptography</hasKeyword>
+        <hasKeyword>vulnerability</hasKeyword>
+        <hasKeyword>malware</hasKeyword>
+        <hasKeyword>intrusion</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Spazio] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Spazio">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Fisica" />
+        <hasKeyword>space</hasKeyword>
+        <hasKeyword>satellite</hasKeyword>
+        <hasKeyword>orbit</hasKeyword>
+        <hasKeyword>planetary</hasKeyword>
+        <hasKeyword>astronomy</hasKeyword>
+        <hasKeyword>astrophysics</hasKeyword>
+        <hasKeyword>cosmic</hasKeyword>
+        <hasKeyword>rocket</hasKeyword>
+        <hasKeyword>aerospace</hasKeyword>
+        <hasKeyword>telescope</hasKeyword>
     </owl:Class>
-    
 
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici"/>
-    
-
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#System_programming -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#System_programming">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici" />
+        <hasKeyword>history</hasKeyword>
+        <hasKeyword>historical</hasKeyword>
+        <hasKeyword>past</hasKeyword>
+        <hasKeyword>chronology</hasKeyword>
+        <hasKeyword>period</hasKeyword>
+        <hasKeyword>epoch</hasKeyword>
+        <hasKeyword>civilization</hasKeyword>
+        <hasKeyword>empire</hasKeyword>
+        <hasKeyword>dynasty</hasKeyword>
+        <hasKeyword>chronicle</hasKeyword>
     </owl:Class>
-    
 
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici" />
 
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Tema -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Tema"/>
-    
-
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Umana -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Umana">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#System_programming] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#System_programming">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica" />
+        <hasKeyword>system</hasKeyword>
+        <hasKeyword>operating system</hasKeyword>
+        <hasKeyword>kernel</hasKeyword>
+        <hasKeyword>linux</hasKeyword>
+        <hasKeyword>unix</hasKeyword>
+        <hasKeyword>driver</hasKeyword>
+        <hasKeyword>embedded</hasKeyword>
+        <hasKeyword>real-time</hasKeyword>
+        <hasKeyword>firmware</hasKeyword>
+        <hasKeyword>compiler</hasKeyword>
     </owl:Class>
-    
 
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Tema] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Tema" />
 
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Web_development -->
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Umana] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Umana">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Paleontologia" />
+        <hasKeyword>human evolution</hasKeyword>
+        <hasKeyword>hominid</hasKeyword>
+        <hasKeyword>ancestor</hasKeyword>
+        <hasKeyword>primitive human</hasKeyword>
+        <hasKeyword>homo sapiens</hasKeyword>
+        <hasKeyword>neanderthal</hasKeyword>
+        <hasKeyword>bipedal</hasKeyword>
+        <hasKeyword>cranium</hasKeyword>
+        <hasKeyword>primates</hasKeyword>
+        <hasKeyword>australopithecus</hasKeyword>
+    </owl:Class>
 
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Web_development">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica"/>
+    <!-- [http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Web_development] -->
+    <owl:Class
+        rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Web_development">
+        <rdfs:subClassOf
+            rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica" />
+        <hasKeyword>website</hasKeyword>
+        <hasKeyword>html</hasKeyword>
+        <hasKeyword>stylesheet</hasKeyword>
+        <hasKeyword>javascript</hasKeyword>
+        <hasKeyword>frontend</hasKeyword>
+        <hasKeyword>backend</hasKeyword>
+        <hasKeyword>server</hasKeyword>
+        <hasKeyword>browser</hasKeyword>
+        <hasKeyword>http</hasKeyword>
+        <hasKeyword>responsive</hasKeyword>
     </owl:Class>
 </rdf:RDF>
 
-
-
-<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
-
+<!-- Generated by the OWL API with keywords integration -->
