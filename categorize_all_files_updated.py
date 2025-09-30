@@ -4,17 +4,17 @@ import random
 from collections import defaultdict, Counter
 
 
-def categorize_all_files_single_category(percentage=85):
+def categorize_all_files_single_category(percentage=100):
     """
     Categorizza una percentuale di TUTTI i file (non solo PDF)
     MODIFICATO: Assegna SOLO UNA categoria (la più specifica) per ogni file
     
     Args:
-        percentage (int): Percentuale di file da categorizzare (80-90)
+        percentage (int): Percentuale di file da categorizzare (80-100)
     """
     
-    if not 80 <= percentage <= 90:
-        print("ERRORE: La percentuale deve essere tra 80 e 90")
+    if not 80 <= percentage <= 100:
+        print("ERRORE: La percentuale deve essere tra 80 e 100")
         return
 
     # Leggi il CSV file
@@ -94,61 +94,29 @@ def categorize_all_files_single_category(percentage=85):
     
     'Linguistica': ['linguistic', 'language', 'linguistics', 'sociolinguistics', 'phonetics','grammar', 'syntax', 'semantics', 'morphology', 'dialect'],
     
-    'Culturale': [
-        'cultural', 'folklore', 'tradition', 'custom', 'belief', 
-        'identity', 'heritage', 'ceremonial', 'symbolic', 'intercultural'
+    'Culturale': ['cultural', 'folklore', 'tradition', 'custom', 'belief', 'identity', 'heritage', 'ceremonial', 'symbolic', 'intercultural'],
+    
+    'Filosofia': ['philosophy', 'philosophical', 'ethics', 'metaphysics', 'logic','epistemology', 'ontology', 'moral', 'reason', 'wisdom'],
+    
+    'Paleontologia': ['paleontology', 'fossil', 'evolution', 'extinct', 'dinosaur','paleozoic', 'mesozoic', 'cenozoic', 'sedimentary', 'trilobite'],
+    
+    'Animale': ['animal', 'vertebrate', 'mammal', 'reptile', 'amphibian','bird', 'fish', 'skeleton', 'bone', 'spine'],
+    
+    'Botanica': ['plant', 'botanical', 'flora', 'leaf', 'root','stem', 'flower', 'seed', 'photosynthesis', 'chlorophyll'],
+    
+    'Umana': ['human evolution', 'hominid', 'ancestor', 'primitive human', 'homo sapiens','neanderthal', 'bipedal', 'cranium', 'primates', 'australopithecus'],
+    
+    'Storia': ['history', 'historical', 'past', 'chronology', 'period','epoch', 'civilization', 'empire', 'dynasty', 'chronicle'],
+    
+    'antica': ['antiquity', 'classical', 'roman', 'greek', 'egypt','mesopotamia', 'babylon', 'pharaoh', 'gladiator', 'colosseum'
     ],
     
-    'Filosofia': [
-        'philosophy', 'philosophical', 'ethics', 'metaphysics', 'logic', 
-        'epistemology', 'ontology', 'moral', 'reason', 'wisdom'
-    ],
+    'moderna': ['modern', 'renaissance', 'enlightenment', 'industrial revolution', 'reformation','capitalism', 'colonialism', 'nationalism', 'democracy', 'monarchy'],
     
-    'Paleontologia': [
-        'paleontology', 'fossil', 'evolution', 'extinct', 'dinosaur', 
-        'paleozoic', 'mesozoic', 'cenozoic', 'sedimentary', 'trilobite'
-    ],
+    'contemporanea': ['contemporary', '19th', '20th', '21st', 'world war','globalization', 'digitalization', 'internet age', 'terrorism', 'pandemic'],
     
-    'Animale': [
-        'animal', 'vertebrate', 'mammal', 'reptile', 'amphibian', 
-        'bird', 'fish', 'skeleton', 'bone', 'spine'
-    ],
-    
-    'Botanica': [
-        'plant', 'botanical', 'flora', 'leaf', 'root', 
-        'stem', 'flower', 'seed', 'photosynthesis', 'chlorophyll'
-    ],
-    
-    'Umana': [
-        'human evolution', 'hominid', 'ancestor', 'primitive human', 'homo sapiens', 
-        'neanderthal', 'bipedal', 'cranium', 'primates', 'australopithecus'
-    ],
-    
-    'Storia': [
-        'history', 'historical', 'past', 'chronology', 'period', 
-        'epoch', 'civilization', 'empire', 'dynasty', 'chronicle'
-    ],
-    
-    'antica': [
-        'antiquity', 'classical', 'roman', 'greek', 'egypt', 
-        'mesopotamia', 'babylon', 'pharaoh', 'gladiator', 'colosseum'
-    ],
-    
-    'moderna': [
-        'modern', 'renaissance', 'enlightenment', 'industrial revolution', 'reformation', 
-        'capitalism', 'colonialism', 'nationalism', 'democracy', 'monarchy'
-    ],
-    
-    'contemporanea': [
-        'contemporary', '19th', '20th', '21st', 'world war', 
-        'globalization', 'digitalization', 'internet age', 'terrorism', 'pandemic'
-    ],
-    
-    'Preistoria': [
-        'prehistory', 'stone age', 'bronze age', 'iron age', 'neolithic', 
-        'paleolithic', 'hunter gatherer', 'cave painting', 'megalith', 'dolmen'
-    ],
-        'Altro': []  # Categoria catch-all senza keywords specifiche
+    'Preistoria': ['prehistory', 'stone age', 'bronze age', 'iron age', 'neolithic','paleolithic', 'hunter gatherer', 'cave painting', 'megalith', 'dolmen'],
+    'Altro': []  # Categoria catch-all senza keywords specifiche
     }
 
     # Mappatura estensioni -> categorie SPECIFICHE (non generali)
