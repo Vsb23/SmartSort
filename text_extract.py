@@ -1,22 +1,13 @@
 import os
 import pandas as pd
-import PyPDF2
 import fitz  # PyMuPDF - migliore per estrazione testo
 import re
-import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import spacy
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 import numpy as np
-import pdfplumber
-
-# Scarica risorse NLTK (eseguire una volta sola)
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('punkt_tab')
 
 class TextExtractor:
     def __init__(self):
@@ -40,28 +31,6 @@ class TextExtractor:
             return text
         except Exception as e:
             print(f"Errore nell'estrazione testo con PyMuPDF da {pdf_path}: {str(e)}")
-            return ""
-
-
-
-    def extract_text_pdfplumber(pdf_path):
-        text = ""
-        with pdfplumber.open(pdf_path) as pdf:
-            for page in pdf.pages:
-                text += page.extract_text() or ""
-        return text
-
-    def extract_text_with_pypdf2(self, pdf_path):
-        """Estrazione testo con PyPDF2 (fallback)"""
-        try:
-            with open(pdf_path, 'rb') as file:
-                pdf_reader = PyPDF2.PdfReader(file)
-                text = ""
-                for page in pdf_reader.pages:
-                    text += page.extract_text()
-                return text
-        except Exception as e:
-            print(f"Errore nell'estrazione testo con PyPDF2 da {pdf_path}: {str(e)}")
             return ""
 
     def clean_text(self, text):
@@ -163,10 +132,6 @@ def process_all_documents(csv_path, output_csv):
             if os.path.exists(pdf_path):
                 # Estrai testo
                 text = extractor.extract_text_with_pymupdf(pdf_path)
-                if not text:
-                    text = extractor.extract_text_with_pypdf2(pdf_path)
-                if not text:
-                    text = extractor.extract_text_pdfplumber(pdf_path)
                 
                 # Estrai sezioni
                 sections = extractor.extract_sections(text)
