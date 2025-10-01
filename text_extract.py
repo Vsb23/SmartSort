@@ -87,7 +87,14 @@ class TextExtractor:
     def extract_text_features(self, text):
         """Estrazione di features statistiche dal testo"""
         if not text:
-            return {}
+            return {
+                'word_count': 0,
+                'sentence_count': 0,
+                'avg_word_length': 0,
+                'avg_sentence_length': 0,
+                'unique_words': 0,
+                'lexical_diversity': 0
+            }
         
         words = text.split()
         sentences = text.split('.')
@@ -100,8 +107,8 @@ class TextExtractor:
             'unique_words': len(set(words)),
             'lexical_diversity': len(set(words)) / len(words) if words else 0
         }
-        
         return features
+    
 
 def process_all_documents(csv_path, output_csv):
     """Processa tutti i documenti dal CSV e aggiunge features di testo"""
@@ -184,7 +191,7 @@ def process_all_documents(csv_path, output_csv):
     result_df = pd.merge(df, text_df, on='titolo', how='left')
     
     # Salva il nuovo CSV
-    result_df.to_csv(output_csv, index=False)
+    result_df.to_csv(output_csv, index=False, escapechar='\\')
     print(f"CSV con testi estratti salvato come: {output_csv}")
     
     return result_df
