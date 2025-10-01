@@ -15,28 +15,22 @@
 - [X] Definizione formato annotations (multi-label con percentuali)
 - [X] Preprocessing documenti (cleaning, normalizzazione)
 - [X] Split train/validation/test sets
-- [ ] Eliminare assegnazione valore Scienza di default con "" 
-- [ ] Eliminare assegnazione valore Unknown ad Autore di default con "" 
-- [ ] Eliminare assegnazione valore Unknown di category di default con "" 
-- [ ] Aggiungere feature di percentuale di affinamento con le top 3 categorie (necessario per implementazione di CSP)
-
-### 1.3 Architettura del Sistema
-- [ ] Design dell'architettura complessiva (ML + CSP + Prolog)
-- [ ] Definizione interfacce tra componenti
-- [ ] Scelta tecnologie e framework
-- [ ] Setup ambiente di sviluppo
+- [X] Eliminare assegnazione valore Scienza di default con "" 
+- [X] Eliminare assegnazione valore Unknown ad Autore di default con "" 
+- [X] Eliminare assegnazione valore Unknown di category di default con "" 
 
 ## **FASE 2: Sviluppo Modello ML (Settimane 3-5)**
 
 ### 2.1 Feature Engineering
 - [X] Estrazione features testuali (TF-IDF, word embeddings)
-- [ ] Sperimentazione con modelli pre-trained (BERT, RoBERTa)
-- [ ] Feature engineering per metadati documenti
-- [ ] Analisi delle correlazioni tra features e categorie
+- [ ] Aggiungere feature di percentuale di affinamento con le top 3 categorie (necessario per implementazione di CSP)
+- [ ] Assegnare nell'ontologia i ifle categorizzati
+- [ ] Usare datat properties per inserire parole chiave di ogni categoria
+- [ ] Design dell'architettura complessiva (ML + CSP + Prolog)
+- [ ] Applicare CSP su categorie 
 
 ### 2.2 Modello Multi-Label Classification
 - [ ] Implementazione baseline (Naive Bayes, SVM)
-- [ ] Sviluppo modelli avanzati (Neural Networks, Transformers)
 - [ ] Fine-tuning modelli pre-trained
 - [ ] Implementazione output con confidenze/percentuali
 - [ ] Validazione che restituisca top-3 categorie con score
