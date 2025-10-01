@@ -11,3 +11,4 @@
 *.pkl
 tfidf_data.pkl
 text_analysis.png
+*.csv
