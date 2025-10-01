@@ -247,7 +247,7 @@ def balance_single_label_dataset(df, label_col='single_label', max_samples_per_c
     """
     counter = Counter(df[label_col])
     print(f"📊 Distribuzione originale:")
-    for label, count in counter.most_common(10):
+    for label, count in counter.items():
         print(f"  {label}: {count}")
     
     # Sottocampiona classi con troppi esempi
@@ -268,7 +268,7 @@ def balance_single_label_dataset(df, label_col='single_label', max_samples_per_c
     
     print(f"📊 Distribuzione bilanciata:")
     counter_balanced = Counter(df_balanced[label_col])
-    for label, count in counter_balanced.most_common(10):
+    for label, count in counter_balanced.items():
         print(f"  {label}: {count}")
     
     return df_balanced
