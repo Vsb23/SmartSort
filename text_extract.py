@@ -12,12 +12,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 import numpy as np
 import pdfplumber
 
-# Scarica risorse NLTK (eseguire una volta sola)
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('punkt_tab')
-
 class TextExtractor:
     def __init__(self):
         self.lemmatizer = WordNetLemmatizer()
@@ -43,26 +37,6 @@ class TextExtractor:
             return ""
 
 
-
-    def extract_text_pdfplumber(pdf_path):
-        text = ""
-        with pdfplumber.open(pdf_path) as pdf:
-            for page in pdf.pages:
-                text += page.extract_text() or ""
-        return text
-
-    def extract_text_with_pypdf2(self, pdf_path):
-        """Estrazione testo con PyPDF2 (fallback)"""
-        try:
-            with open(pdf_path, 'rb') as file:
-                pdf_reader = PyPDF2.PdfReader(file)
-                text = ""
-                for page in pdf_reader.pages:
-                    text += page.extract_text()
-                return text
-        except Exception as e:
-            print(f"Errore nell'estrazione testo con PyPDF2 da {pdf_path}: {str(e)}")
-            return ""
 
     def clean_text(self, text):
         """Pulizia base del testo"""
@@ -118,7 +92,14 @@ class TextExtractor:
     def extract_text_features(self, text):
         """Estrazione di features statistiche dal testo"""
         if not text:
-            return {}
+            return {
+                'word_count': 0,
+                'sentence_count': 0,
+                'avg_word_length': 0,
+                'avg_sentence_length': 0,
+                'unique_words': 0,
+                'lexical_diversity': 0
+            }
         
         words = text.split()
         sentences = text.split('.')
@@ -163,10 +144,6 @@ def process_all_documents(csv_path, output_csv):
             if os.path.exists(pdf_path):
                 # Estrai testo
                 text = extractor.extract_text_with_pymupdf(pdf_path)
-                if not text:
-                    text = extractor.extract_text_with_pypdf2(pdf_path)
-                if not text:
-                    text = extractor.extract_text_pdfplumber(pdf_path)
                 
                 # Estrai sezioni
                 sections = extractor.extract_sections(text)
@@ -256,9 +233,10 @@ def generate_tfidf_matrix(csv_path, output_pickle):
 if __name__ == "__main__":
     # Processa i documenti
     df = process_all_documents('output.csv', 'output_with_text.csv')
+
     
     # Genera matrice TF-IDF
-    tfidf_matrix, vectorizer = generate_tfidf_matrix('output_with_text.csv', 'tfidf_data.pkl')
+    # tfidf_matrix, vectorizer = generate_tfidf_matrix('output_with_text.csv', 'tfidf_data.pkl')
     
     print("Estrazione testo e preprocessing completati!")
     print(f"Documenti processati: {len(df)}")
