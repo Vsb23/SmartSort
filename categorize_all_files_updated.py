@@ -74,7 +74,7 @@ def categorize_all_files_single_category(percentage=85):
     
     'Comunicazione': ['communication', 'media', 'broadcast', 'information', 'messaging', 'signal', 'telecom', 'wireless', 'protocol', 'transmission'],
     
-    'Data_analysis': ['data', 'analysis', 'statistics', 'analytics', 'visualization', 'mining', 'dataset', 'metrics', 'correlation', 'trend'],
+    'Data_analysis': ['analysis', 'statistics', 'analytics', 'visualization', 'mining', 'dataset', 'metrics', 'correlation', 'trend'],
     
     'Database': ['database', 'query', 'nosql', 'storage', 'dbms', 'indexing', 'table', 'schema', 'transaction', 'relational'],
     
@@ -82,7 +82,7 @@ def categorize_all_files_single_category(percentage=85):
     
     'Medicina': ['medicine', 'medical', 'health', 'healthcare', 'clinical', 'patient', 'treatment', 'diagnosis', 'therapy', 'pharmaceutical'],
     
-    'Alimentazione': ['nutrition', 'food', 'diet', 'meal', 'dietary','eating', 'vitamin', 'dietitian', 'calorie', 'nutrient'],
+    'Alimentazione': ['nutrition', 'nutritional', 'food', 'diet', 'meal', 'dietary','eating', 'vitamin', 'dietitian', 'calorie', 'nutrient'],
     
     'Cardiologia': ['cardiology', 'heart', 'cardiac', 'cardiovascular', 'coronary', 'artery', 'blood pressure', 'valve', 'rhythm', 'circulation'],
     
@@ -296,8 +296,10 @@ def categorize_all_files_single_category(percentage=85):
     specific_count = 0
     general_count = 0
     altro_count = 0
-    
+        
+
     for category, count in category_counts.most_common():
+
         if category in categories_by_specificity['very_specific']:
             level = "🎯 MOLTO_SPECIFICA"
             very_specific_count += count
