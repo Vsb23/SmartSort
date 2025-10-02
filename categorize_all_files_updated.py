@@ -74,10 +74,10 @@ def categorize_all_files_single_category(percentage=85):
     
     'Comunicazione': ['communication', 'media', 'broadcast', 'information', 'messaging', 'signal', 'telecom', 'wireless', 'protocol', 'transmission'],
     
-    'Data_analysis': ['data', 'analysis', 'statistics', 'analytics', 'visualization', 'mining', 'dataset', 'metrics', 'correlation', 'trend'],
+    'Data_analysis': ['analysis', 'statistics', 'analytics', 'visualization', 'mining', 'dataset', 'metrics', 'correlation', 'trend'],
     
     'Database': ['database', 'query', 'nosql', 'storage', 'dbms', 'indexing', 'table', 'schema', 'transaction', 'relational'],
-    
+
     'Security': ['security', 'cybersecurity', 'encryption', 'authentication', 'firewall','forensic', 'cryptography', 'vulnerability', 'malware', 'intrusion'],
     
     'Medicina': ['medicine', 'medical', 'health', 'healthcare', 'clinical', 'patient', 'treatment', 'diagnosis', 'therapy', 'pharmaceutical'],
@@ -92,63 +92,28 @@ def categorize_all_files_single_category(percentage=85):
     
     'Archeologia': ['archaeology', 'archaeological', 'artifact', 'excavation', 'site','pottery', 'burial', 'stratigraphy', 'dating', 'ruins'],
     
-    'Linguistica': ['linguistic', 'language', 'linguistics', 'sociolinguistics', 'phonetics','grammar', 'syntax', 'semantics', 'morphology', 'dialect'],
+    'Culturale': ['cultural', 'folklore', 'tradition', 'custom', 'belief', 'identity', 'heritage', 'ceremonial', 'symbolic', 'intercultural'],
     
-    'Culturale': [
-        'cultural', 'folklore', 'tradition', 'custom', 'belief', 
-        'identity', 'heritage', 'ceremonial', 'symbolic', 'intercultural'
-    ],
+    'Filosofia': ['philosophy', 'philosophical', 'ethics', 'metaphysics', 'logic', 'epistemology', 'ontology', 'moral', 'reason', 'wisdom'],
     
-    'Filosofia': [
-        'philosophy', 'philosophical', 'ethics', 'metaphysics', 'logic', 
-        'epistemology', 'ontology', 'moral', 'reason', 'wisdom'
-    ],
+    'Paleontologia': ['paleontology', 'fossil', 'evolution', 'extinct', 'dinosaur', 'paleozoic', 'mesozoic', 'cenozoic', 'sedimentary', 'trilobite'],
     
-    'Paleontologia': [
-        'paleontology', 'fossil', 'evolution', 'extinct', 'dinosaur', 
-        'paleozoic', 'mesozoic', 'cenozoic', 'sedimentary', 'trilobite'
-    ],
+    'Animale': ['animal', 'vertebrate', 'mammal', 'reptile', 'amphibian', 'bird', 'fish', 'skeleton', 'bone', 'spine'],
     
-    'Animale': [
-        'animal', 'vertebrate', 'mammal', 'reptile', 'amphibian', 
-        'bird', 'fish', 'skeleton', 'bone', 'spine'
-    ],
+    'Botanica': ['plant', 'botanical', 'flora', 'leaf', 'root', 'stem', 'flower', 'seed', 'photosynthesis', 'chlorophyll'],
     
-    'Botanica': [
-        'plant', 'botanical', 'flora', 'leaf', 'root', 
-        'stem', 'flower', 'seed', 'photosynthesis', 'chlorophyll'
-    ],
+    'Umana': ['human evolution', 'hominid', 'ancestor', 'primitive human', 'homo sapiens', 'neanderthal', 'bipedal', 'cranium', 'primates', 'australopithecus'],
     
-    'Umana': [
-        'human evolution', 'hominid', 'ancestor', 'primitive human', 'homo sapiens', 
-        'neanderthal', 'bipedal', 'cranium', 'primates', 'australopithecus'
-    ],
+    'Storia': ['history', 'historical', 'past', 'chronology', 'period', 'epoch', 'civilization', 'empire', 'dynasty', 'chronicle'],
     
-    'Storia': [
-        'history', 'historical', 'past', 'chronology', 'period', 
-        'epoch', 'civilization', 'empire', 'dynasty', 'chronicle'
-    ],
+    'antica': ['antiquity', 'classical', 'roman', 'greek', 'egypt', 'mesopotamia', 'babylon', 'pharaoh', 'gladiator', 'colosseum'],
     
-    'antica': [
-        'antiquity', 'classical', 'roman', 'greek', 'egypt', 
-        'mesopotamia', 'babylon', 'pharaoh', 'gladiator', 'colosseum'
-    ],
+    'moderna': ['modern', 'renaissance', 'enlightenment', 'industrial revolution', 'reformation', 'capitalism', 'colonialism', 'nationalism', 'democracy', 'monarchy'],
     
-    'moderna': [
-        'modern', 'renaissance', 'enlightenment', 'industrial revolution', 'reformation', 
-        'capitalism', 'colonialism', 'nationalism', 'democracy', 'monarchy'
-    ],
+    'contemporanea': ['contemporary', '19th', '20th', '21st', 'world war', 'globalization', 'digitalization', 'internet age', 'terrorism', 'pandemic'],
     
-    'contemporanea': [
-        'contemporary', '19th', '20th', '21st', 'world war', 
-        'globalization', 'digitalization', 'internet age', 'terrorism', 'pandemic'
-    ],
-    
-    'Preistoria': [
-        'prehistory', 'stone age', 'bronze age', 'iron age', 'neolithic', 
-        'paleolithic', 'hunter gatherer', 'cave painting', 'megalith', 'dolmen'
-    ],
-        'Altro': []  # Categoria catch-all senza keywords specifiche
+    'Preistoria': ['prehistory', 'stone age', 'bronze age', 'iron age', 'neolithic', 'paleolithic', 'hunter gatherer', 'cave painting', 'megalith', 'dolmen'],
+    'Altro': []  
     }
 
     # Mappatura estensioni -> categorie SPECIFICHE (non generali)
