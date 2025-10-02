@@ -11,4 +11,8 @@
 *.pkl
 tfidf_data.pkl
 text_analysis.png
+<<<<<<< HEAD
 *.csv
+=======
+*.csv
+>>>>>>> origin/main
