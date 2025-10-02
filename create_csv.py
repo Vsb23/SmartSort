@@ -78,3 +78,10 @@ all_data = explore_folder_recursive(base_folder)
 
 write_to_csv(all_data, 'output.csv')
 print("File CSV scritto con struttura ricorsiva.")
+
+# Conta solo i file
+num_files = sum(1 for entry in all_data if entry[6] == "file")
+print(f"Numero totale di file (esclusi folder): {num_files}")
+
+# (Opzionale) Conta tutto
+print(f"Numero totale di record (file + folder): {len(all_data)}")

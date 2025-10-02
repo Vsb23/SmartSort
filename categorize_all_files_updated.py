@@ -27,12 +27,12 @@ def categorize_all_files_single_category(percentage=85):
         'very_specific': [
             'AI_ML', 'Web_development', 'System_programming', 'Data_analysis', 'Database', 'Security',
             'Ambiente', 'Ecologia', 'Energia', 'Spazio', 'Alimentazione', 'Cardiologia', 'Oncologia',
-            'Archeologia', 'antica', 'moderna', 'contemporanea', 'Preistoria', 'Animale', 'Botanica', 'Umana'
+            'Archeologia', 'antica', 'moderna', 'contemporanea', 'Preistoria',  'Comunicazione', 'Animale',
+            'Botanica','Culturale','Umana'
         ],
         # Categorie SPECIFICHE (nodi intermedi)
         'specific': [
-            'Informatica', 'Biologia', 'Fisica', 'Medicina', 'Chimica', 'Comunicazione',
-            'Antropologia', 'Linguistica', 'Culturale', 'Filosofia', 'Paleontologia', 'Storia'
+            'Informatica', 'Biologia', 'Fisica', 'Medicina', 'Chimica', 'Antropologia', 'Filosofia', 'Paleontologia', 'Storia'
         ],
         # Categorie GENERALI (rami principali - da evitare quando possibile)
         'general': [
@@ -199,17 +199,7 @@ def categorize_all_files_single_category(percentage=85):
                         weight = len(keyword.split()) * 2
                         category_scores[category] += weight * matches
 
-        # # Calcola punteggi per tutte le categorie
-        # category_scores = defaultdict(int)
-        # for category, keywords in category_keywords.items():
-        #     if keywords:  # Solo per categorie con keywords definite
-        #         for keyword in keywords:
-        #             if keyword in splitted_clean_text:
-        #                 # Peso maggiore per keyword più lunghe e specifiche
-        #                 weight = len(keyword.split()) * 2
-        #                 frequency = clean_text.count(keyword)
-        #                 category_scores[category] += weight * frequency
-
+        
         # STRATEGIA DI SELEZIONE: Priorità alla specificità
         best_category = None
         best_score = 0
