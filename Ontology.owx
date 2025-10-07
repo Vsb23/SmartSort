@@ -168,7 +168,7 @@
     <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Chimica -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Chimica">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia"/>
     </owl:Class>
     
 
@@ -232,7 +232,7 @@
     <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Filosofia -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Filosofia">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Studi_umanistici"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Storia"/>
     </owl:Class>
     
 
@@ -608,7 +608,6 @@
         <hasKeyword>analysis</hasKeyword>
         <hasKeyword>analytics</hasKeyword>
         <hasKeyword>correlation</hasKeyword>
-        <hasKeyword>data</hasKeyword>
         <hasKeyword>dataset</hasKeyword>
         <hasKeyword>metrics</hasKeyword>
         <hasKeyword>mining</hasKeyword>

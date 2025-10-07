@@ -11,7 +11,7 @@ import numpy as np
 from collections import Counter, defaultdict
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
-
+from sklearn.naive_bayes import MultinomialNB
 
 
 
@@ -214,7 +214,7 @@ def predict_single_category(df, clf, vectorizer, all_labels):
 
 
 
-def balance_single_label_dataset(df, label_col='single_label', max_samples_per_class=100):
+def balance_single_label_dataset(df, label_col='single_label', max_samples_per_class=50):
     """
     NUOVA: Bilancia dataset per classificazione single-label
     """
@@ -391,7 +391,7 @@ if __name__ == "__main__":
     # Logistic Regression con pipeline di scaling e aumento max_iter
     clf_lr = make_pipeline(
         StandardScaler(with_mean=False),  # importante con matrici sparse
-        LogisticRegression(max_iter=1000, multinomial='auto', solver='lbfgs')
+        LogisticRegression(max_iter=1000, multi_class='multinomial', solver='lbfgs')
     )
     model_lr = train_eval_single_label_model("Logistic Regression", clf_lr, 
                                             X_train_combined, y_train, 
@@ -407,7 +407,15 @@ if __name__ == "__main__":
     clf_svc = SVC(probability=True, random_state=42)
     model_svc = train_eval_single_label_model("SVM", clf_svc, 
                                               X_train_combined, y_train, 
-                                              X_val_combined, y_val, all_labels)    
+                                              X_val_combined, y_val, all_labels)  
+
+    
+    # Naive Bayes (funziona bene con features sparse)
+    clf_nb = MultinomialNB()
+    model_nb = train_eval_single_label_model("Naive Bayes", clf_nb,
+                                              X_train_combined, y_train,
+                                              X_val_combined, y_val, all_labels)
+  
     
     
     # Test su dataset completo
