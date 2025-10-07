@@ -23,11 +23,17 @@
 
 ### 2.1 Feature Engineering
 - [X] Estrazione features testuali (TF-IDF, word embeddings)
+<<<<<<< HEAD
+- [X] Aggiungere feature di percentuale di affinamento con le top 3 categorie (necessario per implementazione di CSP)
+=======
 - [ ] Aggiungere feature di percentuale di affinamento con le top 3 categorie (necessario per implementazione di CSP)
+>>>>>>> origin/main
 - [ ] Assegnare nell'ontologia i ifle categorizzati
 - [ ] Usare datat properties per inserire parole chiave di ogni categoria
 - [ ] Design dell'architettura complessiva (ML + CSP + Prolog)
 - [ ] Applicare CSP su categorie 
+<<<<<<< HEAD
+=======
 
 ### 2.2 Modello Multi-Label Classification
 - [ ] Implementazione baseline (Naive Bayes, SVM)
@@ -41,6 +47,7 @@
 - [ ] Analisi degli errori e bias detection
 - [ ] Ottimizzazione per threshold delle confidenze
 
+>>>>>>> origin/main
 ## **FASE 3: Knowledge Base Prolog (Settimane 4-6)**
 
 ### 3.1 Struttura Base KB
