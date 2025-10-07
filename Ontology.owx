@@ -168,7 +168,7 @@
     <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Chimica -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Chimica">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Biologia"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
     </owl:Class>
     
 
@@ -249,14 +249,6 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Informatica">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Scienza"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Linguistica -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Linguistica">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Antropologia"/>
     </owl:Class>
     
 
@@ -725,23 +717,6 @@
         <hasKeyword>processor</hasKeyword>
         <hasKeyword>programming</hasKeyword>
         <hasKeyword>software</hasKeyword>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Linguistica -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#Linguistica">
-        <hasKeyword>dialect</hasKeyword>
-        <hasKeyword>grammar</hasKeyword>
-        <hasKeyword>language</hasKeyword>
-        <hasKeyword>linguistic</hasKeyword>
-        <hasKeyword>linguistics</hasKeyword>
-        <hasKeyword>morphology</hasKeyword>
-        <hasKeyword>phonetics</hasKeyword>
-        <hasKeyword>semantics</hasKeyword>
-        <hasKeyword>sociolinguistics</hasKeyword>
-        <hasKeyword>syntax</hasKeyword>
     </owl:NamedIndividual>
     
 
