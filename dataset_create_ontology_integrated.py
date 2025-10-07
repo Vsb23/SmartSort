@@ -2,7 +2,6 @@ import pandas as pd
 import re
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.multiclass import OneVsRestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
@@ -10,7 +9,7 @@ from sklearn.metrics import f1_score, classification_report, accuracy_score
 from rdflib import Graph, Namespace, RDFS
 import numpy as np
 from collections import Counter, defaultdict
-import text_extract
+
 
 
 
@@ -138,31 +137,6 @@ def get_most_specific_category(labels, g, ns):
     
     # Se non troviamo nulla di specifico, prendi la prima categoria
     return most_specific[:1] if most_specific else [filtered_labels[0]]
-
-
-
-# def extract_text_from_pdf(pdf_path):
-#     """Estrae testo da PDF"""
-#     text = ""
-#     try:
-#         with open(pdf_path, "rb") as file:
-#             reader = PyPDF2.PdfReader(file)
-#             for page in reader.pages:
-#                 text += page.extract_text() or ""
-#     except Exception as e:
-#         print(f"Errore estrazione testo PDF {pdf_path}: {e}")
-#     return text
-
-
-
-# def preprocess_text(text):
-#     """Preprocessa il testo per l'analisi"""
-#     text = text.lower()
-#     text = re.sub(r'\d+', ' ', text)
-#     text = re.sub(r'[^\w\s]', ' ', text)
-#     text = re.sub(r'\s+', ' ', text).strip()
-#     return text
-
 
 
 def parse_labels(label_str):

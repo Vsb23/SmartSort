@@ -164,10 +164,6 @@ def categorize_all_files_single_category(percentage=85):
         '.sql': ['Database'],
         '.csv': ['Data_analysis'],
         '.json': ['Data_analysis'],
-        # Per estensioni generiche, usa categoria più specifica possibile
-        '.pdf': ['Altro'],  # Troppo generico, lascia che le keywords decidano
-        '.doc': ['Altro'], 
-        '.txt': ['Altro'],
         '.unknown': ['Altro']
     }
 
