@@ -9,6 +9,8 @@ from sklearn.metrics import f1_score, classification_report, accuracy_score
 from rdflib import Graph, Namespace, RDFS
 import numpy as np
 from collections import Counter, defaultdict
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
 
 
 
@@ -194,23 +196,20 @@ def train_eval_single_label_model(name, clf, X_train, y_train, X_val, y_val, all
 
 
 def predict_single_category(df, clf, vectorizer, all_labels):
-    """
-    NUOVA: Predice UNA SOLA categoria per documento
-    """
     X = vectorizer.transform(df['text'])
     predictions = clf.predict(X)
-    probabilities = clf.predict_proba(X)
-    
-    # Ottieni confidenze
-    confidences = []
-    for i, pred in enumerate(predictions):
-        pred_idx = all_labels.index(pred) if pred in all_labels else 0
-        confidence = probabilities[i][pred_idx]
-        confidences.append(confidence)
+    probabilities = clf.predict_proba(X)  # matrice NxC (num esempi x categorie)
+
+    probs_dicts = []
+    for prob_vector in probabilities:
+        probs_dict = {label: prob for label, prob in zip(all_labels, prob_vector)}
+        probs_dicts.append(probs_dict)
     
     df_result = df.copy()
     df_result['predicted_category'] = predictions
-    df_result['confidence'] = confidences
+    df_result['probabilities'] = list(probabilities)  # opzionale, per analisi
+    df_result['probs_dict'] = probs_dicts  # nuova colonna con i dizionari di probabilità
+    
     return df_result
 
 
@@ -389,12 +388,15 @@ if __name__ == "__main__":
     print("\n🚀 ADDESTRAMENTO MODELLI (TF-IDF + ONTOLOGY KEYWORDS):")
     print("=" * 60)
     
-    # Logistic Regression
-    clf_lr = LogisticRegression(max_iter=500, multi_class='ovr')
+    # Logistic Regression con pipeline di scaling e aumento max_iter
+    clf_lr = make_pipeline(
+        StandardScaler(with_mean=False),  # importante con matrici sparse
+        LogisticRegression(max_iter=1000, multinomial='auto', solver='lbfgs')
+    )
     model_lr = train_eval_single_label_model("Logistic Regression", clf_lr, 
                                             X_train_combined, y_train, 
                                             X_val_combined, y_val, all_labels)
-    
+
     # Random Forest (più adatto per features combinate)
     clf_rf = RandomForestClassifier(n_estimators=100, random_state=42)
     model_rf = train_eval_single_label_model("Random Forest", clf_rf, 
