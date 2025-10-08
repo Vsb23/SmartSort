@@ -11,21 +11,17 @@ import numpy as np
 from collections import Counter, defaultdict
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
-from sklearn.naive_bayes import MultinomialNB
-
-
+from constraint import Problem, BacktrackingSolver
 
 def load_keywords_from_ontology(ontology_path, ns):
     """
-    NUOVA FUNZIONE: Carica keywords direttamente dall'ontologia OWL
-    Sostituisce il dizionario hardcoded ONTOLOGY_KEYWORDS
+    Carica keywords direttamente dall'ontologia OWL
     """
     print("📖 Caricamento keywords dall'ontologia...")
     
     g = Graph()
     g.parse(ontology_path, format='xml')
     
-    # SPARQL query per estrarre tutte le hasKeyword properties
     query = """
     PREFIX ns: <http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#>
     
@@ -37,20 +33,17 @@ def load_keywords_from_ontology(ontology_path, ns):
     keywords_dict = defaultdict(list)
     
     try:
-        # Esegui query SPARQL
         results = g.query(query)
         
         for row in results:
             class_uri = str(row['class'])
             keyword = str(row['keyword'])
             
-            # Estrai nome classe dall'URI
             class_name = class_uri.split('#')[-1]
             keywords_dict[class_name].append(keyword)
         
         print(f"✅ Keywords caricate per {len(keywords_dict)} categorie")
         
-        # Mostra statistiche
         for category, keywords in list(keywords_dict.items())[:5]:
             print(f"  {category}: {len(keywords)} keywords")
         
@@ -58,7 +51,6 @@ def load_keywords_from_ontology(ontology_path, ns):
         print(f"⚠️ Errore nell'estrazione SPARQL: {e}")
         print("📝 Usando metodo alternativo...")
         
-        # Metodo alternativo: cerca direttamente le triple
         for subject, predicate, obj in g:
             if str(predicate).endswith('#hasKeyword'):
                 class_name = str(subject).split('#')[-1]
@@ -67,14 +59,11 @@ def load_keywords_from_ontology(ontology_path, ns):
         
         print(f"✅ Keywords caricate (metodo alternativo) per {len(keywords_dict)} categorie")
     
-    # Converti defaultdict in dict normale e aggiungi categoria "Altro"
     keywords_dict = dict(keywords_dict)
     if 'Altro' not in keywords_dict:
-        keywords_dict['Altro'] = []  # Categoria catch-all senza keywords
+        keywords_dict['Altro'] = []
     
     return keywords_dict
-
-
 
 def get_all_subclasses(g, base_class_uri):
     """Ottiene tutte le sottoclassi di una classe base"""
@@ -86,60 +75,71 @@ def get_all_subclasses(g, base_class_uri):
         subclasses.add(subclass_name)
         subclasses |= get_all_subclasses(g, subclass)
     
-    # Includi "Altro" come categoria valida
     subclasses.add('Altro')
     return subclasses
 
+def get_subclasses_by_level(g, base_class_uri):
+    """
+    Ottiene tutte le sottoclassi di una classe base,
+    organizzate per livello gerarchico.
+    """
+    levels = defaultdict(set)
+    queue = [(base_class_uri, 0)]
+    visited = set()
+    
+    while queue:
+        current_uri, level = queue.pop(0)
+        
+        if current_uri in visited:
+            continue
+        visited.add(current_uri)
+        
+        levels[level].add(str(current_uri).split('#')[-1])
+        
+        direct_subclasses = set(s for s, p, o in g.triples((None, RDFS.subClassOf, current_uri)))
+        for subclass in direct_subclasses:
+            queue.append((subclass, level + 1))
+            
+    return levels
 
-
-def get_superclasses(g, cls_uri):
-    """Ottiene tutte le superclassi di una classe"""
-    superclasses = set()
-    for s, p, o in g.triples((cls_uri, RDFS.subClassOf, None)):
-        name = str(o).split('#')[-1]
-        if name != str(cls_uri).split('#')[-1]:  # evita loop
-            superclasses.add(name)
-            superclasses |= get_superclasses(g, o)
-    return superclasses
-
-
+def get_parents(g, ns, child_name):
+    """Ottiene i genitori di una classe nell'ontologia."""
+    parents = set()
+    try:
+        child_uri = ns[child_name]
+        for s, p, o in g.triples((child_uri, RDFS.subClassOf, None)):
+            parent_name = str(o).split('#')[-1]
+            if parent_name != child_name:
+                parents.add(parent_name)
+    except:
+        pass
+    return parents
 
 def get_most_specific_category(labels, g, ns):
-    """
-    NUOVA FUNZIONE: Restituisce SOLO la categoria più specifica
-    Invece di aggiungere superclassi, trova la foglia più specifica
-    """
+    """Restituisce SOLO la categoria più specifica"""
     if not labels:
-        return ['Altro']  # Default fallback
+        return ['Altro']
     
-    # Se c'è "Altro", usalo solo se è l'unico
     if len(labels) == 1 and labels[0] == 'Altro':
         return ['Altro']
     
-    # Rimuovi "Altro" se ci sono categorie più specifiche
     filtered_labels = [label for label in labels if label != 'Altro']
     if not filtered_labels:
         return ['Altro']
     
-    # Trova la categoria più specifica (quella senza sottoclassi)
     most_specific = []
     
     for label in filtered_labels:
         try:
-            # Controlla se questa categoria ha sottoclassi
             subclasses = get_all_subclasses(g, ns[label])
-            # Se non ha sottoclassi tra le etichette correnti, è specifica
             has_subclass_in_labels = any(sub in filtered_labels for sub in subclasses if sub != label and sub != 'Altro')
             
             if not has_subclass_in_labels:
                 most_specific.append(label)
         except:
-            # Se non è nell'ontologia, considerala specifica
             most_specific.append(label)
     
-    # Se non troviamo nulla di specifico, prendi la prima categoria
     return most_specific[:1] if most_specific else [filtered_labels[0]]
-
 
 def parse_labels(label_str):
     """Parsa le etichette da stringa a lista"""
@@ -161,7 +161,6 @@ def load_dataset_with_single_category(csv_file, g, ns):
     """
     df = pd.read_csv(csv_file, low_memory=False)
 
-    # Usiamo direttamente 'clean_text'
     df['text'] = df['clean_text'].fillna("")
 
     single_labels = []
@@ -175,16 +174,12 @@ def load_dataset_with_single_category(csv_file, g, ns):
 
     return df_train
 
-
 def train_eval_single_label_model(name, clf, X_train, y_train, X_val, y_val, all_labels):
-    """
-    MODIFICATA: Addestra e valuta modello per classificazione SINGLE-LABEL
-    """
+    """Addestra e valuta modello per classificazione SINGLE-LABEL"""
     print(f"---- Training {name} (Single-Label) ----")
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_val)
     
-    # Metriche per single-label
     accuracy = accuracy_score(y_val, y_pred)
     f1 = f1_score(y_val, y_pred, average="weighted")
     
@@ -193,43 +188,18 @@ def train_eval_single_label_model(name, clf, X_train, y_train, X_val, y_val, all
     print(classification_report(y_val, y_pred, target_names=None, zero_division=0))
     return clf
 
-
-
-def predict_single_category(df, clf, vectorizer, all_labels):
-    X = vectorizer.transform(df['text'])
-    predictions = clf.predict(X)
-    probabilities = clf.predict_proba(X)  # matrice NxC (num esempi x categorie)
-
-    probs_dicts = []
-    for prob_vector in probabilities:
-        probs_dict = {label: prob for label, prob in zip(all_labels, prob_vector)}
-        probs_dicts.append(probs_dict)
-    
-    df_result = df.copy()
-    df_result['predicted_category'] = predictions
-    df_result['probabilities'] = list(probabilities)  # opzionale, per analisi
-    df_result['probs_dict'] = probs_dicts  # nuova colonna con i dizionari di probabilità
-    
-    return df_result
-
-
-
-def balance_single_label_dataset(df, label_col='single_label', max_samples_per_class=50):
-    """
-    NUOVA: Bilancia dataset per classificazione single-label
-    """
+def balance_single_label_dataset(df, label_col='single_label', max_samples_per_class=100):
+    """Bilancia dataset per classificazione single-label"""
     counter = Counter(df[label_col])
     print(f"📊 Distribuzione originale:")
     for label, count in counter.items():
         print(f"  {label}: {count}")
     
-    # Sottocampiona classi con troppi esempi
     balanced_indices = []
     class_counts = Counter()
     
-    # Priorità: prima le classi con meno esempi
     sorted_indices = df.index.tolist()
-    np.random.shuffle(sorted_indices)  # Randomizza per evitare bias
+    np.random.shuffle(sorted_indices)
     
     for idx in sorted_indices:
         label = df.loc[idx, label_col]
@@ -246,35 +216,25 @@ def balance_single_label_dataset(df, label_col='single_label', max_samples_per_c
     
     return df_balanced
 
-
-
 def create_enhanced_features(df, ontology_keywords):
-    """
-    NUOVA: Crea features avanzate basate su keywords ontologiche
-    Combina TF-IDF con conteggi keyword-specifici
-    """
+    """Crea features avanzate basate su keywords ontologiche"""
     print("🔧 Creazione features avanzate basate su ontologia...")
     
-    # Features per ogni documento
     keyword_features = []
     
     for _, row in df.iterrows():
         text = str(row['text']).lower()
         doc_features = {}
         
-        # Conta keywords per ogni categoria
         for category, keywords in ontology_keywords.items():
             keyword_count = 0
             for keyword in keywords:
-                if keyword:  # Skip empty keywords
-                    # Usa whole-word matching
+                if keyword:
                     if ' ' in keyword:
-                        # Per frasi multi-parola
                         pattern = r'\b' + re.escape(keyword.lower()) + r'\b'
                         matches = len(re.findall(pattern, text))
                         keyword_count += matches * len(keyword.split())
                     else:
-                        # Per singole parole
                         pattern = r'\b' + re.escape(keyword.lower()) + r'\b'
                         matches = len(re.findall(pattern, text))
                         keyword_count += matches
@@ -285,12 +245,84 @@ def create_enhanced_features(df, ontology_keywords):
     
     return pd.DataFrame(keyword_features)
 
+def setup_csp_problem(doc_probs, ontology_graph, ns):
+    """
+    Imposta il problema CSP per la post-elaborazione.
+    """
+    problem = Problem(BacktrackingSolver())
+    
+    probs_l1 = {k: v for k, v in doc_probs['L1'].items() if v > 0}
+    probs_l2 = {k: v for k, v in doc_probs['L2'].items() if v > 0}
+    probs_l3 = {k: v for k, v in doc_probs['L3'].items() if v > 0}
 
+    problem.addVariable("L1_Category", list(probs_l1.keys()))
+    problem.addVariable("L2_Category", list(probs_l2.keys()))
+    problem.addVariable("L3_Category", list(probs_l3.keys()))
+    
+    def hierarchical_constraint(l1_cat, l2_cat, l3_cat):
+        parents_l2 = get_parents(ontology_graph, ns, l2_cat)
+        if l1_cat not in parents_l2:
+            return False
+            
+        parents_l3 = get_parents(ontology_graph, ns, l3_cat)
+        if l2_cat not in parents_l3:
+            return False
+            
+        return True
+
+    problem.addConstraint(hierarchical_constraint, ("L1_Category", "L2_Category", "L3_Category"))
+    
+    def probability_constraint(l1_cat, l2_cat, l3_cat):
+        prob_l1 = probs_l1.get(l1_cat, 0)
+        prob_l2 = probs_l2.get(l2_cat, 0)
+        prob_l3 = probs_l3.get(l3_cat, 0)
+        
+        return (prob_l1 * prob_l2 * prob_l3) > 0
+
+    problem.addConstraint(probability_constraint, ("L1_Category", "L2_Category", "L3_Category"))
+    
+    return problem
+
+def find_best_csp_solution(problem, doc_probs):
+    """
+    Risolve il problema CSP per trovare la soluzione ottimale.
+    """
+    solutions = problem.getSolutions()
+    if not solutions:
+        return None, None, None, {}
+    
+    best_solution = None
+    max_prob = -1
+    
+    for sol in solutions:
+        l1_cat = sol["L1_Category"]
+        l2_cat = sol["L2_Category"]
+        l3_cat = sol["L3_Category"]
+        
+        prob = doc_probs['L1'].get(l1_cat, 0) * doc_probs['L2'].get(l2_cat, 0) * doc_probs['L3'].get(l3_cat, 0)
+        
+        if prob > max_prob:
+            max_prob = prob
+            best_solution = sol
+            
+    if best_solution:
+        l1 = best_solution['L1_Category']
+        l2 = best_solution['L2_Category']
+        l3 = best_solution['L3_Category']
+        
+        probs_dict = {
+            f'{l1}': doc_probs['L1'].get(l1, 0),
+            f'{l2}': doc_probs['L2'].get(l2, 0),
+            f'{l3}': doc_probs['L3'].get(l3, 0)
+        }
+        
+        return l1, l2, l3, probs_dict
+        
+    return None, None, None, {}
 
 if __name__ == "__main__":
     # Configurazione
-    ontology_path = "./Ontology.owx"  # AGGIORNATO per usare nuova ontologia
-    base_folder = "./References"
+    ontology_path = "./Ontology.owx"
     csv_file = "./training_set_single_category_85percent.csv"
     
     print("🚀 DATASET CREATION CON KEYWORDS DALL'ONTOLOGIA")
@@ -301,7 +333,6 @@ if __name__ == "__main__":
     g.parse(ontology_path, format='xml')
     NS = Namespace("http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#")
     
-    # CARICA KEYWORDS DALL'ONTOLOGIA (invece di hardcoded)
     ONTOLOGY_KEYWORDS = load_keywords_from_ontology(ontology_path, NS)
     
     if not ONTOLOGY_KEYWORDS:
@@ -313,33 +344,27 @@ if __name__ == "__main__":
             'AI_ML': ['machine learning', 'artificial intelligence'],
             'Altro': []
         }
+        
+    # Ottieni tutte le categorie dall'ontologia e definisci i livelli
+    levels = get_subclasses_by_level(g, NS['Scienza'])
+    levels_humanities = get_subclasses_by_level(g, NS['Studi_umanistici'])
+    for level, classes in levels_humanities.items():
+        levels[level] |= classes
+        
+    all_l1_labels = sorted(list(levels.get(0, set())))
+    all_l2_labels = sorted(list(levels.get(1, set())))
+    all_l3_labels = sorted(list(levels.get(2, set())))
+
+    print(f"📊 Categorie L1: {all_l1_labels}")
+    print(f"📊 Categorie L2: {all_l2_labels}")
+    print(f"📊 Categorie L3: {all_l3_labels}")
     
-    # Ottieni tutte le categorie dall'ontologia
-    categories = set(['Scienza'])
-    categories |= get_all_subclasses(g, NS['Scienza'])
-    categories.add('Studi_umanistici')
-    categories |= get_all_subclasses(g, NS['Studi_umanistici'])
-    categories.add('Altro')
-    all_labels = sorted(list(categories))
-    
-    print(f"📊 Categorie totali dall'ontologia: {len(all_labels)}")
-    print(f"📚 Keywords caricate dall'ontologia: {len(ONTOLOGY_KEYWORDS)} categorie")
-    print("🔍 Prime 5 categorie con keywords:")
-    for category in list(ONTOLOGY_KEYWORDS.keys())[:5]:
-        keywords = ONTOLOGY_KEYWORDS[category]
-        print(f"  {category}: {len(keywords)} keywords")
-    
-    # Carica dataset con UNA categoria per documento
     df_train = load_dataset_with_single_category(csv_file, g, NS)
     print(f"📁 Dataset caricato: {len(df_train)} documenti")
     
-    # Bilancia dataset
     df_train_balanced = balance_single_label_dataset(df_train, 'single_label', max_samples_per_class=50)
-    
-    # RESET indici per coerenza tra dataframes
     df_train_balanced = df_train_balanced.reset_index(drop=True)
     
-    # Crea features ontologiche dopo reset degli indici
     keyword_features_df = create_enhanced_features(df_train_balanced, ONTOLOGY_KEYWORDS)
     keyword_features_df = keyword_features_df.reset_index(drop=True)
     
@@ -347,7 +372,7 @@ if __name__ == "__main__":
     print(f"🎯 Features ontologiche create: {keyword_features_df.shape[1]} features")
     
     # Split train/validation - SINGLE LABEL
-    if len(df_train_balanced) >= 10:  # Controllo minimo
+    if len(df_train_balanced) >= 10:
         unique_labels = df_train_balanced['single_label'].unique()
         can_stratify = all(sum(df_train_balanced['single_label'] == label) >= 2 for label in unique_labels)
         
@@ -360,12 +385,16 @@ if __name__ == "__main__":
         print("⚠️ Dataset troppo piccolo per il training")
         train, val = df_train_balanced, df_train_balanced.sample(frac=0.1)
     
+    # Reset degli indici per i DataFrame di training e validazione
+    train = train.reset_index(drop=True)
+    val = val.reset_index(drop=True)
+
     # Vettorizzazione TF-IDF
     vectorizer = TfidfVectorizer(max_features=5000, stop_words='english')
     X_train_tfidf = vectorizer.fit_transform(train['text'])
     X_val_tfidf = vectorizer.transform(val['text'])
     
-    # Seleziona features ontologiche con .iloc per evitare errori di indice
+    # Seleziona features ontologiche
     X_train_keywords = keyword_features_df.iloc[train.index].values
     X_val_keywords = keyword_features_df.iloc[val.index].values
     
@@ -374,81 +403,116 @@ if __name__ == "__main__":
     X_train_combined = hstack([X_train_tfidf, csr_matrix(X_train_keywords)])
     X_val_combined = hstack([X_val_tfidf, csr_matrix(X_val_keywords)])
     
-    # Labels SINGLE
+    # Labels
     y_train = train['single_label'].values
     y_val = val['single_label'].values
     
-    print(f"🔧 Features TF-IDF: {X_train_tfidf.shape[1]}")
-    print(f"🔧 Features Keywords: {X_train_keywords.shape[1]}")
-    print(f"🔧 Features Combinate: {X_train_combined.shape[1]}")
-    print(f"📋 Training samples: {X_train_combined.shape[0]}")
-    print(f"📋 Unique labels: {len(np.unique(y_train))}")
-    
-    # Addestramento modelli SINGLE-LABEL con features combinate
-    print("\n🚀 ADDESTRAMENTO MODELLI (TF-IDF + ONTOLOGY KEYWORDS):")
+    print("\n🚀 ADDESTRAMENTO MODELLO PER LIVELLO DI CLASSIFICAZIONE:")
     print("=" * 60)
     
-    # Logistic Regression con pipeline di scaling e aumento max_iter
-    clf_lr = make_pipeline(
-        StandardScaler(with_mean=False),  # importante con matrici sparse
-        LogisticRegression(max_iter=1000, multi_class='multinomial', solver='lbfgs')
+    # Addestra modelli separati per ogni livello
+    model_l1 = make_pipeline(
+        StandardScaler(with_mean=False),
+        LogisticRegression(max_iter=1000, solver='lbfgs')
     )
-    model_lr = train_eval_single_label_model("Logistic Regression", clf_lr, 
-                                            X_train_combined, y_train, 
-                                            X_val_combined, y_val, all_labels)
+    
+    model_l2 = SVC(probability=True, random_state=42)
+    model_l3 = RandomForestClassifier(n_estimators=100, random_state=42)
+    
+    # Prepara le etichette per l'addestramento dei modelli di livello superiore
+    # CORREZIONE: Assegna le etichette genitore corrette per ogni livello
+    train['l1_parent'] = train['single_label'].apply(lambda x: get_parents(g, NS, list(get_parents(g, NS, x))[0]).pop() if get_parents(g, NS, x) and get_parents(g, NS, list(get_parents(g, NS, x))[0]) else None)
+    train['l2_parent'] = train['single_label'].apply(lambda x: list(get_parents(g, NS, x))[0] if get_parents(g, NS, x) else None)
+    
+    # Filtra il training set per rimuovere i valori 'None' nelle etichette genitore
+    
+    # Filtro per il modello L1
+    l1_mask = train['l1_parent'].notna()
+    X_train_l1 = X_train_combined[l1_mask.values]
+    y_train_l1 = train[l1_mask]['l1_parent'].values
+    
+    # Filtro per il modello L2
+    l2_mask = train['l2_parent'].notna()
+    X_train_l2 = X_train_combined[l2_mask.values]
+    y_train_l2 = train[l2_mask]['l2_parent'].values
+    
+    # Per il modello L3, usiamo tutti i dati di training
+    X_train_l3 = X_train_combined
+    y_train_l3 = y_train
+    
+    print("📚 Training Model L1...")
+    if len(y_train_l1) > 0:
+        model_l1.fit(X_train_l1, y_train_l1)
+    else:
+        print("⚠️ Impossibile addestrare il modello L1: nessun campione valido.")
+    
+    print("📚 Training Model L2 (SVM)...")
+    if len(y_train_l2) > 0:
+        model_l2.fit(X_train_l2, y_train_l2)
+    else:
+        print("⚠️ Impossibile addestrare il modello L2: nessun campione valido.")
+    
+    print("📚 Training Model L3 (Random Forest)...")
+    if len(y_train_l3) > 0:
+        model_l3.fit(X_train_l3, y_train_l3)
+    else:
+        print("⚠️ Impossibile addestrare il modello L3: nessun campione valido.")
+    
+    # Predizioni per L'INTERO DATASET BILANCIATO
+    X_all_tfidf = vectorizer.transform(df_train_balanced['text'])
+    X_all_keywords = keyword_features_df.values
+    X_all_combined = hstack([X_all_tfidf, csr_matrix(X_all_keywords)])
 
-    # Random Forest (più adatto per features combinate)
-    clf_rf = RandomForestClassifier(n_estimators=100, random_state=42)
-    model_rf = train_eval_single_label_model("Random Forest", clf_rf, 
-                                             X_train_combined, y_train, 
-                                             X_val_combined, y_val, all_labels)
+    # Prepara il DataFrame per i risultati
+    df_result = df_train_balanced.copy()
     
-    # SVM 
-    clf_svc = SVC(probability=True, random_state=42)
-    model_svc = train_eval_single_label_model("SVM", clf_svc, 
-                                              X_train_combined, y_train, 
-                                              X_val_combined, y_val, all_labels)  
+    # Predizioni di probabilità per ogni livello
+    probs_l1 = model_l1.predict_proba(X_all_combined)
+    probs_l2 = model_l2.predict_proba(X_all_combined)
+    probs_l3 = model_l3.predict_proba(X_all_combined)
+    
+    df_result['probs_l1'] = [dict(zip(model_l1.classes_, p)) for p in probs_l1]
+    df_result['probs_l2'] = [dict(zip(model_l2.classes_, p)) for p in probs_l2]
+    df_result['probs_l3'] = [dict(zip(model_l3.classes_, p)) for p in probs_l3]
 
-    
-    # Naive Bayes (funziona bene con features sparse)
-    clf_nb = MultinomialNB()
-    model_nb = train_eval_single_label_model("Naive Bayes", clf_nb,
-                                              X_train_combined, y_train,
-                                              X_val_combined, y_val, all_labels)
-  
-    
-    
-    # Test su dataset completo
-    print("\n🎯 VALUTAZIONE SU DATASET COMPLETO:")
+    print("\n⚖️ ESECUZIONE DEL CSP PER LA POST-ELABORAZIONE:")
     print("=" * 60)
     
-    # Crea features per tutto il dataset
-    all_keyword_features = create_enhanced_features(df_train_balanced, ONTOLOGY_KEYWORDS)
-    X_all_tfidf = vectorizer.transform(df_train_balanced['text'])
-    X_all_combined = hstack([X_all_tfidf, csr_matrix(all_keyword_features.values)])
+    final_predictions = []
+    final_probs = []
     
-    # Predizioni
-    predictions = model_rf.predict(X_all_combined)
-    probabilities = model_rf.predict_proba(X_all_combined)
+    for idx, row in df_result.iterrows():
+        doc_probs = {
+            'L1': row['probs_l1'],
+            'L2': row['probs_l2'],
+            'L3': row['probs_l3'],
+        }
+
+        problem = setup_csp_problem(doc_probs, g, NS)
+        l1, l2, l3, probs = find_best_csp_solution(problem, doc_probs)
+        
+        final_predictions.append({
+            'L1_pred': l1,
+            'L2_pred': l2,
+            'L3_pred': l3,
+        })
+        final_probs.append(probs)
+
+    predictions_df = pd.DataFrame(final_predictions)
+    df_result = pd.concat([df_result.reset_index(drop=True), predictions_df.reset_index(drop=True)], axis=1)
+    df_result['final_probs'] = final_probs
     
-    # Aggiungi predizioni al dataframe
-    df_result = df_train_balanced.copy()
-    df_result['predicted_category'] = predictions
-    df_result['prediction_confidence'] = [prob.max() for prob in probabilities]
+    # Aggiungi le probabilità finali in colonne separate
+    df_result['L1_prob'] = df_result.apply(lambda row: row['final_probs'].get(row['L1_pred'], 0), axis=1)
+    df_result['L2_prob'] = df_result.apply(lambda row: row['final_probs'].get(row['L2_pred'], 0), axis=1)
+    df_result['L3_prob'] = df_result.apply(lambda row: row['final_probs'].get(row['L3_pred'], 0), axis=1)
+
+    output_cols = ['filename', 'single_label', 'L1_pred', 'L1_prob', 'L2_pred', 'L2_prob', 'L3_pred', 'L3_prob']
     
-    print("📋 Sample predictions con confidence:")
-    sample_results = df_result[['filename', 'single_label', 'predicted_category', 'prediction_confidence']].head(10)
-    print(sample_results.to_string(index=False))
+    print("\n📋 ESEMPIO DI RISULTATI POST-CSP:")
+    print(df_result[output_cols].head().to_string(index=False))
     
-    # Statistiche finali
-    accuracy = (df_result['single_label'] == df_result['predicted_category']).mean()
-    print(f"\n🎯 Accuracy finale (TF-IDF + Ontology): {accuracy:.4f}")
+    df_result.to_csv('predictions_with_csp_postprocessing.csv', index=False)
+    print("\n✅ Risultati salvati in 'predictions_with_csp_postprocessing.csv'")
     
-    # Salva risultati
-    df_result.to_csv('predictions_with_ontology_keywords.csv', index=False)
-    print("\n✅ Risultati salvati in 'predictions_with_ontology_keywords.csv'")
-    
-    print("\n🎊 ADDESTRAMENTO COMPLETATO CON KEYWORDS DALL'ONTOLOGIA!")
-    print("🔗 Fonte unica di verità: ontologia OWL")
-    print("🎯 Features combinate: TF-IDF + Keywords ontologiche")
-    print(f"📈 Miglioramento con features ontologiche rispetto a solo TF-IDF")
+    print("\n🎊 PROCESSO COMPLETATO!")

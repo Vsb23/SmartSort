@@ -23,56 +23,30 @@
 
 ### 2.1 Feature Engineering
 - [X] Estrazione features testuali (TF-IDF, word embeddings)
-<<<<<<< HEAD
 - [X] Aggiungere feature di percentuale di affinamento con le top 3 categorie (necessario per implementazione di CSP)
-=======
-- [ ] Aggiungere feature di percentuale di affinamento con le top 3 categorie (necessario per implementazione di CSP)
->>>>>>> origin/main
-- [ ] Assegnare nell'ontologia i ifle categorizzati
-- [ ] Usare datat properties per inserire parole chiave di ogni categoria
-- [ ] Design dell'architettura complessiva (ML + CSP + Prolog)
-- [ ] Applicare CSP su categorie 
-<<<<<<< HEAD
-=======
 
 ### 2.2 Modello Multi-Label Classification
-- [ ] Implementazione baseline (Naive Bayes, SVM)
-- [ ] Fine-tuning modelli pre-trained
-- [ ] Implementazione output con confidenze/percentuali
-- [ ] Validazione che restituisca top-3 categorie con score
+- [X] Implementazione baseline (Naive Bayes, SVM)
+- [X] Fine-tuning modelli pre-trained
+- [X] Implementazione output con confidenze/percentuali
 
 ### 2.3 Evaluation e Ottimizzazione
-- [ ] Metriche multi-label (Hamming Loss, F1-micro/macro, Jaccard)
+- [X] Metriche multi-label (Hamming Loss, F1-micro/macro, Jaccard)
 - [ ] Cross-validation e hyperparameter tuning
 - [ ] Analisi degli errori e bias detection
 - [ ] Ottimizzazione per threshold delle confidenze
 
->>>>>>> origin/main
-## **FASE 3: Knowledge Base Prolog (Settimane 4-6)**
-
 ### 3.1 Struttura Base KB
 - [ ] Definizione predicati base (categorie, cartelle, gerarchia)
-- [ ] Implementazione mapping categoria → cartella
-- [ ] Regole di appartenenza e compatibilità
-- [ ] Test base della KB con query semplici
+- [X] Implementazione mapping categoria → cartella
+- [X] Regole di appartenenza e compatibilità
+- [X] Test base della KB con query semplici
 
 ### 3.2 Vincoli Organizzativi
 - [ ] Vincoli di capacità cartelle
-- [ ] Regole gerarchiche (parent-child folders)
-- [ ] Vincoli di bilanciamento del carico
+- [X] Regole gerarchiche (parent-child folders)
+- [X] Vincoli di bilanciamento del carico
 - [ ] Regole temporali (documenti recenti, archiving)
-
-### 3.3 Vincoli di Business e Compliance
-- [ ] Regole GDPR e privacy
-- [ ] Politiche di retention
-- [ ] Vincoli di accesso e sicurezza
-- [ ] Regole specifiche del dominio aziendale
-
-### 3.4 Interfaccia Prolog-Python
-- [ ] Setup interfaccia query Prolog da Python
-- [ ] Funzioni di conversione dati ML → Prolog facts
-- [ ] Sistema di query dinamiche per vincoli
-- [ ] Gestione degli errori e fallback
 
 ## **FASE 4: CSP Solver (Settimane 6-7)**
 
@@ -82,92 +56,8 @@
 - [ ] Mapping vincoli Prolog → CSP constraints
 - [ ] Funzione obiettivo multi-criterio
 
-### 4.2 Implementazione Solver
-- [ ] Algoritmo di risoluzione CSP (backtracking, local search)
-- [ ] Integrazione con score ML come euristica
-- [ ] Ottimizzazione per performance su grandi dataset
-- [ ] Gestione casi senza soluzione valida
-
 ### 4.3 Pipeline Integrata
 - [ ] Workflow ML → Prolog Query → CSP → Assegnazione finale
 - [ ] Sistema di logging per debug e tracciabilità
 - [ ] Interfaccia per override manuale decisioni
 - [ ] Batch processing per documenti multipli
-
-## **FASE 5: Sistema di Feedback e Learning (Settimane 7-8)**
-
-### 5.1 Active Learning
-- [ ] Identificazione documenti con bassa confidenza
-- [ ] Sistema per richiedere labeling manuale
-- [ ] Retraining incrementale del modello ML
-- [ ] Update automatico KB con nuove regole
-
-### 5.2 User Feedback Integration
-- [ ] Interfaccia per feedback su classificazioni
-- [ ] Sistema di logging decisioni utente
-- [ ] Analisi pattern feedback per migliorare regole
-- [ ] A/B testing per validare miglioramenti
-
-## **FASE 6: Interfaccia e Deployment (Settimane 8-9)**
-
-### 6.1 API e Backend
-- [ ] API REST per classificazione documenti
-- [ ] Sistema di code per processing asincrono
-- [ ] Database per storage metadati e history
-- [ ] Monitoraggio performance e health checks
-
-### 6.2 Frontend/Interface
-- [ ] Interfaccia web per upload e visualizzazione
-- [ ] Dashboard con statistiche classificazione
-- [ ] Strumenti per gestione KB e regole
-- [ ] Sistema di reportistica
-
-### 6.3 Deployment e Scalabilità
-- [ ] Containerizzazione (Docker)
-- [ ] Setup CI/CD pipeline
-- [ ] Load testing e ottimizzazione performance
-- [ ] Documentazione deployment e manutenzione
-
-## **FASE 7: Testing e Validazione (Settimane 9-10)**
-
-### 7.1 Testing Sistema Completo
-- [ ] Unit tests per ogni componente
-- [ ] Integration tests pipeline completa
-- [ ] Performance tests su dataset reali
-- [ ] Stress testing con volumi elevati
-
-### 7.2 User Acceptance Testing
-- [ ] Testing con utenti finali
-- [ ] Raccolta feedback su usabilità
-- [ ] Validazione accuratezza in scenari reali
-- [ ] Tuning finale basato su feedback
-
-### 7.3 Documentazione
-- [ ] Documentazione tecnica architettura
-- [ ] Manuale utente e amministratore
-- [ ] Runbook operativo
-- [ ] Troubleshooting guide
-
-## **DELIVERABLES PRINCIPALI**
-
-1. **Modello ML Multi-Label** con confidenze per top-3 categorie
-2. **Knowledge Base Prolog** con regole di business personalizzabili
-3. **CSP Solver** per ottimizzazione assegnazione cartelle
-4. **API e Frontend** per interazione utente
-5. **Sistema di Monitoraggio** e feedback loop
-6. **Documentazione Completa** tecnica e utente
-
-## **METRICHE DI SUCCESSO**
-
-- **Accuratezza ML**: F1-score > 0.85 su validation set
-- **Efficienza CSP**: Risoluzione < 100ms per documento
-- **Soddisfazione Utente**: Approvazione > 90% delle classificazioni automatiche
-- **Performance**: Throughput > 1000 documenti/ora
-- **Manutenibilità**: Aggiornamento regole KB senza downtime
-
-## **RISCHI E MITIGAZIONI**
-
-- **Qualità dati insufficiente** → Processo iterativo di data collection
-- **Complessità CSP elevata** → Euristics e approximation algorithms  
-- **Performance Prolog** → Caching e ottimizzazione query
-- **Scalabilità sistema** → Architettura microservizi e load balancing
