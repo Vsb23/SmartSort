@@ -8,11 +8,10 @@ def extract_metadata_from_pdf(pdf_path):
             pdf_reader = PyPDF2.PdfReader(file)
             metadata = pdf_reader.metadata
             
-            title = metadata.get('/Title', None) if metadata else None
-            if not title or title.strip() == '':
-                title = os.path.splitext(os.path.basename(pdf_path))[0]
+            # MODIFICA: Usa sempre il nome del file come titolo per garantire l'unicità
+            title = os.path.splitext(os.path.basename(pdf_path))[0]
 
-            filename= os.path.basename(pdf_path)
+            filename = os.path.basename(pdf_path)
             
             author = metadata.get('/Author', None) if metadata else None
             if not author or author.strip() == '':
@@ -34,7 +33,7 @@ def extract_metadata_from_pdf(pdf_path):
         name_no_ext = os.path.splitext(os.path.basename(pdf_path))[0]
         extension = os.path.splitext(pdf_path)[1].lower()
         category = ""
-        return name_no_ext, name_no_ext, "", "", category, extension, "file"
+        return name_no_ext, os.path.basename(pdf_path), "", "", category, extension, "file"
 
 
 def explore_folder_recursive(base_path):

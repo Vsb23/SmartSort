@@ -1,6 +1,6 @@
 import pandas as pd
 import re
-import numpy as np
+import numpy as np # Importato per calcoli statistici
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
@@ -11,10 +11,10 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from constraint import Problem, BacktrackingSolver
 from scipy.sparse import hstack, csr_matrix
-from sklearn.model_selection import StratifiedKFold
-from sklearn.metrics import accuracy_score
+from sklearn.model_selection import StratifiedKFold # <-- IMPORTATO PER LA K-FOLD
+from sklearn.metrics import accuracy_score # <-- IMPORTATO PER CALCOLARE L'ACCURACY
 
-# (Le funzioni da 'load_keywords_from_ontology' a 'create_enhanced_features' rimangono invariate)
+# (Le funzioni helper da 'load_keywords_from_ontology' a 'find_best_csp_solution' rimangono invariate)
 def load_keywords_from_ontology(ontology_path, ns):
     g = Graph()
     g.parse(ontology_path, format='xml')
@@ -90,35 +90,28 @@ def find_best_csp_solution(problem, doc_probs):
     return None, None, None, {}
 
 def predict_for_validation(data_to_predict, models, vectorizer, g, ns):
-    """Funzione di predizione semplificata, usata solo per la validazione k-fold."""
     keyword_features_df = create_enhanced_features(data_to_predict, ONTOLOGY_KEYWORDS)
     tfidf_features = vectorizer.transform(data_to_predict['text'])
     combined_features = hstack([tfidf_features, csr_matrix(keyword_features_df.values)])
-    
     model_l1, model_l2, model_l3 = models['L1'], models['L2'], models['L3']
-    
-    probs_l1 = model_l1.predict_proba(combined_features)
-    probs_l2 = model_l2.predict_proba(combined_features)
-    probs_l3 = model_l3.predict_proba(combined_features)
-    
-    probs_dict_list = [
-        {'L1': dict(zip(model_l1.classes_, p1)), 'L2': dict(zip(model_l2.classes_, p2)), 'L3': dict(zip(model_l3.classes_, p3))}
-        for p1, p2, p3 in zip(probs_l1, probs_l2, probs_l3)
-    ]
-    
+    probs_l1, probs_l2, probs_l3 = model_l1.predict_proba(combined_features), model_l2.predict_proba(combined_features), model_l3.predict_proba(combined_features)
+    probs_dict_list = [{'L1': dict(zip(model_l1.classes_, p1)), 'L2': dict(zip(model_l2.classes_, p2)), 'L3': dict(zip(model_l3.classes_, p3))} for p1, p2, p3 in zip(probs_l1, probs_l2, probs_l3)]
     final_predictions = []
     for doc_probs in probs_dict_list:
-        problem = setup_csp_problem(doc_probs, g, NS)
-        _, _, l3, _ = find_best_csp_solution(problem, doc_probs)
+        _, _, l3, _ = find_best_csp_solution(setup_csp_problem(doc_probs, g, NS), doc_probs)
         final_predictions.append(l3 if l3 is not None else 'Altro')
-        
     return final_predictions
 
+
 if __name__ == "__main__":
+    # --- IMPOSTAZIONI ---
     ontology_path = "./Ontology.owx"
+    # NOTA: Assicurati che questi percorsi siano corretti per il tuo ambiente
     train_csv_file = "./training_data/training_set_85percent.csv"
     test_csv_file = "./test_data/test_set_15percent.csv"
     
+    # --- CARICAMENTO E PREPARAZIONE DATI ---
+    print("🚀 Avvio del processo con K-Fold Cross-Validation 🚀")
     g = Graph()
     g.parse(ontology_path, format='xml')
     NS = Namespace("http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#")
@@ -137,14 +130,16 @@ if __name__ == "__main__":
     df_train['l2_parent'] = df_train['single_label'].apply(lambda x: list(get_parents(g, NS, x))[0] if get_parents(g, NS, x) else None)
     df_train['l1_parent'] = df_train['l2_parent'].apply(lambda x: list(get_parents(g, NS, x))[0] if pd.notna(x) and get_parents(g, NS, x) else None)
 
-    # --- K-FOLD CROSS-VALIDATION (per valutazione) ---
-    print("\n--- 📊 ESECUZIONE K-FOLD CROSS-VALIDATION (K=5) SUL TRAINING SET ---")
+    # --- INIZIO SEZIONE K-FOLD CROSS-VALIDATION ---
+    print("\n--- 📊 Esecuzione K-Fold Cross-Validation (K=5) sul Training Set ---")
+    
     n_splits = 5
     skf = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=42)
     fold_accuracies = []
 
     for fold, (train_index, val_index) in enumerate(skf.split(X_train_combined, y_train)):
-        # ... (Questa sezione rimane identica, usa predict_for_validation) ...
+        print(f"\n--- Fold {fold + 1}/{n_splits} ---")
+        
         X_train_fold, X_val_fold = X_train_combined[train_index], X_train_combined[val_index]
         df_train_fold, df_val_fold = df_train.iloc[train_index], df_train.iloc[val_index]
         y_train_fold, y_val_fold_true = df_train_fold['single_label'].values, df_val_fold['single_label'].values
@@ -154,46 +149,44 @@ if __name__ == "__main__":
         y_train_l2_fold = df_train_fold.loc[df_train_fold['l2_parent'].notna(), 'l2_parent'].values
         X_train_l2_fold = X_train_fold[df_train_fold['l2_parent'].notna().values]
         
-        model_l1 = make_pipeline(StandardScaler(with_mean=False), LogisticRegression(max_iter=1000, solver='lbfgs'))
-        model_l2 = SVC(probability=True, random_state=42, class_weight='balanced')
-        model_l3 = RandomForestClassifier(n_estimators=100, random_state=42, class_weight='balanced')
+        model_l1, model_l2, model_l3 = make_pipeline(StandardScaler(with_mean=False), LogisticRegression(max_iter=1000)), SVC(probability=True, random_state=42), RandomForestClassifier(n_estimators=100, random_state=42)
         
+        print("Addestramento modelli del fold...")
         if len(y_train_l1_fold) > 0: model_l1.fit(X_train_l1_fold, y_train_l1_fold)
         if len(y_train_l2_fold) > 0: model_l2.fit(X_train_l2_fold, y_train_l2_fold)
         model_l3.fit(X_train_fold, y_train_fold)
 
+        print("Valutazione sul set di validazione...")
         models_fold = {'L1': model_l1, 'L2': model_l2, 'L3': model_l3}
         y_val_pred = predict_for_validation(df_val_fold, models_fold, vectorizer, g, NS)
         accuracy = accuracy_score(y_val_fold_true, y_val_pred)
         fold_accuracies.append(accuracy)
-        print(f"Accuracy del Fold {fold + 1}/{n_splits}: {accuracy:.4f}")
+        print(f"Accuracy del Fold {fold + 1}: {accuracy:.4f}")
 
-    print(f"\n🎯 Accuracy Media sui {n_splits} fold: {np.mean(fold_accuracies):.4f} +/- {np.std(fold_accuracies):.4f}")
+    print("\n--- Risultati K-Fold Cross-Validation ---")
+    print(f"🎯 Accuratezza Media sui {n_splits} fold: {np.mean(fold_accuracies):.4f}")
+    print(f"🎯 Deviazione Standard: {np.std(fold_accuracies):.4f}")
+    # --- FINE SEZIONE K-FOLD CROSS-VALIDATION ---
 
-    # --- ADDESTRAMENTO FINALE SUL 100% DEI DATI ---
-    print("\n\n--- 🚀 ADDESTRAMENTO MODELLO FINALE SUL 100% DEL TRAINING SET ---")
-    l1_mask = df_train['l1_parent'].notna()
+    # --- ADDESTRAMENTO FINALE E PREDIZIONE ---
+    print("\n\n--- 🚀 Addestramento Modello Finale sul 100% del Training Set ---")
+    
+    l1_mask, l2_mask = df_train['l1_parent'].notna(), df_train['l2_parent'].notna()
     X_train_l1, y_train_l1 = X_train_combined[l1_mask.values], df_train.loc[l1_mask, 'l1_parent'].values
-    l2_mask = df_train['l2_parent'].notna()
     X_train_l2, y_train_l2 = X_train_combined[l2_mask.values], df_train.loc[l2_mask, 'l2_parent'].values
     
-    model_l1_final = make_pipeline(StandardScaler(with_mean=False), LogisticRegression(max_iter=1000, solver='lbfgs'))
-    model_l2_final = SVC(probability=True, random_state=42, class_weight='balanced')
-    model_l3_final = RandomForestClassifier(n_estimators=100, random_state=42, class_weight='balanced')
+    model_l1_final, model_l2_final, model_l3_final = make_pipeline(StandardScaler(with_mean=False), LogisticRegression(max_iter=1000)), SVC(probability=True, random_state=42), RandomForestClassifier(n_estimators=100, random_state=42)
 
     if len(y_train_l1) > 0: model_l1_final.fit(X_train_l1, y_train_l1)
     if len(y_train_l2) > 0: model_l2_final.fit(X_train_l2, y_train_l2)
     model_l3_final.fit(X_train_combined, y_train)
 
-    # --- RISTABILITA LOGICA DI PREDIZIONE DETTAGLIATA PER IL TEST SET FINALE ---
-    print("\n--- ⚙️ ESECUZIONE PREDIZIONI DETTAGLIATE SUL TEST SET FINALE ---")
+    print("\n--- ⚙️ Esecuzione Predizioni Dettagliate sul Test Set Finale ---")
     test_keyword_features_df = create_enhanced_features(df_test, ONTOLOGY_KEYWORDS)
     X_test_tfidf = vectorizer.transform(df_test['text'])
     X_test_combined = hstack([X_test_tfidf, csr_matrix(test_keyword_features_df.values)])
     
-    probs_l1 = model_l1_final.predict_proba(X_test_combined)
-    probs_l2 = model_l2_final.predict_proba(X_test_combined)
-    probs_l3 = model_l3_final.predict_proba(X_test_combined)
+    probs_l1, probs_l2, probs_l3 = model_l1_final.predict_proba(X_test_combined), model_l2_final.predict_proba(X_test_combined), model_l3_final.predict_proba(X_test_combined)
     
     df_result = df_test[['filename']].copy()
     df_result['probs_l1'] = [dict(zip(model_l1_final.classes_, p)) for p in probs_l1]
@@ -217,7 +210,7 @@ if __name__ == "__main__":
     
     output_cols = ['filename', 'L1_pred', 'L1_prob', 'L2_pred', 'L2_prob', 'L3_pred', 'L3_prob']
     
-    output_filename = 'predictions_on_test_set_detailed.csv'
+    output_filename = 'predictions_on_test_set_kfold.csv'
     df_result.to_csv(output_filename, index=False, columns=output_cols)
     print(f"\n✅ Risultati finali dettagliati salvati in '{output_filename}'")
     print(df_result[output_cols].head().to_string(index=False))

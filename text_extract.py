@@ -8,6 +8,7 @@ from nltk.stem import WordNetLemmatizer
 import spacy
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 import numpy as np
+import pickle
 
 class TextExtractor:
     def __init__(self):
@@ -108,27 +109,38 @@ class TextExtractor:
             'lexical_diversity': len(set(words)) / len(words) if words else 0
         }
         return features
-    
 
 def process_all_documents(csv_path, output_csv):
-    """Processa tutti i documenti dal CSV e aggiunge features di testo"""
-    
-    # Carica il CSV esistente
+    """
+    Processa tutti i documenti dal CSV, estraendo testo solo da file unici
+    e mappando i risultati su tutte le righe pertinenti.
+    """
     df = pd.read_csv(csv_path)
     extractor = TextExtractor()
     
-    text_data = []
-    features_list = []
+    # Dizionario per memorizzare i dati estratti per ogni percorso di file UNICO
+    # Chiave: percorso del file, Valore: dizionario con i dati estratti
+    extracted_data_cache = {}
     
-    for idx, row in df.iterrows():
-        if row['type'] == 'file' and row['extension'] == '.pdf':
-            relative_path = row['relative_path']
-            if relative_path == '.' or relative_path == '':
-                relative_path = ''  # considera la cartella base senza punto
-            pdf_path = os.path.join("./References", relative_path, row['titolo'] + '.pdf')
-            pdf_path = os.path.normpath(pdf_path)  # pulisce eventuali "/./" o doppi slash
+    # Liste per popolare le nuove colonne del DataFrame
+    full_texts = []
+    abstracts = []
+    clean_texts = []
+    word_counts = []
+    unique_words_list = []
+    lexical_diversities = []
 
-            # Usa file_name se presente e non vuoto, altrimenti titolo + .pdf
+    for idx, row in df.iterrows():
+        # Inizializza i valori di default
+        default_data = {'full_text': '', 'abstract': '', 'clean_text': '', 'word_count': 0, 'unique_words': 0, 'lexical_diversity': 0}
+
+        if row['type'] == 'file' and row['extension'] == '.pdf':
+            # Costruisci il percorso del file
+            relative_path = row['relative_path'] if pd.notna(row['relative_path']) else ''
+            relative_path = relative_path.strip()
+            if relative_path == '.':
+                relative_path = ''
+            
             if 'filename' in row and pd.notna(row['filename']) and row['filename'].strip() != '':
                 pdf_filename = row['filename']
             else:
@@ -136,70 +148,63 @@ def process_all_documents(csv_path, output_csv):
 
             pdf_path = os.path.normpath(os.path.join("./References", relative_path, pdf_filename))
             
-            if os.path.exists(pdf_path):
-                # Estrai testo
-                text = extractor.extract_text_with_pymupdf(pdf_path)
-                
-                # Estrai sezioni
-                sections = extractor.extract_sections(text)
-                
-                # Features statistiche
-                features = extractor.extract_text_features(text)
-                
-                # Pulizia e tokenizzazione
-                clean_text = extractor.clean_text(text)
-                tokens = extractor.tokenize_text(clean_text)
-                
-                text_data.append({
-                    'titolo': row['titolo'],
-                    'full_text': text,
-                    'abstract': sections['abstract'],
-                    'clean_text': ' '.join(tokens),
-                    'word_count': features['word_count'],
-                    'unique_words': features['unique_words'],
-                    'lexical_diversity': features['lexical_diversity']
-                })
-                
-                features_list.append(features)
-            else:
-                print(f"File non trovato: {pdf_path}")
-                text_data.append({
-                    'titolo': row['titolo'],
-                    'full_text': '',
-                    'abstract': '',
-                    'clean_text': '',
-                    'word_count': 0,
-                    'unique_words': 0,
-                    'lexical_diversity': 0
-                })
+            # Se il file non è ancora stato processato, estrai i dati e salvali in cache
+            if pdf_path not in extracted_data_cache:
+                if os.path.exists(pdf_path):
+                    text = extractor.extract_text_with_pymupdf(pdf_path)
+                    sections = extractor.extract_sections(text)
+                    features = extractor.extract_text_features(text)
+                    clean_text = extractor.clean_text(text)
+                    tokens = extractor.tokenize_text(clean_text)
+                    
+                    extracted_data_cache[pdf_path] = {
+                        'full_text': text,
+                        'abstract': sections['abstract'],
+                        'clean_text': ' '.join(tokens),
+                        'word_count': features['word_count'],
+                        'unique_words': features['unique_words'],
+                        'lexical_diversity': features['lexical_diversity']
+                    }
+                else:
+                    print(f"File non trovato: {pdf_path}")
+                    # Salva in cache il risultato nullo per non cercarlo di nuovo
+                    extracted_data_cache[pdf_path] = default_data.copy()
+            
+            # Recupera i dati dalla cache e li aggiunge alle liste
+            data = extracted_data_cache[pdf_path]
+            full_texts.append(data['full_text'])
+            abstracts.append(data['abstract'])
+            clean_texts.append(data['clean_text'])
+            word_counts.append(data['word_count'])
+            unique_words_list.append(data['unique_words'])
+            lexical_diversities.append(data['lexical_diversity'])
+
         else:
-            # Per cartelle o file non PDF
-            text_data.append({
-                'titolo': row['titolo'],
-                'full_text': '',
-                'abstract': '',
-                'clean_text': '',
-                'word_count': 0,
-                'unique_words': 0,
-                'lexical_diversity': 0
-            })
+            # Per cartelle o file non PDF, aggiungi valori vuoti
+            full_texts.append(default_data['full_text'])
+            abstracts.append(default_data['abstract'])
+            clean_texts.append(default_data['clean_text'])
+            word_counts.append(default_data['word_count'])
+            unique_words_list.append(default_data['unique_words'])
+            lexical_diversities.append(default_data['lexical_diversity'])
     
-    # Crea DataFrame con i testi estratti
-    text_df = pd.DataFrame(text_data)
-    
-    # Unisci con il DataFrame originale
-    result_df = pd.merge(df, text_df, on='titolo', how='left')
+    # Aggiungi le nuove colonne al DataFrame originale
+    # Questo mantiene l'ordine e il numero di righe originali
+    df['full_text'] = full_texts
+    df['abstract'] = abstracts
+    df['clean_text'] = clean_texts
+    df['word_count'] = word_counts
+    df['unique_words'] = unique_words_list
+    df['lexical_diversity'] = lexical_diversities
     
     # Salva il nuovo CSV
-    result_df.to_csv(output_csv, index=False, escapechar='\\')
+    df.to_csv(output_csv, index=False, escapechar='\\')
     print(f"CSV con testi estratti salvato come: {output_csv}")
     
-    return result_df
+    return df
 
 def generate_tfidf_matrix(csv_path, output_pickle):
     """Genera matrice TF-IDF per analisi successiva"""
-    from sklearn.feature_extraction.text import TfidfVectorizer
-    import pickle
     
     df = pd.read_csv(csv_path)
     
@@ -233,5 +238,8 @@ if __name__ == "__main__":
     tfidf_matrix, vectorizer = generate_tfidf_matrix('output_with_text.csv', 'tfidf_data.pkl')
     
     print("Estrazione testo e preprocessing completati!")
-    print(f"Documenti processati: {len(df)}")
-    print(f"Documenti con testo estratto: {len(df[df['clean_text'] != ''])}")
+    if 'clean_text' in df.columns:
+        print(f"Documenti processati: {len(df)}")
+        print(f"Documenti con testo estratto: {len(df[df['clean_text'] != ''])}")
+    else:
+        print("La colonna 'clean_text' non è stata creata.")
