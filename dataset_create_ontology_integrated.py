@@ -99,8 +99,8 @@ def find_best_csp_solution(problem, doc_probs):
 
 if __name__ == "__main__":
     ontology_path = "Ontology.owx"
-    train_csv_file = "training_data/training_set_85percent.csv"
-    test_csv_file = "test_data/test_set_15percent.csv"
+    train_csv_file = "training_result/training_set_categorized.csv"
+    test_csv_file = "test_result/test_data_with_text.csv"
     
     print("Avvio del processo...")
     g = Graph()
