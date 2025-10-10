@@ -116,6 +116,25 @@ def process_all_documents(csv_path, output_csv):
     e mappando i risultati su tutte le righe pertinenti.
     """
     df = pd.read_csv(csv_path)
+    
+    print(f"INFO: Righe totali prima del filtraggio: {len(df)}")
+    original_rows = len(df)
+
+    # Definiamo le condizioni per una riga "buona"
+    # Condizione 1: La riga è una cartella.
+    is_folder = df['type'] == 'folder'
+    
+    # Condizione 2: La riga è un file con un nome di file valido.
+    is_valid_file = (df['type'] == 'file') & (df['filename'].notna()) & (df['filename'].str.strip() != '')
+    
+    # Manteniamo le righe che sono O una cartella O un file valido.
+    # Il simbolo '|' significa OR (oppure).
+    df = df[is_folder | is_valid_file].copy()
+
+    rows_removed = original_rows - len(df)
+    if rows_removed > 0:
+        print(f"✅ PULIZIA: Rimosse {rows_removed} righe corrotte (dati senza tipo o file incompleti).")
+    print(f"INFO: Righe valide dopo il filtraggio: {len(df)}")
     extractor = TextExtractor()
     
     # Dizionario per memorizzare i dati estratti per ogni percorso di file UNICO
