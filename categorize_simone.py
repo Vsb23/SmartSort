@@ -172,17 +172,17 @@ def categorize_entire_file(input_csv, output_folder, output_file):
 if __name__ == "__main__":
     # Categorizzazione training set (tutto invariato)
     input_training_file = "training_result/output_with_text.csv"
-    training_output_folder = "training_result"
+    training_output_folder = "csv simone"
     training_output_file = "training_set_categorized.csv"
     print("=" * 80)
     print(f"🚀 CATEGORIZZAZIONE COMPLETA TRAINING SET: '{input_training_file}'")
-    categorize_entire_file("training_result/output_with_text.csv", "training_result", "training_set_categorized.csv")
+    categorize_entire_file("training_result/output_with_text.csv", "csv simone", "training_set_categorized.csv")
     print("=" * 80)
 
     # Categorizzazione test set (NUOVA funzione identica ma percorso e nome file differente)
     input_test_file = "test_result/test_data_with_text.csv"
-    test_output_folder = "test_result"
+    test_output_folder = "csv simone"
     test_output_file = "test_set_categorized.csv"
     print(f"\n🚀 CATEGORIZZAZIONE COMPLETA TEST SET: '{input_test_file}'")
-    categorize_entire_file("test_result/test_data_with_text.csv", "test_result", "test_set_categorized.csv")
+    categorize_entire_file("test_result/test_data_with_text.csv", "csv simone", "test_set_categorized.csv")
     print("=" * 80)

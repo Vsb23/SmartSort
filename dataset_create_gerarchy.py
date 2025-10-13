@@ -222,13 +222,14 @@ def train_hierarchical_models(X_train_combined, y_train_l1, y_train_l2, y_train_
     
     return pipeline
 
+import os
+
 if __name__ == "__main__":
     
     ontology_path = "Ontology.owx"
-    train_csv_file = "training_result/training_set_categorized.csv"
+    train_csv_file = "csv simone/training_set_categorized.csv"
     test_csv_file = "test_result/test_data_with_text.csv"
 
-    
     print("Avvio del processo...")
     g = Graph()
     g.parse(ontology_path, format="xml")
@@ -252,7 +253,6 @@ if __name__ == "__main__":
     y_train_l1 = df_train['l1_label'].values
     y_train_l2 = df_train['l2_label'].values
     y_train_l3 = df_train['l3_label'].values
-
 
     # Addestramento modelli gerarchici
     print("--- Addestramento Modelli Finali con Vincoli Gerarchici ---")
@@ -323,34 +323,140 @@ if __name__ == "__main__":
 
     df_result = pd.DataFrame(final_results)
 
-    from sklearn.metrics import precision_recall_fscore_support
-
-    # Estrai etichette vere dal test set (se presenti)
-    y_true_l1 = df_test['l1_label'].values if 'l1_label' in df_test.columns else None
-    y_true_l2 = df_test['l2_label'].values if 'l2_label' in df_test.columns else None
-    y_true_l3 = df_test['single_label'].values if 'single_label' in df_test.columns else None
-
-    # Ricava le etichette predette da final_results
-    y_pred_l1 = df_result['L1_pred'].values
-    y_pred_l2 = df_result['L2_pred'].values
-    y_pred_l3_svm = df_result['L3_pred_svm'].values
-    y_pred_l3_nb = df_result['L3_pred_nb'].values
-    y_pred_l3_ensemble = df_result['L3_pred_ensemble'].values
-
-    def evaluate_classification(y_true, y_pred):
-        precision, recall, f1, _ = precision_recall_fscore_support(y_true, y_pred, average='weighted', zero_division=0)
-        return precision, recall, f1
-
-    output_cols = ['filename', 'L1_pred', 'L2_pred',
-                   'L3_pred_svm', 'L3_prob_svm',
-                   'L3_pred_nb', 'L3_prob_nb',
-                   'L3_pred_ensemble', 'L3_prob_ensemble']
+    output_cols = [
+        'filename', 'L1_pred', 'L2_pred',
+        'L3_pred_svm', 'L3_prob_svm',
+        'L3_pred_nb', 'L3_prob_nb',
+        'L3_pred_ensemble', 'L3_prob_ensemble'
+    ]
+    output_folder = "csv simone"
+    os.makedirs(output_folder, exist_ok=True)
     output_filename = "predictions_on_testset_full_comparison.csv"
+    output_path = os.path.join(output_folder, output_filename)
 
-    df_result.to_csv(output_filename, index=False,
+    df_result.to_csv(output_path, index=False,
                      columns=output_cols, float_format='%.4f')
 
-    print(f"\nRisultati finali dettagliati salvati in {output_filename}")
+    print(f"\nRisultati finali dettagliati salvati in {output_path}")
+    print("--- Esempio di output ---")
+    print(df_result[output_cols].head().to_string(index=False))
+    print("\nPROCESSO COMPLETATO!")
+import os
+
+if __name__ == "__main__":
+    
+    ontology_path = "Ontology.owx"
+    train_csv_file = "csv simone/training_set_categorized.csv"
+    test_csv_file = "test_result/test_data_with_text.csv"
+
+    print("Avvio del processo...")
+    g = Graph()
+    g.parse(ontology_path, format="xml")
+    NS = Namespace("http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#")
+    ONTOLOGY_KEYWORDS = load_keywords_from_ontology(ontology_path, NS)
+    
+    df_train = load_training_data(train_csv_file)
+    df_test = pd.read_csv(test_csv_file)
+    df_test['clean_text'] = df_test['clean_text'].fillna('')
+
+    print("Creazione delle feature...")
+    vectorizer = TfidfVectorizer(max_features=5000, stop_words='english')
+    X_train_tfidf = vectorizer.fit_transform(df_train['clean_text'])
+    train_keyword_features_df = create_enhanced_features(df_train, ONTOLOGY_KEYWORDS)
+    X_train_combined = hstack([X_train_tfidf, csr_matrix(train_keyword_features_df.values)])
+    
+    df_train['l3_label'] = df_train['single_label']
+    df_train['l2_label'] = df_train['l3_label'].apply(lambda x: list(get_parents(g, NS, x))[0] if get_parents(g, NS, x) else "Altro")
+    df_train['l1_label'] = df_train['l2_label'].apply(lambda x: list(get_parents(g, NS, x))[0] if x != "Altro" and get_parents(g, NS, x) else "Altro")
+    
+    y_train_l1 = df_train['l1_label'].values
+    y_train_l2 = df_train['l2_label'].values
+    y_train_l3 = df_train['l3_label'].values
+
+    # Addestramento modelli gerarchici
+    print("--- Addestramento Modelli Finali con Vincoli Gerarchici ---")
+    hierarchical_pipeline = train_hierarchical_models(
+        X_train_combined, y_train_l1, y_train_l2, y_train_l3, g, NS
+    )
+
+    # Estrazione modelli finali
+    model_l1_final = hierarchical_pipeline.models['L1']
+    model_l2_final = hierarchical_pipeline.models['L2'] 
+    model_l3_svm_final = hierarchical_pipeline.models['L3_svm']
+    model_l3_nb_final = hierarchical_pipeline.models['L3_nb']  # NB ora con vincoli
+
+    print("Tutti i modelli finali sono stati addestrati con vincoli gerarchici (incluso NB per L3).")
+
+    print("\n--- Predizioni sul Test Set Finale (Comparazione + Ensemble) ---")
+    X_test_tfidf = vectorizer.transform(df_test['clean_text'])
+    test_keyword_features_df = create_enhanced_features(df_test, ONTOLOGY_KEYWORDS)
+    X_test_combined = hstack([X_test_tfidf, csr_matrix(test_keyword_features_df.values)])
+    
+    probs_l1 = model_l1_final.predict_proba(X_test_combined)
+    probs_l2 = model_l2_final.predict_proba(X_test_combined)
+    probs_l3_svm = model_l3_svm_final.predict_proba(X_test_combined)
+    probs_l3_nb = model_l3_nb_final.predict_proba(X_test_combined)
+    
+    final_results = []
+    
+    assert np.array_equal(model_l3_svm_final.classes_, model_l3_nb_final.classes_), "Le classi dei modelli L3 non corrispondono!"
+
+    for i in range(len(df_test)):
+        # Pipeline 1: SVM
+        doc_probs_svm = {
+            'L1': dict(zip(model_l1_final.classes_, probs_l1[i])), 
+            'L2': dict(zip(model_l2_final.classes_, probs_l2[i])), 
+            'L3': dict(zip(model_l3_svm_final.classes_, probs_l3_svm[i]))
+        }
+        _, _, _, final_probs_svm = find_best_csp_solution(setup_csp_problem(doc_probs_svm, g, NS), doc_probs_svm)
+
+        # Pipeline 2: Naive Bayes
+        doc_probs_nb = {
+            'L1': dict(zip(model_l1_final.classes_, probs_l1[i])), 
+            'L2': dict(zip(model_l2_final.classes_, probs_l2[i])), 
+            'L3': dict(zip(model_l3_nb_final.classes_, probs_l3_nb[i]))
+        }
+        _, _, _, final_probs_nb = find_best_csp_solution(setup_csp_problem(doc_probs_nb, g, NS), doc_probs_nb)
+
+        # Pipeline Ensemble
+        probs_l3_ensemble = (probs_l3_svm[i] + probs_l3_nb[i]) / 2.0
+        doc_probs_ensemble = {
+            'L1': dict(zip(model_l1_final.classes_, probs_l1[i])), 
+            'L2': dict(zip(model_l2_final.classes_, probs_l2[i])), 
+            'L3': dict(zip(model_l3_svm_final.classes_, probs_l3_ensemble))
+        }
+        _, _, _, final_probs_ensemble = find_best_csp_solution(setup_csp_problem(doc_probs_ensemble, g, NS), doc_probs_ensemble)
+
+        result_row = {
+            'filename': df_test.iloc[i]['filename'],
+            'L1_pred': final_probs_ensemble.get('L1_pred', "N/A"),
+            'L2_pred': final_probs_ensemble.get('L2_pred', "N/A"),
+            'L3_pred_svm': final_probs_svm.get('L3_pred', "Altro"),
+            'L3_prob_svm': final_probs_svm.get('L3_prob', 0.0),
+            'L3_pred_nb': final_probs_nb.get('L3_pred', "Altro"),
+            'L3_prob_nb': final_probs_nb.get('L3_prob', 0.0),
+            'L3_pred_ensemble': final_probs_ensemble.get('L3_pred', "Altro"),
+            'L3_prob_ensemble': final_probs_ensemble.get('L3_prob', 0.0),
+        }
+        final_results.append(result_row)
+
+    df_result = pd.DataFrame(final_results)
+
+    output_cols = [
+        'filename', 'L1_pred', 'L2_pred',
+        'L3_pred_svm', 'L3_prob_svm',
+        'L3_pred_nb', 'L3_prob_nb',
+        'L3_pred_ensemble', 'L3_prob_ensemble'
+    ]
+    output_folder = "csv simone"
+    os.makedirs(output_folder, exist_ok=True)
+    output_filename = "predictions_on_testset_full_comparison_gerarchy.csv"
+    output_path = os.path.join(output_folder, output_filename)
+
+    df_result.to_csv(output_path, index=False,
+                     columns=output_cols, float_format='%.4f')
+
+    print(f"\nRisultati finali dettagliati salvati in {output_path}")
     print("--- Esempio di output ---")
     print(df_result[output_cols].head().to_string(index=False))
     print("\nPROCESSO COMPLETATO!")
