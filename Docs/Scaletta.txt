@@ -1,8 +1,9 @@
 10/10/2025
 
 [X] utilizzare utti i document ini references come training set, e agigungere altri oducmenti come test set 
-[] fare una comparazione di tutti i modelli ad ogni livell , e vedere quale si comporta meglio a quale livello
+[X] fare una comparazione di tutti i modelli ad ogni livell , e vedere quale si comporta meglio a quale livello
 [X] comparare approccio top down e bottom up per quanto riguarda il ritrovamento della categoria migliore per il documento
 [] aggiungere più statistiche stampare (precision,recall, f1)
 [] crare cartelle delle categorie
- 
+[] creare uno scirpt di esecuzione completo (che esegua in ordine tutti i file)
+[] Aggiungere tempo di addestramento per ogni modello (lr,rf,svm  e nb)
