@@ -1,4 +1,4 @@
-# FILE: dataset_ricorsivo.py (MODIFICATO PER USARE L'OUTPUT DI categorize_simone.py)
+# FILE: dataset_ricorsivo.py (MODIFICATO CON FILTRAGGIO AUTOMATICO DELLE CLASSI RARE)
 
 import pandas as pd
 import numpy as np
@@ -41,13 +41,8 @@ def get_parents(g, ns, child_class_name):
     return parents
 
 def load_training_data(csv_file):
-    """
-    Funzione semplificata: carica i dati già categorizzati e puliti.
-    La colonna 'category' è ora la nostra 'single_label'.
-    """
     df = pd.read_csv(csv_file, low_memory=False)
     df['clean_text'] = df['clean_text'].fillna('')
-    # La colonna 'category' creata da categorize_simone.py è già la nostra etichetta pulita.
     df['single_label'] = df['category']
     return df[df['single_label'].notna()].copy()
 
@@ -61,9 +56,6 @@ def create_enhanced_features(df, ontology_keywords):
             doc_features[f"{category}_keywords"] = keyword_count
         keyword_features.append(doc_features)
     return pd.DataFrame(keyword_features, index=df.index).fillna(0)
-
-# --- FUNZIONI DI GROUND TRUTH RIMOSSE ---
-# La logica di find_most_specific_category è ora solo in categorize_simone.py
 
 # --- FUNZIONI PER PREDIZIONE CON VINCOLI (CSP) ---
 
@@ -102,10 +94,8 @@ def find_best_csp_solution(problem, doc_probs):
 
 def evaluate_and_get_metrics(df_predictions, df_test_with_ground_truth):
     print("\n" + "--- VALUTAZIONE PERFORMANCE (ACCURACY, PRECISION, RECALL, F1) ---".center(90, "="))
-    # La colonna ground truth ora si chiama 'category' nel file di input
     df_test_with_ground_truth['ground_truth_category'] = df_test_with_ground_truth['category']
     df_merged = pd.merge(df_predictions, df_test_with_ground_truth[['filename', 'ground_truth_category']], on='filename')
-    
     y_true = df_merged['ground_truth_category']
     models = ['LR', 'RF', 'SVM', 'NB']
     all_metrics = {}
@@ -129,20 +119,24 @@ def evaluate_and_get_metrics(df_predictions, df_test_with_ground_truth):
 if __name__ == "__main__":
     # --- 1. SETUP E CONFIGURAZIONE ---
     ontology_path = "Ontology.owx"
-    # NUOVI PERCORSI: puntano ai file creati da categorize_simone.py
-    train_csv_file = "csv simone/training_set_categorized.csv"
-    test_csv_file = "test_result/test_data_with_text.csv" # Per ottenere il testo per le features
-    test_labels_csv_file = "csv simone/test_set_categorized.csv" # Per ottenere il ground truth
-    
+    train_csv_file = "training_result/training_set_categorized.csv"
+    test_csv_file = "test_result/test_data_with_text.csv"
+    test_labels_csv_file = "test_result/test_set_categorized.csv"
     output_model_dir = "saved_models"
     output_metrics_dir = "metrics"
     force_retrain = False
+    min_samples_per_class = 5 # NUOVA Impostazione: soglia per il filtraggio
 
     print("🚀 AVVIO PIPELINE ML: ADDESTRAMENTO, PREDIZIONE E VALUTAZIONE 🚀")
     os.makedirs(output_model_dir, exist_ok=True)
     os.makedirs(output_metrics_dir, exist_ok=True)
     
-    model_templates = {'LR': make_pipeline(StandardScaler(with_mean=False), LogisticRegression(max_iter=1000, random_state=42)), 'RF': RandomForestClassifier(n_estimators=100, random_state=42), 'SVM': make_pipeline(StandardScaler(with_mean=False), SVC(probability=True, random_state=42)), 'NB': MultinomialNB()}
+    model_templates = {
+        'LR': make_pipeline(StandardScaler(with_mean=False), LogisticRegression(C=0.1,max_iter=1000, random_state=42)), 
+        'RF': RandomForestClassifier(n_estimators=100, random_state=42), 
+        'SVM': make_pipeline(StandardScaler(with_mean=False), SVC(probability=True, random_state=42)), 
+        'NB': MultinomialNB()
+    }
     levels = {'L1': None, 'L2': None, 'L3': None}
 
     # --- 2. ADDESTRAMENTO CONDIZIONALE ---
@@ -161,10 +155,25 @@ if __name__ == "__main__":
         NS = Namespace("http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#")
         df_train = load_training_data(train_csv_file)
         
-        vectorizer = TfidfVectorizer(max_features=300, stop_words='english')
+        # --- NUOVA SEZIONE: FILTRAGGIO AUTOMATICO DELLE CLASSI RARE ---
+        print(f"\n--- Filtro delle classi con meno di {min_samples_per_class} campioni ---")
+        original_doc_count = len(df_train)
+        category_counts = df_train['single_label'].value_counts()
+        categories_to_keep = category_counts[category_counts >= min_samples_per_class].index.tolist()
+        
+        df_train = df_train[df_train['single_label'].isin(categories_to_keep)]
+        filtered_doc_count = len(df_train)
+        
+        print(f"Numero di categorie originali: {len(category_counts)}")
+        print(f"Numero di categorie mantenute: {len(categories_to_keep)}")
+        print(f"Documenti rimossi: {original_doc_count - filtered_doc_count}")
+        print(f"Dataset di training ridotto a {filtered_doc_count} documenti.")
+        # --- FINE SEZIONE DI FILTRAGGIO ---
+
+        vectorizer = TfidfVectorizer(max_features=40, stop_words='english')
         X_train_tfidf = vectorizer.fit_transform(df_train['clean_text'])
         with open(os.path.join(output_model_dir, 'vectorizer.pkl'), 'wb') as f: pickle.dump(vectorizer, f)
-        print("✅ Vectorizer addestrato e salvato.")
+        print("\n✅ Vectorizer addestrato e salvato.")
         
         X_train_combined = hstack([X_train_tfidf, csr_matrix(create_enhanced_features(df_train, estrai_category_keywords_da_ontologia(ontology_path)).values)])
         df_train['l3_label'] = df_train['single_label']
@@ -193,9 +202,7 @@ if __name__ == "__main__":
     NS = Namespace("http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#")
     ONTOLOGY_KEYWORDS = estrai_category_keywords_da_ontologia(ontology_path)
     
-    # Carica i dati di test per la predizione (con testo)
     df_test_data = pd.read_csv(test_csv_file).fillna('')
-    # Carica i dati di test con le etichette (ground truth)
     df_test_labels = pd.read_csv(test_labels_csv_file).fillna('')
     print("✅ File di test (dati e etichette) caricati.")
 
@@ -223,7 +230,7 @@ if __name__ == "__main__":
     df_results = pd.DataFrame(results)
     
     # --- 4. VALUTAZIONE E SALVATAGGIO FINALE ---
-    performance_metrics = evaluate_and_get_metrics(df_results, df_test_labels) # Passa il df con le etichette corrette
+    performance_metrics = evaluate_and_get_metrics(df_results, df_test_labels)
     metrics_df = pd.DataFrame(performance_metrics).T
     print("\n--- RIEPILOGO METRICHE AGGREGATE ---")
     print(metrics_df.round(4).to_string())
@@ -231,7 +238,6 @@ if __name__ == "__main__":
     output_predictions_filename = os.path.join(output_metrics_dir, "predictions_and_evaluation_results.csv")
     output_metrics_filename = os.path.join(output_metrics_dir, "performance_metrics_summary.csv")
     
-    # Unisce i risultati della predizione con il ground truth per il salvataggio finale
     df_test_labels['ground_truth_category'] = df_test_labels['category']
     df_final_output = pd.merge(df_results, df_test_labels[['filename', 'ground_truth_category']], on='filename')
     df_final_output.to_csv(output_predictions_filename, index=False)
@@ -241,4 +247,3 @@ if __name__ == "__main__":
     print(f"✅ Riepilogo metriche di performance salvato in '{output_metrics_filename}'.")
     
     print("\n🎉 PROCESSO DI TRAINING E PREDIZIONE TERMINATO! 🎉")
-    print("➡️  Ora puoi eseguire 'stats.py' per generare i grafici e le visualizzazioni.")

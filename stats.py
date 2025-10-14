@@ -92,20 +92,19 @@ def plot_loss_curve(X_train, y_train, output_dir):
     X_train_part_scaled = scaler.fit_transform(X_train_part)
     X_val_scaled = scaler.transform(X_val)
     
-    # --- MODIFICA CHIAVE QUI ---
-    # Rendiamo il modello più stabile impostando un learning rate adattivo.
+# In stats.py
     model = SGDClassifier(
         loss='log_loss',
         random_state=42,
-        learning_rate='adaptive', # NUOVO: Adatta la "velocità" di apprendimento se si blocca
-        eta0=0.01,                # NUOVO: Imposta una velocità di partenza bassa e sicura
+        learning_rate='adaptive',
+        eta0=0.01,
+        alpha=0.001,  # PROVA AD AGGIUNGERE QUESTO (aumentalo se necessario a 0.01)
         max_iter=1,
         tol=None,
         warm_start=True
     )
-    # --- FINE MODIFICA ---
     
-    n_epochs = 20
+    n_epochs = 50
     train_losses, val_losses = [], []
     classes = np.unique(y_train)
     
