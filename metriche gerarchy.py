@@ -4,7 +4,8 @@ from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+import os
+from sklearn.linear_model import SGDClassifier
 
 
 def get_parents(g, ns, child_class_name):
@@ -57,6 +58,9 @@ def calcola_metriche(df_vere_etichette, df_predizioni):
 
     risultati = {}
 
+    output_dir = "test_result/images"
+    os.makedirs(output_dir, exist_ok=True)
+
     for lvl, pred_col in zip(livelli, pred_cols):
         y_true = df[lvl]
         y_pred = df[pred_col]
@@ -77,7 +81,6 @@ def calcola_metriche(df_vere_etichette, df_predizioni):
             for _, row in diff_rows.iterrows():
                 print(f"  * {row['filename']}: vero = {row[lvl]}, predetto = {row[pred_col]}")
 
-
         # Matrice di confusione - heatmap
         labels = sorted(set(y_true) | set(y_pred))
         cm = confusion_matrix(y_true, y_pred, labels=labels)
@@ -88,6 +91,12 @@ def calcola_metriche(df_vere_etichette, df_predizioni):
         plt.ylabel('Categoria vera')
         plt.title(f'Matrice di confusione {lvl}')
         plt.tight_layout()
+
+        # Salvataggio immagine
+        filename = os.path.join(output_dir, f"confusion_matrix_{lvl}.png")
+        plt.savefig(filename, dpi=150)
+        print(f"✅ Matrice di confusione {lvl} salvata in {filename}")
+
         plt.show()
 
     return risultati
@@ -95,8 +104,8 @@ def calcola_metriche(df_vere_etichette, df_predizioni):
 
 
 def main():
-    input_test_csv = 'csv simone/test_set_categorized.csv'  
-    predizioni_csv = 'csv simone/predictions_on_testset_full_comparison.csv'
+    input_test_csv = 'test_result/test_set_categorized.csv'  
+    predizioni_csv = 'test_result/predictions_on_testset_full_comparison_gerarchy.csv'
 
     df_vere = pd.read_csv(input_test_csv)
     df_pred = pd.read_csv(predizioni_csv)
@@ -109,6 +118,7 @@ def main():
     print("Risultati metriche:")
     for livello, valori in metriche.items():
         print(f"{livello}: Precision={valori['precision']:.3f}, Recall={valori['recall']:.3f}, F1={valori['f1']:.3f}")
+    
 
 if __name__ == '__main__':
     main()
