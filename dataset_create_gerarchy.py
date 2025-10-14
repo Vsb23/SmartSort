@@ -227,7 +227,7 @@ import os
 if __name__ == "__main__":
     
     ontology_path = "Ontology.owx"
-    train_csv_file = "csv simone/training_set_categorized.csv"
+    train_csv_file = "training_result/training_set_categorized.csv"
     test_csv_file = "test_result/test_data_with_text.csv"
 
     print("Avvio del processo...")
@@ -329,7 +329,7 @@ if __name__ == "__main__":
         'L3_pred_nb', 'L3_prob_nb',
         'L3_pred_ensemble', 'L3_prob_ensemble'
     ]
-    output_folder = "csv simone"
+    output_folder = "test_result"
     os.makedirs(output_folder, exist_ok=True)
     output_filename = "predictions_on_testset_full_comparison.csv"
     output_path = os.path.join(output_folder, output_filename)
@@ -346,7 +346,7 @@ import os
 if __name__ == "__main__":
     
     ontology_path = "Ontology.owx"
-    train_csv_file = "csv simone/training_set_categorized.csv"
+    train_csv_file = "training_result/training_set_categorized.csv"
     test_csv_file = "test_result/test_data_with_text.csv"
 
     print("Avvio del processo...")
@@ -448,7 +448,7 @@ if __name__ == "__main__":
         'L3_pred_nb', 'L3_prob_nb',
         'L3_pred_ensemble', 'L3_prob_ensemble'
     ]
-    output_folder = "csv simone"
+    output_folder = "test_result"
     os.makedirs(output_folder, exist_ok=True)
     output_filename = "predictions_on_testset_full_comparison_gerarchy.csv"
     output_path = os.path.join(output_folder, output_filename)
