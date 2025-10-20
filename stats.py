@@ -104,7 +104,7 @@ def plot_loss_curve(X_train, y_train, output_dir):
         warm_start=True
     )
     
-    n_epochs = 50
+    n_epochs = 150
     train_losses, val_losses = [], []
     classes = np.unique(y_train)
     
