@@ -170,7 +170,7 @@ if __name__ == "__main__":
         print(f"Dataset di training ridotto a {filtered_doc_count} documenti.")
         # --- FINE SEZIONE DI FILTRAGGIO ---
 
-        vectorizer = TfidfVectorizer(max_features=40, stop_words='english')
+        vectorizer = TfidfVectorizer(max_features=45, stop_words='english')
         X_train_tfidf = vectorizer.fit_transform(df_train['clean_text'])
         with open(os.path.join(output_model_dir, 'vectorizer.pkl'), 'wb') as f: pickle.dump(vectorizer, f)
         print("\n✅ Vectorizer addestrato e salvato.")

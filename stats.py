@@ -118,7 +118,7 @@ def plot_loss_curve(X_train, y_train, output_dir):
     
     plt.figure(figsize=(10, 6))
     plt.plot(train_losses, label='Train Loss')
-    plt.plot(val_losses, label='Validation Loss', linestyle='--')
+    plt.plot(val_losses, label='Validation Loss')
     plt.title("Curva di Apprendimento (Train vs Validation Loss)")
     plt.xlabel("Epoche")
     plt.ylabel("Log Loss")
