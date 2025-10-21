@@ -21,9 +21,6 @@ from sklearn.model_selection import train_test_split
 from collections import Counter
 
 
-
-
-# (Le funzioni di supporto come load_keywords_from_ontology, get_parents, etc. rimangono invariate)
 def load_keywords_from_ontology(ontology_path, ns):
     g = Graph()
     g.parse(ontology_path, format="xml")
@@ -85,9 +82,9 @@ def setup_csp_problem(doc_probs, ontology_graph, ns):
     return problem
 
 def find_best_csp_solution(problem, doc_probs):
-    if problem is None: return None, None, None, {}
+    if problem is None: return 'Altro', 'Altro', 'Altro', {}
     solutions = problem.getSolutions()
-    if not solutions: return None, None, None, {}
+    if not solutions: return 'Altro', 'Altro', 'Altro', {}
     best_solution = None
     max_prob = -1
     for sol in solutions:
@@ -104,7 +101,7 @@ def find_best_csp_solution(problem, doc_probs):
             'L3_pred': l3, 'L3_prob': doc_probs['L3'].get(l3, 0)
         }
         return l1, l2, l3, probs_dict
-    return None, None, None, {}
+    return 'Altro', 'Altro', 'Altro', {}
 
 class HierarchicalClassifier(BaseEstimator, ClassifierMixin):
     """
