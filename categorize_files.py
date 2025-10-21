@@ -157,7 +157,6 @@ def categorize_entire_file(input_csv, output_folder, output_file):
     print("✅ Categorizzazione completata.")
 
     # --- SALVATAGGIO NELLA CARTELLA E FILE SPECIFICATI ---
-    import os
     os.makedirs(output_folder, exist_ok=True)
     output_path = os.path.join(output_folder, output_file)
     df.to_csv(output_path, index=False, encoding='utf-8')

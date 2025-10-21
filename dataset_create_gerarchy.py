@@ -345,7 +345,7 @@ if __name__ == "__main__":
     df_train['l1_label'] = df_train['l2_label'].apply(lambda x: list(get_parents(g, NS, x))[0] if x != "Altro" and get_parents(g, NS, x) else "Altro")
 
     # Creazione feature e matrice combinata
-    vectorizer = TfidfVectorizer(max_features=75, stop_words='english')
+    vectorizer = TfidfVectorizer(max_features=45, stop_words='english')
     X_tfidf = vectorizer.fit_transform(df_train['clean_text'])
     keyword_features_df = create_enhanced_features(df_train, ONTOLOGY_KEYWORDS)
     X_combined = hstack([X_tfidf, csr_matrix(keyword_features_df.values)])
