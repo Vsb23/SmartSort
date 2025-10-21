@@ -1,4 +1,4 @@
-# FILE: dataset_ricorsivo.py (MODIFICATO CON FILTRAGGIO AUTOMATICO DELLE CLASSI RARE)
+# FILE: dataset_ricorsivo.py (MODIFICATO CON FILTRAGGIO E LOGICA DI FALLBACK)
 
 import pandas as pd
 import numpy as np
@@ -59,37 +59,101 @@ def create_enhanced_features(df, ontology_keywords):
 
 # --- FUNZIONI PER PREDIZIONE CON VINCOLI (CSP) ---
 
+# --- MODIFICA FALLBACK ---
+# setup_csp_problem ora restuisce una tupla: (problema, dizionario_fallback_l3)
 def setup_csp_problem(doc_probs, ontology_graph, ns):
     problem = Problem()
-    prob_l1 = {k: v for k, v in doc_probs['L1'].items() if v > 0.01}
-    prob_l2 = {k: v for k, v in doc_probs['L2'].items() if v > 0.01}
-    prob_l3 = {k: v for k, v in doc_probs['L3'].items() if v > 0.01}
-    if not prob_l1 or not prob_l2 or not prob_l3: return None
-    problem.addVariable("L1Category", list(prob_l1.keys()))
-    problem.addVariable("L2Category", list(prob_l2.keys()))
-    problem.addVariable("L3Category", list(prob_l3.keys()))
+    
+    # 1. Filtriamo L3 per le categorie più probabili per ridurre il rumore
+    prob_l3 = {k: v for k, v in doc_probs['L3'].items() if v > 0.05} # Soglia 5%
+    if not prob_l3:
+        # Se nessuna L3 è probabile, prepariamo per il fallback
+        return None, doc_probs['L3'] 
+
+    # 2. Troviamo tutti i genitori L2 e L1 validi basati sulle L3 probabili
+    possible_l2 = set()
+    for l3_cat in prob_l3:
+        possible_l2.update(get_parents(ontology_graph, ns, l3_cat))
+    
+    possible_l1 = set()
+    for l2_cat in possible_l2:
+        possible_l1.update(get_parents(ontology_graph, ns, l2_cat))
+
+    # 3. Se non possiamo costruire una gerarchia (es. L3 è "Altro"), prepariamo per il fallback
+    if not possible_l1 or not possible_l2:
+        return None, doc_probs['L3']
+
+    # 4. Creiamo il problema CSP solo con le categorie gerarchicamente valide
+    #    Questo riduce drasticamente lo spazio di ricerca
+    valid_l1 = list(possible_l1 & doc_probs['L1'].keys())
+    valid_l2 = list(possible_l2 & doc_probs['L2'].keys())
+    valid_l3 = list(prob_l3.keys()) # Usiamo le L3 filtrate
+
+    if not valid_l1 or not valid_l2 or not valid_l3:
+        # Se l'intersezione è vuota, c'è un conflitto. Prepariamo per il fallback
+        return None, doc_probs['L3']
+
+    problem.addVariable("L1Category", valid_l1)
+    problem.addVariable("L2Category", valid_l2)
+    problem.addVariable("L3Category", valid_l3)
+    
     def hierarchical_constraint(l2_cat, l3_cat): return l2_cat in get_parents(ontology_graph, ns, l3_cat)
     def hierarchical_constraint_l1(l1_cat, l2_cat): return l1_cat in get_parents(ontology_graph, ns, l2_cat)
+    
     problem.addConstraint(hierarchical_constraint, ("L2Category", "L3Category"))
     problem.addConstraint(hierarchical_constraint_l1, ("L1Category", "L2Category"))
-    return problem
+    
+    # Restituiamo il problema CSP e None per il fallback (perché useremo il Piano A)
+    return problem, None
 
-def find_best_csp_solution(problem, doc_probs):
-    if problem is None: return "N/A", "N/A", "N/A", {}
-    solutions = problem.getSolutions()
-    if not solutions: return "Incoerente", "Incoerente", "Incoerente", {}
-    best_solution, max_prob = None, -1
-    for sol in solutions:
-        l1, l2, l3 = sol["L1Category"], sol["L2Category"], sol["L3Category"]
-        prob = doc_probs['L1'].get(l1, 0) * doc_probs['L2'].get(l2, 0) * doc_probs['L3'].get(l3, 0)
-        if prob > max_prob:
-            max_prob, best_solution = prob, sol
-    if best_solution:
-        l1, l2, l3 = best_solution["L1Category"], best_solution["L2Category"], best_solution["L3Category"]
-        probs_dict = {'L1_pred': l1, 'L2_pred': l2, 'L3_pred': l3, 'Combined_prob': max_prob}
-        return l1, l2, l3, probs_dict
-    return "No_Solution", "No_Solution", "No_Solution", {}
+# --- MODIFICA FALLBACK ---
+# find_best_csp_solution ora accetta la tupla, g, e ns per gestire il Piano B
+def find_best_csp_solution(problem_tuple, doc_probs, g, ns):
+    problem, fallback_l3_probs = problem_tuple
 
+    # --- PIANO A: Prova a risolvere il CSP ---
+    if problem is not None:
+        solutions = problem.getSolutions()
+        if solutions:
+            best_solution, max_prob = None, -1
+            for sol in solutions:
+                l1, l2, l3 = sol["L1Category"], sol["L2Category"], sol["L3Category"]
+                prob = doc_probs['L1'].get(l1, 0) * doc_probs['L2'].get(l2, 0) * doc_probs['L3'].get(l3, 0)
+                if prob > max_prob:
+                    max_prob, best_solution = prob, sol
+            
+            if best_solution:
+                l1, l2, l3 = best_solution["L1Category"], best_solution["L2Category"], best_solution["L3Category"]
+                probs_dict = {'L1_pred': l1, 'L2_pred': l2, 'L3_pred': l3, 'Combined_prob': max_prob}
+                return l1, l2, l3, probs_dict
+
+    # --- PIANO B (FALLBACK): Se il Piano A fallisce (problem=None o solutions=[]) ---
+    # Questo codice viene eseguito se "Incoerente" o "No_Solution" stavano per accadere.
+    
+    # Se il dizionario di fallback non è stato passato, usa quello di L3 completo
+    if fallback_l3_probs is None:
+        fallback_l3_probs = doc_probs['L3']
+        
+    if not fallback_l3_probs:
+         return "N/A", "N/A", "N/A", {}
+         
+    # 1. Trova la L3 più probabile (la nostra "ancora")
+    l3_pred = max(fallback_l3_probs, key=fallback_l3_probs.get)
+    
+    # 2. Ricostruisci L2 (genitore di L3)
+    l2_parents = list(get_parents(g, ns, l3_pred))
+    l2_pred = l2_parents[0] if l2_parents else "Altro" # Prende il primo genitore L2, o "Altro"
+    
+    # 3. Ricostruisci L1 (genitore di L2)
+    l1_parents = list(get_parents(g, ns, l2_pred))
+    l1_pred = l1_parents[0] if l1_parents else "Altro" # Prende il primo genitore L1, o "Altro"
+
+    # Calcola la probabilità di questa catena "forzata"
+    prob = doc_probs['L1'].get(l1_pred, 0) * doc_probs['L2'].get(l2_pred, 0) * doc_probs['L3'].get(l3_pred, 0)
+    probs_dict = {'L1_pred': l1_pred, 'L2_pred': l2_pred, 'L3_pred': l3_pred, 'Combined_prob': prob}
+    
+    return l1_pred, l2_pred, l3_pred, probs_dict
+    
 # --- FUNZIONE PER VALUTAZIONE ---
 
 def evaluate_and_get_metrics(df_predictions, df_test_with_ground_truth):
@@ -125,7 +189,11 @@ if __name__ == "__main__":
     output_model_dir = "saved_models"
     output_metrics_dir = "metrics"
     force_retrain = False
-    min_samples_per_class = 5 # NUOVA Impostazione: soglia per il filtraggio
+    min_samples_per_class = 5 
+    
+    # --- IMPORTANTE: Rivedi questo parametro! ---
+
+    max_tfidf_features = 30 
 
     print("🚀 AVVIO PIPELINE ML: ADDESTRAMENTO, PREDIZIONE E VALUTAZIONE 🚀")
     os.makedirs(output_model_dir, exist_ok=True)
@@ -155,25 +223,25 @@ if __name__ == "__main__":
         NS = Namespace("http://www.semanticweb.org/vsb/ontologies/2025/8/untitled-ontology-11#")
         df_train = load_training_data(train_csv_file)
         
-        # --- NUOVA SEZIONE: FILTRAGGIO AUTOMATICO DELLE CLASSI RARE ---
         print(f"\n--- Filtro delle classi con meno di {min_samples_per_class} campioni ---")
         original_doc_count = len(df_train)
         category_counts = df_train['single_label'].value_counts()
         categories_to_keep = category_counts[category_counts >= min_samples_per_class].index.tolist()
-        
         df_train = df_train[df_train['single_label'].isin(categories_to_keep)]
         filtered_doc_count = len(df_train)
-        
         print(f"Numero di categorie originali: {len(category_counts)}")
         print(f"Numero di categorie mantenute: {len(categories_to_keep)}")
         print(f"Documenti rimossi: {original_doc_count - filtered_doc_count}")
         print(f"Dataset di training ridotto a {filtered_doc_count} documenti.")
-        # --- FINE SEZIONE DI FILTRAGGIO ---
 
-        vectorizer = TfidfVectorizer(max_features=30, stop_words='english')
+        # --- MODIFICA FALLBACK ---
+        # Usa la variabile max_tfidf_features
+        vectorizer = TfidfVectorizer(max_features=max_tfidf_features, stop_words='english') 
+        print(f"\nAddestramento Vectorizer con max_features={max_tfidf_features}...")
+        
         X_train_tfidf = vectorizer.fit_transform(df_train['clean_text'])
         with open(os.path.join(output_model_dir, 'vectorizer.pkl'), 'wb') as f: pickle.dump(vectorizer, f)
-        print("\n✅ Vectorizer addestrato e salvato.")
+        print("✅ Vectorizer addestrato e salvato.")
         
         X_train_combined = hstack([X_train_tfidf, csr_matrix(create_enhanced_features(df_train, estrai_category_keywords_da_ontologia(ontology_path)).values)])
         df_train['l3_label'] = df_train['single_label']
@@ -191,6 +259,7 @@ if __name__ == "__main__":
         
         for level_name, y_train in levels_with_data.items():
             for model_name, model_template in model_templates.items():
+                print(f"Addestramento modello: {model_name} per Livello: {level_name}...")
                 model_to_fit = clone(model_template)
                 model_to_fit.fit(X_train_combined, y_train)
                 with open(os.path.join(output_model_dir, f"model_{level_name}_{model_name}.pkl"), 'wb') as f: pickle.dump(model_to_fit, f)
@@ -217,16 +286,23 @@ if __name__ == "__main__":
     X_test_combined = hstack([X_test_tfidf, csr_matrix(create_enhanced_features(df_test_data, ONTOLOGY_KEYWORDS).values)])
     
     results = []
+    print(f"Inizio predizioni su {len(df_test_data)} documenti di test...")
     for i in range(len(df_test_data)):
         row_result = {'filename': df_test_data.iloc[i]['filename']}
         for model_name in model_templates.keys():
             doc_probs = {level_name: dict(zip(models[model_name].classes_, models[model_name].predict_proba(X_test_combined[i])[0])) for level_name, models in trained_models.items()}
-            problem = setup_csp_problem(doc_probs, g, NS)
-            l1, l2, l3, probs_dict = find_best_csp_solution(problem, doc_probs)
+            
+            # --- MODIFICA FALLBACK ---
+            # Aggiornamento delle chiamate alle funzioni modificate
+            problem_tuple = setup_csp_problem(doc_probs, g, NS)
+            l1, l2, l3, probs_dict = find_best_csp_solution(problem_tuple, doc_probs, g, NS)
+            
             row_result[f'{model_name}_L1_pred'] = l1
             row_result[f'{model_name}_L2_pred'] = l2
             row_result[f'{model_name}_L3_pred'] = l3
         results.append(row_result)
+    print("✅ Predizioni completate.")
+    
     df_results = pd.DataFrame(results)
     
     # --- 4. VALUTAZIONE E SALVATAGGIO FINALE ---
