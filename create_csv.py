@@ -85,6 +85,26 @@ def process_single_task(source_folder, output_csv):
 
     return num_files, total_records
 
+def process_folder_to_csv(source_folder, output_csv):
+    print(f"--- Inizio processo per la cartella: '{source_folder}' ---")
+    if not os.path.isdir(source_folder):
+        print(f"❌ ERRORE: La cartella '{source_folder}' non esiste. Processo saltato.")
+        print("-" * 50)
+        return 0, 0  # Restituisce 0 se la cartella non esiste
+
+    all_data = explore_folder_recursive(source_folder)
+    write_to_csv(all_data, output_csv)
+    
+    print(f"✅ File CSV '{output_csv}' creato con successo.")
+    
+    num_files = sum(1 for entry in all_data if entry[6] == "file")
+    total_records = len(all_data)
+    
+    print(f"Numero di file PDF trovati: {num_files}")
+    print(f"Numero totale di record (file + folder): {total_records}")
+    print("-" * 50)
+    
+    return num_files, total_records # Restituisce i valori calcolati
 
 if __name__ == "__main__":
     os.makedirs("./training_result", exist_ok=True)
