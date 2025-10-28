@@ -68,7 +68,7 @@ class TextExtractor:
             'lexical_diversity': unique_words / word_count if word_count > 0 else 0
         }
 
-# << MODIFICA >>: La funzione ora accetta 'base_data_folder' per essere riutilizzabile
+
 def process_all_documents(csv_path, output_csv, base_data_folder):
     """
     Processa i documenti da un CSV, estraendo testo dalla cartella base specificata.
@@ -161,6 +161,11 @@ if __name__ == "__main__":
     test_input_csv = './test_result/test_output.csv'  # Assicurati che questo file esista!
     test_output_csv = './test_result/test_data_with_text.csv'
     test_folder = './test_data'
+
+    # Dati di Test 2 
+    test_2_input_csv = './test_result_2/test_output_2.csv'
+    test_2_output_csv = './test_result_2/test_data_2_with_text.csv'
+    test_2_folder = './test_data_2'
     
     # File per TF-IDF (generato solo su dati di training)
     tfidf_pickle_file = 'tfidf_data.pkl'
@@ -169,7 +174,7 @@ if __name__ == "__main__":
     print("🚀 Inizio processo di estrazione testo...")
     print("="*50)
     
-    # 1. Processa i documenti di TRAINING
+    # # 1. Processa i documenti di TRAINING
     print(" Fase 1: Elaborazione dei dati di TRAINING ".center(50, "-"))
     training_df = process_all_documents(training_input_csv, training_output_csv, training_folder)
     print("="*50)
@@ -177,6 +182,11 @@ if __name__ == "__main__":
     # 2. Processa i documenti di TEST
     print(" Fase 2: Elaborazione dei dati di TEST ".center(50, "-"))
     test_df = process_all_documents(test_input_csv, test_output_csv, test_folder)
+    print("="*50)
+
+    # 3. Processa i documenti di TEST 2 
+    print(" Fase 3: Elaborazione dei dati di TEST 2 ".center(50, "-"))
+    test_2_df = process_all_documents(test_2_input_csv, test_2_output_csv, test_2_folder)
     print("="*50)
     
     # 3. Genera la matrice TF-IDF SOLO sul set di training

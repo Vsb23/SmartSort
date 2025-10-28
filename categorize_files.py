@@ -178,10 +178,18 @@ if __name__ == "__main__":
     categorize_entire_file("training_result/output_with_text.csv", "training_result", "training_set_categorized.csv")
     print("=" * 80)
 
-    # Categorizzazione test set (NUOVA funzione identica ma percorso e nome file differente)
+    # Categorizzazione test set 
     input_test_file = "test_result/test_data_with_text.csv"
     test_output_folder = "test_result"
     test_output_file = "test_set_categorized.csv"
     print(f"\n🚀 CATEGORIZZAZIONE COMPLETA TEST SET: '{input_test_file}'")
     categorize_entire_file("test_result/test_data_with_text.csv", "test_result", "test_set_categorized.csv")
+    print("=" * 80)
+
+    # Categorizzazione test set 2 
+    input_test_2_file = "test_result_2/test_data_2_with_text.csv"
+    test_2_output_folder = "test_result_2"
+    test_2_output_file = "test_set_2_categorized.csv"
+    print(f"\n🚀 CATEGORIZZAZIONE COMPLETA TEST SET 2: '{input_test_2_file}'")
+    categorize_entire_file(input_test_2_file, test_2_output_folder, test_2_output_file)
     print("=" * 80)

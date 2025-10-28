@@ -71,6 +71,9 @@ def process_folder_to_csv(source_folder, output_csv):
 
 # << MODIFICA >>: Il blocco principale ora raccoglie i risultati e calcola il totale
 if __name__ == "__main__":
+    os.makedirs("./training_result", exist_ok=True)
+    os.makedirs("./test_result", exist_ok=True)
+    os.makedirs("./test_result_2", exist_ok=True)
     total_files_processed = 0
     total_records_processed = 0
 
@@ -84,6 +87,10 @@ if __name__ == "__main__":
     total_files_processed += num_f
     total_records_processed += num_r
     
+    num_f, num_r = process_folder_to_csv("test_data_2", "./test_result_2/test_output_2.csv")
+    total_files_processed += num_f
+    total_records_processed += num_r
+
     print("🎉 Tutti i processi sono stati completati.")
     print("\n" + "--- RIEPILOGO COMPLESSIVO ---".center(50))
     print(f"Numero totale di file PDF processati: {total_files_processed}")
