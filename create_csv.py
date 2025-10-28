@@ -87,29 +87,27 @@ def process_single_task(source_folder, output_csv):
 
 
 if __name__ == "__main__":
-    # --- DEFINISCI QUI I TASK DA ESEGUIRE ---
-    # Ogni elemento è una tupla: (cartella_input, file_output_csv)
-    tasks_to_process = [
-        ("training_data", "training_result/output.csv"),
-        ("test_data", "test_result/test_output.csv"),
-        ("test_data_2", "test_result_2/test_output_2.csv") # Nuovo task
-        # Puoi aggiungere altri task qui, es:
-        # ("test_data_3", "test_result_3/test_output_3.csv")
-    ]
-    # --- FINE DEFINIZIONE TASK ---
-
+    os.makedirs("./training_result", exist_ok=True)
+    os.makedirs("./test_result", exist_ok=True)
+    os.makedirs("./test_result_2", exist_ok=True)
     total_files_processed = 0
     total_records_processed = 0
 
-    print("🚀 Avvio creazione CSV multipli...")
+    # 1. Processa la cartella di Training e aggiorna i totali
+    num_f, num_r = process_folder_to_csv("training_data", "./training_result/output.csv")
+    total_files_processed += num_f
+    total_records_processed += num_r
+    
+    # 2. Processa la cartella di Test e aggiorna i totali
+    num_f, num_r = process_folder_to_csv("test_data", "./test_result/test_output.csv")
+    total_files_processed += num_f
+    total_records_processed += num_r
+    
+    num_f, num_r = process_folder_to_csv("test_data_2", "./test_result_2/test_output_2.csv")
+    total_files_processed += num_f
+    total_records_processed += num_r
 
-    # Itera sui task definiti e processali uno per uno
-    for input_folder, output_file in tasks_to_process:
-        num_f, num_r = process_single_task(input_folder, output_file)
-        total_files_processed += num_f
-        total_records_processed += num_r
-
-    print("\n🎉 Tutti i processi sono stati completati.")
+    print("🎉 Tutti i processi sono stati completati.")
     print("\n" + "--- RIEPILOGO COMPLESSIVO ---".center(50))
     print(f"Numero totale di file PDF processati: {total_files_processed}")
     print(f"Numero totale di record (file + folder): {total_records_processed}")

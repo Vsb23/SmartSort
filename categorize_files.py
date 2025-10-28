@@ -167,45 +167,27 @@ def categorize_entire_file(input_csv, output_folder, output_file):
 
     return df
 if __name__ == "__main__":
-    # --- DEFINISCI QUI I TASK DA ESEGUIRE ---
-    # Ogni elemento è una tupla: (file_input_csv, cartella_output, nome_file_output)
-    tasks_to_process = [
-        (
-            "training_result/output_with_text.csv", 
-            "training_result", 
-            "training_set_categorized.csv"
-        ),
-        (
-            "test_result/test_data_with_text.csv", 
-            "test_result", 
-            "test_set_categorized.csv"
-        ),
-        # Esempio per il terzo task definito in create_csv.py
-        (
-            "test_result_2/test_data_with_text_2.csv", 
-            "test_result_2", 
-            "test_set_categorized_2.csv"
-        )
-        # Puoi aggiungere altri task qui
-    ]
-    # --- FINE DEFINIZIONE TASK ---
+    # Categorizzazione training set (tutto invariato)
+    input_training_file = "training_result/output_with_text.csv"
+    training_output_folder = "training_result"
+    training_output_file = "training_set_categorized.csv"
+    print("=" * 80)
+    print(f"🚀 CATEGORIZZAZIONE COMPLETA TRAINING SET: '{input_training_file}'")
+    categorize_entire_file("training_result/output_with_text.csv", "training_result", "training_set_categorized.csv")
+    print("=" * 80)
 
-    print("🚀 Avvio categorizzazione (euristica) dei file...")
-    total_files_categorized = 0
+    # Categorizzazione test set 
+    input_test_file = "test_result/test_data_with_text.csv"
+    test_output_folder = "test_result"
+    test_output_file = "test_set_categorized.csv"
+    print(f"\n🚀 CATEGORIZZAZIONE COMPLETA TEST SET: '{input_test_file}'")
+    categorize_entire_file("test_result/test_data_with_text.csv", "test_result", "test_set_categorized.csv")
+    print("=" * 80)
 
-    # Itera sui task definiti e processali uno per uno
-    for input_csv, output_folder, output_file in tasks_to_process:
-        print("=" * 80)
-        print(f"🚀 CATEGORIZZAZIONE TASK: '{input_csv}'")
-        
-        df_categorized = categorize_entire_file(input_csv, output_folder, output_file)
-        
-        if df_categorized is not None:
-            total_files_categorized += len(df_categorized)
-        
-        print("=" * 80)
-
-    print("\n🎉 Tutti i processi di categorizzazione sono stati completati.")
-    print("\n" + "--- RIEPILOGO COMPLESSIVO ---".center(50))
-    print(f"Numero totale di file categorizzati: {total_files_categorized}")
-    print("-" * 50)
+    # Categorizzazione test set 2 
+    input_test_2_file = "test_result_2/test_data_2_with_text.csv"
+    test_2_output_folder = "test_result_2"
+    test_2_output_file = "test_set_2_categorized.csv"
+    print(f"\n🚀 CATEGORIZZAZIONE COMPLETA TEST SET 2: '{input_test_2_file}'")
+    categorize_entire_file(input_test_2_file, test_2_output_folder, test_2_output_file)
+    print("=" * 80)

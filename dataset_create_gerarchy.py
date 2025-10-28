@@ -322,12 +322,99 @@ def plot_loss_curve(X_train, y_train, output_dir):
     print(f"✅ Curva di Loss salvata in {filename}")
 
 
+def process_and_predict_test_set(csv_file, output_folder, output_filename, 
+                                 vectorizer, ontology_keywords, final_pipeline, g, NS, output_cols):
+    """
+    Carica un file CSV di test, estrae le feature, esegue la predizione gerarchica
+    e salva i risultati.
+    """
+    print(f"\n--- Caricamento e Predizione su Test Set: {csv_file} ---")
+    
+    df_test = pd.read_csv(csv_file)
+    df_test['clean_text'] = df_test['clean_text'].fillna('')
+
+    # 1. Feature Engineering
+    X_test_tfidf = vectorizer.transform(df_test['clean_text'])
+    test_keyword_features_df = create_enhanced_features(df_test, ontology_keywords)
+    X_test_combined = hstack([X_test_tfidf, csr_matrix(test_keyword_features_df.values)])
+
+    # 2. Ottenimento Modelli
+    model_l1_final = final_pipeline.models['L1']
+    model_l2_final = final_pipeline.models['L2']
+    model_l3_svm_final = final_pipeline.models['L3_svm']
+    model_l3_nb_final = final_pipeline.models['L3_nb']
+
+    # 3. Predizione delle Probabilità
+    probs_l1_test = model_l1_final.predict_proba(X_test_combined)
+    probs_l2_test = model_l2_final.predict_proba(X_test_combined)
+    probs_l3_svm_test = model_l3_svm_final.predict_proba(X_test_combined)
+    probs_l3_nb_test = model_l3_nb_final.predict_proba(X_test_combined)
+
+    final_results = []
+    
+    # Assert
+    assert np.array_equal(model_l3_svm_final.classes_, model_l3_nb_final.classes_), "Le classi L3 dei modelli non corrispondono!"
+
+    # 4. Applicazione CSP (Constraint Satisfaction Problem)
+    for i in range(len(df_test)):
+        # SVM
+        doc_probs_svm = {'L1': dict(zip(model_l1_final.classes_, probs_l1_test[i])),
+                         'L2': dict(zip(model_l2_final.classes_, probs_l2_test[i])),
+                         'L3': dict(zip(model_l3_svm_final.classes_, probs_l3_svm_test[i]))}
+        _, _, _, final_probs_svm = find_best_csp_solution(setup_csp_problem(doc_probs_svm, g, NS), doc_probs_svm)
+
+        # Naive Bayes
+        doc_probs_nb = {'L1': dict(zip(model_l1_final.classes_, probs_l1_test[i])),
+                        'L2': dict(zip(model_l2_final.classes_, probs_l2_test[i])),
+                        'L3': dict(zip(model_l3_nb_final.classes_, probs_l3_nb_test[i]))}
+        _, _, _, final_probs_nb = find_best_csp_solution(setup_csp_problem(doc_probs_nb, g, NS), doc_probs_nb)
+
+        # Ensemble
+        probs_l3_ensemble = (probs_l3_svm_test[i] + probs_l3_nb_test[i]) / 2
+        doc_probs_ensemble = {'L1': dict(zip(model_l1_final.classes_, probs_l1_test[i])),
+                              'L2': dict(zip(model_l2_final.classes_, probs_l2_test[i])),
+                              'L3': dict(zip(model_l3_svm_final.classes_, probs_l3_ensemble))}
+        _, _, _, final_probs_ensemble = find_best_csp_solution(setup_csp_problem(doc_probs_ensemble, g, NS), doc_probs_ensemble)
+
+        result_row = {
+            'filename': df_test.iloc[i]['filename'],
+            'L1_pred': final_probs_ensemble.get('L1_pred', "N/A"),
+            'L2_pred': final_probs_ensemble.get('L2_pred', "N/A"),
+            'L3_pred_svm': final_probs_svm.get('L3_pred', "Altro"),
+            'L3_prob_svm': final_probs_svm.get('L3_prob', 0.0),
+            'L3_pred_nb': final_probs_nb.get('L3_pred', "Altro"),
+            'L3_prob_nb': final_probs_nb.get('L3_prob', 0.0),
+            'L3_pred_ensemble': final_probs_ensemble.get('L3_pred', "Altro"),
+            'L3_prob_ensemble': final_probs_ensemble.get('L3_prob', 0.0),
+        }
+        final_results.append(result_row)
+
+    # 5. Salvataggio Risultati
+    df_result = pd.DataFrame(final_results)
+    os.makedirs(output_folder, exist_ok=True)
+    output_path = os.path.join(output_folder, output_filename)
+    df_result.to_csv(output_path, index=False, columns=output_cols, float_format='%.4f')
+
+    print(f"\n✅ Risultati finali dettagliati salvati in {output_path}")
+    print("--- Esempio di output ---")
+    print(df_result[output_cols].head().to_string(index=False))
+
+    return df_result
+
 if __name__ == "__main__":
 
     # Percorsi file
     ontology_path = "Ontology.owx"
     train_csv_file = "training_result/training_set_categorized.csv"
     test_csv_file = "test_result/test_set_categorized.csv"
+    test_2_csv_file = "test_result_2/test_set_2_categorized.csv"
+
+    output_cols = [
+        'filename', 'L1_pred', 'L2_pred',
+        'L3_pred_svm', 'L3_prob_svm',
+        'L3_pred_nb', 'L3_prob_nb',
+        'L3_pred_ensemble', 'L3_prob_ensemble'
+    ]
 
     print("Avvio del processo...")
     g = Graph()
@@ -357,7 +444,7 @@ if __name__ == "__main__":
     os.makedirs(output_dir, exist_ok=True)
     plot_loss_curve(X_combined, y_l3, output_dir)
 
-    # --- FASE 1: K-FOLD CROSS VALIDATION ---
+    # FASE 1: K-FOLD CROSS VALIDATION
 
     print("\n--- Inizio K-Fold Cross Validation su Training Set ---")
     skf = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
@@ -422,87 +509,56 @@ if __name__ == "__main__":
 
         fold_no += 1
 
-    print("\n--- Media accuratezza K-Fold ---")
-    print(f"Media Accuracy L3 SVM: {np.mean(accuracies_l3_svm):.4f}")
-    print(f"Media Accuracy L3 NB: {np.mean(accuracies_l3_nb):.4f}")
-    print(f"Media Accuracy L3 Ensemble: {np.mean(accuracies_l3_ensemble):.4f}")
+    # --- Media e Dev. Standard accuratezza K-Fold ---
+    print("\n--- Media e Dev. Standard accuratezza K-Fold (L3) ---")
 
-    # --- FASE 2: TRAINING FINALE su tutto il training set e PREDIZIONE su test set esterno ---
+    # Calcolo e stampa per SVM
+    mean_svm = np.mean(accuracies_l3_svm)
+    std_svm = np.std(accuracies_l3_svm)
+    print(f"L3 SVM: {mean_svm:.4f} (Dev. Standard: {std_svm:.4f})")
 
+    # Calcolo e stampa per Naive Bayes
+    mean_nb = np.mean(accuracies_l3_nb)
+    std_nb = np.std(accuracies_l3_nb)
+    print(f"L3 NB: {mean_nb:.4f} (Dev. Standard: {std_nb:.4f})")
+
+    # Calcolo e stampa per Ensemble
+    mean_ensemble = np.mean(accuracies_l3_ensemble)
+    std_ensemble = np.std(accuracies_l3_ensemble)
+    print(f"L3 Ensemble: {mean_ensemble:.4f} (Dev. Standard: {std_ensemble:.4f})")
+
+
+    # FASE 2: TRAINING FINALE su tutto il training set
     print("\n--- Training finale su tutto il training set ---")
     pipeline_finale = train_hierarchical_models(X_combined, y_l1, y_l2, y_l3, g, NS)
 
-    model_l1_final = pipeline_finale.models['L1']
-    model_l2_final = pipeline_finale.models['L2']
-    model_l3_svm_final = pipeline_finale.models['L3_svm']
-    model_l3_nb_final = pipeline_finale.models['L3_nb']
+    # FASE 3: PREDIZIONE su Test Set 1 e 2 
+    
+    # 3.1 Predizione Test Set 1
+    df_result_1 = process_and_predict_test_set(
+        csv_file=test_csv_file,
+        output_folder="test_result",
+        output_filename="predictions_on_testset_full_comparison_gerarchy.csv",
+        vectorizer=vectorizer,
+        ontology_keywords=ONTOLOGY_KEYWORDS,
+        final_pipeline=pipeline_finale,
+        g=g, NS=NS,
+        output_cols=output_cols
+    )
 
-    print("\n--- Caricamento test set esterno ---")
-    df_test = pd.read_csv(test_csv_file)
-    df_test['clean_text'] = df_test['clean_text'].fillna('')
-
-    X_test_tfidf = vectorizer.transform(df_test['clean_text'])
-    test_keyword_features_df = create_enhanced_features(df_test, ONTOLOGY_KEYWORDS)
-    X_test_combined = hstack([X_test_tfidf, csr_matrix(test_keyword_features_df.values)])
-
-    probs_l1_test = model_l1_final.predict_proba(X_test_combined)
-    probs_l2_test = model_l2_final.predict_proba(X_test_combined)
-    probs_l3_svm_test = model_l3_svm_final.predict_proba(X_test_combined)
-    probs_l3_nb_test = model_l3_nb_final.predict_proba(X_test_combined)
-
-    final_results = []
-
-    assert np.array_equal(model_l3_svm_final.classes_, model_l3_nb_final.classes_), "Le classi L3 dei modelli non corrispondono!"
-
-    for i in range(len(df_test)):
-        doc_probs_svm = {'L1': dict(zip(model_l1_final.classes_, probs_l1_test[i])),
-                         'L2': dict(zip(model_l2_final.classes_, probs_l2_test[i])),
-                         'L3': dict(zip(model_l3_svm_final.classes_, probs_l3_svm_test[i]))}
-        _, _, _, final_probs_svm = find_best_csp_solution(setup_csp_problem(doc_probs_svm, g, NS), doc_probs_svm)
-
-        doc_probs_nb = {'L1': dict(zip(model_l1_final.classes_, probs_l1_test[i])),
-                        'L2': dict(zip(model_l2_final.classes_, probs_l2_test[i])),
-                        'L3': dict(zip(model_l3_nb_final.classes_, probs_l3_nb_test[i]))}
-        _, _, _, final_probs_nb = find_best_csp_solution(setup_csp_problem(doc_probs_nb, g, NS), doc_probs_nb)
-
-        probs_l3_ensemble_test = (probs_l3_svm_test[i] + probs_l3_nb_test[i]) / 2
-        doc_probs_ensemble = {'L1': dict(zip(model_l1_final.classes_, probs_l1_test[i])),
-                              'L2': dict(zip(model_l2_final.classes_, probs_l2_test[i])),
-                              'L3': dict(zip(model_l3_svm_final.classes_, probs_l3_ensemble_test))}
-        _, _, _, final_probs_ensemble = find_best_csp_solution(setup_csp_problem(doc_probs_ensemble, g, NS), doc_probs_ensemble)
-
-        result_row = {
-            'filename': df_test.iloc[i]['filename'],
-            'L1_pred': final_probs_ensemble.get('L1_pred', "N/A"),
-            'L2_pred': final_probs_ensemble.get('L2_pred', "N/A"),
-            'L3_pred_svm': final_probs_svm.get('L3_pred', "Altro"),
-            'L3_prob_svm': final_probs_svm.get('L3_prob', 0.0),
-            'L3_pred_nb': final_probs_nb.get('L3_pred', "Altro"),
-            'L3_prob_nb': final_probs_nb.get('L3_prob', 0.0),
-            'L3_pred_ensemble': final_probs_ensemble.get('L3_pred', "Altro"),
-            'L3_prob_ensemble': final_probs_ensemble.get('L3_prob', 0.0),
-        }
-        final_results.append(result_row)
-
-    df_result = pd.DataFrame(final_results)
-    output_cols = [
-        'filename', 'L1_pred', 'L2_pred',
-        'L3_pred_svm', 'L3_prob_svm',
-        'L3_pred_nb', 'L3_prob_nb',
-        'L3_pred_ensemble', 'L3_prob_ensemble'
-    ]
-
-    output_folder = "test_result"
-    os.makedirs(output_folder, exist_ok=True)
-    output_filename = "predictions_on_testset_full_comparison_gerarchy.csv"
-    output_path = os.path.join(output_folder, output_filename)
-
-    df_result.to_csv(output_path, index=False, columns=output_cols, float_format='%.4f')
-
-    print(f"\nRisultati finali dettagliati salvati in {output_path}")
-    print("--- Esempio di output ---")
-    print(df_result[output_cols].head().to_string(index=False))
+    # 3.2 Predizione Test Set 2
+    df_result_2 = process_and_predict_test_set(
+        csv_file=test_2_csv_file,
+        output_folder="test_result_2",
+        output_filename="predictions_on_testset_2_full_comparison_gerarchy.csv",
+        vectorizer=vectorizer,
+        ontology_keywords=ONTOLOGY_KEYWORDS,
+        final_pipeline=pipeline_finale,
+        g=g, NS=NS,
+        output_cols=output_cols
+    )
 
     print("\nPROCESSO COMPLETATO!")
+
 
     plot_kfold_accuracies([1, 2, 3], accuracies_l3_svm, accuracies_l3_nb, accuracies_l3_ensemble)
