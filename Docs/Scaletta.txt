@@ -3,7 +3,10 @@
 [X] utilizzare utti i document ini references come training set, e agigungere altri oducmenti come test set 
 [X] fare una comparazione di tutti i modelli ad ogni livell , e vedere quale si comporta meglio a quale livello
 [X] comparare approccio top down e bottom up per quanto riguarda il ritrovamento della categoria migliore per il documento
-[] aggiungere più statistiche stampare (precision,recall, f1)
-[] crare cartelle delle categorie
-[] creare uno scirpt di esecuzione completo (che esegua in ordine tutti i file)
-[] Aggiungere tempo di addestramento per ogni modello (lr,rf,svm  e nb)
+[X] aggiungere più statistiche stampare (precision,recall, f1)
+[X] creare uno scirpt di esecuzione completo (che esegua in ordine tutti i file)
+[] Aggiungere più run del test set, con altri documenti
+[] Salvare tutte le statistiche 
+[] Aggiornare documentazione
+[] In docuemtnazione, aggiungere che il dataset è creato  da noi, poiuche non l'abbiamo trovato uno che sofddisfacessi tutti requisiti
+[] Motivar ela scelta dei valori per i loro parametri

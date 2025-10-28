@@ -25,66 +25,91 @@ def extract_metadata_from_pdf(pdf_path):
 def explore_folder_recursive(base_path):
     all_data = []
     for root, dirs, files in os.walk(base_path):
+        # Processa prima le cartelle
         for d in dirs:
             full_path = os.path.join(root, d)
             relative_path = os.path.relpath(full_path, base_path)
+            # Aggiungi info cartella: (nome cartella, nome cartella, "", "", "", "", "folder", percorso relativo)
             all_data.append((d, d, "", "", "", "", "folder", relative_path))
+        # Poi processa i file PDF
         for f in files:
             if f.lower().endswith('.pdf'):
                 full_path = os.path.join(root, f)
                 containing_folder = os.path.dirname(full_path)
                 relative_folder = os.path.relpath(containing_folder, base_path)
                 metadata_tuple = extract_metadata_from_pdf(full_path)
+                # Aggiungi info file: (titolo, nome file, autore, anno, cat vuota, estensione, "file", percorso relativo)
                 all_data.append(metadata_tuple + (relative_folder,))
     return all_data
 
 def write_to_csv(data, output_csv):
+    # Assicura che la directory di output esista
+    output_dir = os.path.dirname(output_csv)
+    if output_dir: # Controlla se il percorso non è vuoto (es. se è nella stessa cartella)
+        os.makedirs(output_dir, exist_ok=True)
+
     with open(output_csv, 'w', newline='', encoding='utf-8') as csvfile:
         fieldnames = ['titolo','filename', 'autore', 'anno', 'category', 'extension', 'type', 'relative_path']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for entry in data:
-            titolo, filename, autore, anno, categoria, estensione, tipo, relpath = entry
-            writer.writerow({'titolo': titolo, 'filename': filename, 'autore': autore, 'anno': anno, 'category': categoria, 'extension': estensione, 'type': tipo, 'relative_path': relpath})
+            # Assicurati che ci siano 8 elementi nella tupla
+            if len(entry) == 8:
+                titolo, filename, autore, anno, categoria, estensione, tipo, relpath = entry
+                writer.writerow({'titolo': titolo, 'filename': filename, 'autore': autore, 'anno': anno, 'category': categoria, 'extension': estensione, 'type': tipo, 'relative_path': relpath})
+            else:
+                 print(f"⚠️ Attenzione: Record saltato a causa di un numero errato di campi: {entry}")
 
-# << MODIFICA >>: La funzione ora restituisce i conteggi
-def process_folder_to_csv(source_folder, output_csv):
-    print(f"--- Inizio processo per la cartella: '{source_folder}' ---")
+def process_single_task(source_folder, output_csv):
+    """
+    Processa una singola cartella (task) e scrive i suoi contenuti in un CSV.
+    Restituisce il numero di file e record.
+    """
+    print(f"\n--- Inizio processo per: '{source_folder}' -> '{output_csv}' ---")
     if not os.path.isdir(source_folder):
-        print(f"❌ ERRORE: La cartella '{source_folder}' non esiste. Processo saltato.")
-        print("-" * 50)
-        return 0, 0  # Restituisce 0 se la cartella non esiste
+        print(f"❌ ERRORE: La cartella sorgente '{source_folder}' non esiste. Task saltato.")
+        print("-" * 70)
+        return 0, 0
 
     all_data = explore_folder_recursive(source_folder)
     write_to_csv(all_data, output_csv)
-    
+
     print(f"✅ File CSV '{output_csv}' creato con successo.")
-    
-    num_files = sum(1 for entry in all_data if entry[6] == "file")
+
+    num_files = sum(1 for entry in all_data if len(entry) == 8 and entry[6] == "file")
     total_records = len(all_data)
-    
+
     print(f"Numero di file PDF trovati: {num_files}")
     print(f"Numero totale di record (file + folder): {total_records}")
-    print("-" * 50)
-    
-    return num_files, total_records # Restituisce i valori calcolati
+    print("-" * 70)
 
-# << MODIFICA >>: Il blocco principale ora raccoglie i risultati e calcola il totale
+    return num_files, total_records
+
+
 if __name__ == "__main__":
+    # --- DEFINISCI QUI I TASK DA ESEGUIRE ---
+    # Ogni elemento è una tupla: (cartella_input, file_output_csv)
+    tasks_to_process = [
+        ("training_data", "training_result/output.csv"),
+        ("test_data", "test_result/test_output.csv"),
+        ("test_data_2", "test_result_2/test_output_2.csv") # Nuovo task
+        # Puoi aggiungere altri task qui, es:
+        # ("test_data_3", "test_result_3/test_output_3.csv")
+    ]
+    # --- FINE DEFINIZIONE TASK ---
+
     total_files_processed = 0
     total_records_processed = 0
 
-    # 1. Processa la cartella di Training e aggiorna i totali
-    num_f, num_r = process_folder_to_csv("training_data", "./training_result/output.csv")
-    total_files_processed += num_f
-    total_records_processed += num_r
-    
-    # 2. Processa la cartella di Test e aggiorna i totali
-    num_f, num_r = process_folder_to_csv("test_data", "./test_result/test_output.csv")
-    total_files_processed += num_f
-    total_records_processed += num_r
-    
-    print("🎉 Tutti i processi sono stati completati.")
+    print("🚀 Avvio creazione CSV multipli...")
+
+    # Itera sui task definiti e processali uno per uno
+    for input_folder, output_file in tasks_to_process:
+        num_f, num_r = process_single_task(input_folder, output_file)
+        total_files_processed += num_f
+        total_records_processed += num_r
+
+    print("\n🎉 Tutti i processi sono stati completati.")
     print("\n" + "--- RIEPILOGO COMPLESSIVO ---".center(50))
     print(f"Numero totale di file PDF processati: {total_files_processed}")
     print(f"Numero totale di record (file + folder): {total_records_processed}")

@@ -68,7 +68,6 @@ class TextExtractor:
             'lexical_diversity': unique_words / word_count if word_count > 0 else 0
         }
 
-# << MODIFICA >>: La funzione ora accetta 'base_data_folder' per essere riutilizzabile
 def process_all_documents(csv_path, output_csv, base_data_folder):
     """
     Processa i documenti da un CSV, estraendo testo dalla cartella base specificata.
@@ -150,39 +149,81 @@ def generate_tfidf_matrix(csv_path, output_pickle):
     else:
         print("Nessun documento di training con testo trovato per generare la matrice TF-IDF.")
 
+def process_single_task(input_csv, output_csv, data_folder):
+    """
+    Funzione wrapper per eseguire process_all_documents come un singolo task.
+    Restituisce il DataFrame processato o None.
+    """
+    print(f"\n--- Inizio processo per: '{data_folder}' -> '{output_csv}' ---")
+    
+    processed_df = process_all_documents(input_csv, output_csv, data_folder)
+    
+    if processed_df is not None:
+        print(f"File processati: {len(processed_df)}")
+    else:
+        print(f"❌ Task saltato a causa di errore (es. file input non trovato).")
+    
+    print("-" * 70)
+    return processed_df
+
 if __name__ == "__main__":
-    # --- IMPOSTAZIONI ---
-    # Dati di Training
-    training_input_csv = './training_result/output.csv'
-    training_output_csv = './training_result/output_with_text.csv'
-    training_folder = './training_data'
+    # --- DEFINISCI QUI I TASK DA ESEGUIRE ---
+    # Ogni tupla: (file_csv_input, file_csv_output, cartella_sorgente_pdf, is_training)
+    # is_training=True: genera la matrice TF-IDF per questo set
+    tasks_to_process = [
+        (
+            './training_result/output.csv',
+            './training_result/output_with_text.csv',
+            './training_data',
+            True  # Questo è il set di training
+        ),
+        (
+            './test_result/test_output.csv',
+            './test_result/test_data_with_text.csv',
+            './test_data',
+            False # Questo è il set di test
+        ),
+        # Esempio per il terzo task definito in create_csv.py
+        (
+            './test_result_2/test_output_2.csv', 
+            './test_result_2/test_data_with_text_2.csv',
+            './test_data_2',
+            False
+        )
+        # Puoi aggiungere altri task qui
+    ]
+    # --- FINE DEFINIZIONE TASK ---
     
-    # Dati di Test
-    test_input_csv = './test_result/test_output.csv'  # Assicurati che questo file esista!
-    test_output_csv = './test_result/test_data_with_text.csv'
-    test_folder = './test_data'
-    
-    # File per TF-IDF (generato solo su dati di training)
     tfidf_pickle_file = 'tfidf_data.pkl'
+    # Salva il percorso di output del training set per la generazione TF-IDF
+    training_data_path_for_tfidf = None 
+    total_files_processed = 0
 
-    # --- ESECUZIONE ---
     print("🚀 Inizio processo di estrazione testo...")
-    print("="*50)
     
-    # 1. Processa i documenti di TRAINING
-    print(" Fase 1: Elaborazione dei dati di TRAINING ".center(50, "-"))
-    training_df = process_all_documents(training_input_csv, training_output_csv, training_folder)
-    print("="*50)
+    # 1. Itera sui task definiti e processali uno per uno
+    for input_csv, output_csv, data_folder, is_training in tasks_to_process:
+        
+        processed_df = process_single_task(input_csv, output_csv, data_folder)
+        
+        if processed_df is not None:
+            total_files_processed += len(processed_df)
+            if is_training:
+                # Se questo è il set di training, salva il suo percorso di output
+                training_data_path_for_tfidf = output_csv
+                print(f"ℹ️  Set di training '{output_csv}' designato per la generazione TF-IDF.")
 
-    # 2. Processa i documenti di TEST
-    print(" Fase 2: Elaborazione dei dati di TEST ".center(50, "-"))
-    test_df = process_all_documents(test_input_csv, test_output_csv, test_folder)
-    print("="*50)
-    
-    # 3. Genera la matrice TF-IDF SOLO sul set di training
-    if training_df is not None:
-        print(" Fase 3: Generazione matrice TF-IDF (solo su training) ".center(50, "-"))
-        generate_tfidf_matrix(training_output_csv, tfidf_pickle_file)
-        print("="*50)
+    print("\n" + "--- FASE FINALE ---".center(70, "="))
 
-    print("🎉 Estrazione testo e preprocessing completati per entrambi i set!")
+    # 2. Genera la matrice TF-IDF SOLO sul set di training (dopo tutti i task)
+    if training_data_path_for_tfidf:
+        print("Generazione matrice TF-IDF (solo su training)...")
+        generate_tfidf_matrix(training_data_path_for_tfidf, tfidf_pickle_file)
+    else:
+        print("⚠️  Nessun task è stato contrassegnato come 'is_training=True'.")
+        print("⚠️  Matrice TF-IDF non generata.")
+
+    print("\n🎉 Estrazione testo e preprocessing completati per tutti i set!")
+    print("\n" + "--- RIEPILOGO COMPLESSIVO ---".center(50))
+    print(f"Numero totale di record processati: {total_files_processed}")
+    print("-" * 50)
