@@ -236,6 +236,10 @@ if __name__ == '__main__':
     test_set_metrics_csv_2 = 'metrics/performance_metrics_summary_secondo.csv'
     test_set_predictions_csv_2 = 'metrics/predictions_and_evaluation_results_secondo.csv'
     suffix_2 = '_secondo'
+
+    test_set_metrics_csv_3 = 'metrics/performance_metrics_summary_terzo.csv'
+    test_set_predictions_csv_3 = 'metrics/predictions_and_evaluation_results_terzo.csv'
+    suffix_2 = '_terzo'
     
     # 4. Percorsi per grafici di training (loss, tfidf)
     vectorizer_file = 'saved_models/vectorizer.pkl'

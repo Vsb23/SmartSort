@@ -184,6 +184,10 @@ if __name__ == "__main__":
     test_2_output_csv = './test_result_2/test_data_2_with_text.csv'
     test_2_folder = './test_data_2'
     
+    test_3_input_csv = './test_result_3/test_output_3.csv'
+    test_3_output_csv = './test_result_3/test_data_3_with_text.csv'
+    test_3_folder = './test_data_3'
+
     # File per TF-IDF (generato solo su dati di training)
     tfidf_pickle_file = 'tfidf_data.pkl'
     # Salva il percorso di output del training set per la generazione TF-IDF
@@ -208,6 +212,11 @@ if __name__ == "__main__":
     test_2_df = process_all_documents(test_2_input_csv, test_2_output_csv, test_2_folder)
     print("="*50)
     
+    # 4. Processa i documenti di TEST 3
+    print(" Fase 4: Elaborazione dei dati di TEST 3 ".center(50, "-"))
+    test_3_df = process_all_documents(test_3_input_csv, test_3_output_csv, test_3_folder)
+    print("="*50)
+
     # 3. Genera la matrice TF-IDF SOLO sul set di training
     if training_df is not None:
         print(" Fase 3: Generazione matrice TF-IDF (solo su training) ".center(50, "-"))

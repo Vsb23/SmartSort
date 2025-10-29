@@ -127,6 +127,10 @@ if __name__ == "__main__":
     total_files_processed += num_f
     total_records_processed += num_r
 
+    num_f, num_r = process_folder_to_csv("test_data_3", "./test_result_3/test_output_3.csv")
+    total_files_processed += num_f
+    total_records_processed += num_r
+
     print("🎉 Tutti i processi sono stati completati.")
     print("\n" + "--- RIEPILOGO COMPLESSIVO ---".center(50))
     print(f"Numero totale di file PDF processati: {total_files_processed}")

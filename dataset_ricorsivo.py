@@ -443,5 +443,19 @@ if __name__ == "__main__":
             output_metrics_dir=output_metrics_dir,
             suffix="_secondo" # Questo crea i file ..._secondo.csv
         )
+
+        run_evaluation_on_test_set(
+            # Percorsi corretti come da categorize_files.py
+            test_data_path="test_result_3/test_data_with_text_3.csv", 
+            test_labels_path="test_result_3/test_set_categorized_3.csv",
+            
+            trained_models=trained_models,
+            vectorizer=vectorizer_final,
+            ontology_keywords=ONTOLOGY_KEYWORDS,
+            g=g, # <-- Passa 'g'
+            ns=NS, # <-- Passa 'NS'
+            output_metrics_dir=output_metrics_dir,
+            suffix="_terzo" # Questo crea i file ... _terzo.csv
+        )
     
     print("\n🎉 PROCESSO DI TRAINING E PREDIZIONE TERMINATO! 🎉")

@@ -191,3 +191,11 @@ if __name__ == "__main__":
     print(f"\n🚀 CATEGORIZZAZIONE COMPLETA TEST SET 2: '{input_test_2_file}'")
     categorize_entire_file(input_test_2_file, test_2_output_folder, test_2_output_file)
     print("=" * 80)
+
+    # Categorizzazione test set 3
+    input_test_3_file = "test_result_3/test_data_3_with_text.csv"
+    test_3_output_folder = "test_result_3"
+    test_3_output_file = "test_set_3_categorized.csv"
+    print(f"\n🚀 CATEGORIZZAZIONE COMPLETA TEST SET 3: '{input_test_3_file}'")
+    categorize_entire_file(input_test_3_file, test_3_output_folder, test_3_output_file)
+    print("=" * 80)
