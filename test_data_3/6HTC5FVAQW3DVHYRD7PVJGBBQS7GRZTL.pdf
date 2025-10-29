@@ -1,0 +1,107 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+
+
+
+
+<!-- HEADER -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		      
+		<link rel="stylesheet" type="text/css" 
+			href="http://webarchive.loc.gov/all/css/styles.css"
+			src="http://webarchive.loc.gov/all/css/styles.css" />
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" src="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<title>Library of Congress Web Archives</title>
+		<base target="_top" />
+
+		<!--LC Click Traffic Tracker-->
+		<script type='text/javascript' src='http://www.loc.gov/global/s_code.js'></script>
+		<style type="text/css" >
+			@-moz-document url-prefix() {
+    				button.search-button {
+         				margin-top:-3px!important;
+			    	}
+
+			}
+		</style>
+	</head>
+
+	<body bgcolor="white" alink="red" vlink="#0000aa" link="blue" 
+		style="font-family: Arial; font-size: 10pt">
+
+                <div id="position">
+                      <!-- OPENWAYBACK LOGO -->
+                      <br>
+                      <a href="http://loc.gov/websites">
+                        <img src="http://webarchive.loc.gov/all/images/logo-webtopper.png" alt="logo: Library of Congress" />
+                      </a>
+					  <!-- Ask a librarian -->
+					  <div class="askalibrarian"><a href="http://www.loc.gov/rr/askalib/ask-digital.html">Ask a Librarian</a></div>
+                </div>
+<!-- /HEADER -->
+<div id="position">
+
+
+    <div id="wbSearch">
+        <div id="form">
+                
+
+
+<form name="form1" method="get" action="http://webarchive.loc.gov/all/query">
+	<input type="hidden" name="type" value="urlquery">
+	<input class="search-input" type="text" name="url" placeholder="Search for a URL in the web archive" size="50" maxlength="256">
+	<button class="search-button" type="submit" value="submit"><i class="fa fa-search"></i></button>
+</form>
+
+                <hr>
+
+
+
+
+           	                
+            <div id="error">
+
+                <h2>Resource Not In Archive</h2>
+                <p>The Resource you requested is not in this archive.</p>
+
+		        </p>
+		        <p>More options: </p>
+			    <p>Try Searching all pages under  <a href="http://webarchive.loc.gov/all/query?q=startdate%3A19960101000000+type%3Aprefixquery+date%3A20161210113306+enddate%3A20171101235959+url%3Ahttp%253A%252F%252Fwww.loc.gov%252Fstaff%252Fcopyright%252Fir%252Fnotices%252F2006%252F&amp;count=10000&amp;start_page=1">http://www.loc.gov/staff/copyright/ir/notices/2006/</a></p>
+		
+	    </div>
+            </div>
+            </section>
+            <div id="errorBorder"></div>
+
+
+
+
+
+<!-- FOOTER -->
+                <!--
+		<div align="center">
+			<hr noshade size="1" align="center">
+			
+			<p>
+				<a href="http://webarchive.loc.gov/all/">
+					Home
+				</a> |
+				<a href="http://webarchive.loc.gov/all/help.jsp">
+					Help
+				</a>
+			</p>
+		</div>
+                -->
+                <div style="position: fixed; bottom: 4px; right: 4px; font: 11px 'lucida grande', helvetica, arial; color: #4b75b3; text-align: right;">
+                  <a href="https://github.com/iipc/openwayback" target="_blank">OpenWayback</a> 2.3.0
+                </div>
+	</body>
+</html>
+<!-- /FOOTER -->
+
