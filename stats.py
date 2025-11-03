@@ -5,8 +5,7 @@ import numpy as np
 import pickle
 import os
 import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, log_loss
+from sklearn.metrics import log_loss
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import SGDClassifier
 from scipy.sparse import load_npz

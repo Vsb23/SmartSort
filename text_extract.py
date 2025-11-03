@@ -6,7 +6,6 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import spacy
-import numpy as np
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 
