@@ -447,7 +447,7 @@ if __name__ == "__main__":
     # FASE 1: K-FOLD CROSS VALIDATION
 
     print("\n--- Inizio K-Fold Cross Validation su Training Set ---")
-    skf = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+    skf = StratifiedKFold(n_splits=3, shuffle=True)
 
     accuracies_l3_svm, accuracies_l3_nb, accuracies_l3_ensemble = [], [], []
     fold_no = 1
