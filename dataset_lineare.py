@@ -14,7 +14,6 @@ from sklearn.metrics import accuracy_score
 from scipy.sparse import hstack, csr_matrix
 from constraint import Problem, BacktrackingSolver
 
-# (Le funzioni di supporto come load_keywords_from_ontology, get_parents, etc. rimangono invariate)
 def load_keywords_from_ontology(ontology_path, ns):
     g = Graph()
     g.parse(ontology_path, format="xml")
@@ -151,7 +150,6 @@ if __name__ == "__main__":
     
     final_results = []
     
-    # Verifica che le classi dei modelli L3 siano le stesse per un ensemble sicuro
     assert np.array_equal(model_l3_svm_final.classes_, model_l3_nb_final.classes_), "Le classi dei modelli L3 non corrispondono!"
 
     for i in range(len(df_test)):
@@ -171,7 +169,7 @@ if __name__ == "__main__":
 
         result_row = {
             'filename': df_test.iloc[i]['filename'],
-            'L1_pred': final_probs_ensemble.get('L1_pred', "N/A"), # L1 e L2 sono comuni
+            'L1_pred': final_probs_ensemble.get('L1_pred', "N/A"),
             'L2_pred': final_probs_ensemble.get('L2_pred', "N/A"),
             'L3_pred_svm': final_probs_svm.get('L3_pred', "Altro"),
             'L3_prob_svm': final_probs_svm.get('L3_prob', 0.0),

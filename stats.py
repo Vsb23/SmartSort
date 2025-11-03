@@ -1,5 +1,3 @@
-# FILE: stats.py (MODIFICATO PER GESTIRE DUE TEST SET)
-
 import pandas as pd
 import numpy as np
 import pickle
@@ -92,12 +90,12 @@ def plot_test_set_performance(metrics_csv_path, output_dir, suffix=''):
     print(f"✅ Grafico riassuntivo (Test Set {title_suffix}) salvato in: {filename}")
 
 
-# # --- 3. FUNZIONE PER MATRICI DI CONFUSIONE (MODIFICATA) ---
+# # --- 3. FUNZIONE PER MATRICI DI CONFUSIONE (DEPRECATA) ---
 # def plot_confusion_matrices(predictions_csv_path, output_dir, suffix=''):
-#     """
-#     Genera e salva le matrici di confusione per ogni pipeline.
-#     'suffix' viene usato per differenziare i nomi dei file (es. '_primo', '_secondo')
-#     """
+#     # """
+#     # Genera e salva le matrici di confusione per ogni pipeline.
+#     # 'suffix' viene usato per differenziare i nomi dei file (es. '_primo', '_secondo')
+#     # """
 #     title_suffix = suffix.replace('_', ' ').strip().title()
 #     print(f"\n--- 3. Generazione Matrici di Confusione (Test Set: {title_suffix}) ---")
     
@@ -106,10 +104,10 @@ def plot_test_set_performance(metrics_csv_path, output_dir, suffix=''):
 #     except FileNotFoundError:
 #         print(f"❌ ERRORE: File delle previsioni '{predictions_csv_path}' non trovato.")
 #         return
-    
+   
 #     y_true = df['ground_truth_category']
 #     models = ['LR', 'RF', 'SVM', 'NB']
-    
+   
 #     for model in models:
 #         pred_col = f'{model}_L3_pred'
 #         if pred_col not in df.columns: 
@@ -226,12 +224,12 @@ if __name__ == '__main__':
     # 1. Percorso K-Fold (relativo al training)
     kfold_summary_csv = 'metrics/kfold_metrics_summary.csv'
     
-    # 2. Percorsi per Test Set 1 (Generale)
+    # 2. Percorsi per Test Set 1 
     test_set_metrics_csv_1 = 'metrics/performance_metrics_summary_primo.csv'
     test_set_predictions_csv_1 = 'metrics/predictions_and_evaluation_results_primo.csv'
     suffix_1 = '_primo'
     
-    # 3. Percorsi per Test Set 2 (Calcio)
+    # 3. Percorsi per Test Set 2 
     test_set_metrics_csv_2 = 'metrics/performance_metrics_summary_secondo.csv'
     test_set_predictions_csv_2 = 'metrics/predictions_and_evaluation_results_secondo.csv'
     suffix_2 = '_secondo'

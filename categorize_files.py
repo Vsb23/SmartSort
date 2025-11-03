@@ -18,14 +18,12 @@ def estrai_category_keywords_da_ontologia(ontology_path):
         category_keywords[cat_name].append(str(o))
     return dict(category_keywords)
 
-# --- Caricamento dinamico delle keyword dall'ontologia ---
 try:
     category_keywords = estrai_category_keywords_da_ontologia("Ontology.owx")
 except FileNotFoundError:
     print("❌ ERRORE: File 'Ontology.owx' non trovato. Assicurati che sia nella stessa cartella dello script.")
     exit()
 
-# --- Definizione delle categorie per livello di specificità ---
 categories_by_specificity = {
     "very_specific": [
         "AI_ML", "Web_development", "System_programming", "Data_analysis", "Database", "Security",
@@ -42,7 +40,6 @@ categories_by_specificity = {
     "fallback": ["Altro"]
 }
 
-# --- Mappatura estensioni -> categoria ---
 extension_categories = {
     ".html": ["Web_development"],
     ".css": ["Web_development"],
@@ -83,7 +80,6 @@ def find_most_specific_category(row):
     best_category = None
     best_score = 0
 
-    # Gerarchia di specificità
     for level in ['very_specific', 'specific']:
         if best_category is None:
             for category in categories_by_specificity[level]:
@@ -167,7 +163,7 @@ def categorize_entire_file(input_csv, output_folder, output_file):
 
     return df
 if __name__ == "__main__":
-    # Categorizzazione training set (tutto invariato)
+    # Categorizzazione training set
     input_training_file = "training_result/output_with_text.csv"
     training_output_folder = "training_result"
     training_output_file = "training_set_categorized.csv"

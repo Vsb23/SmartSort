@@ -38,14 +38,12 @@ def explore_folder_recursive(base_path):
                 containing_folder = os.path.dirname(full_path)
                 relative_folder = os.path.relpath(containing_folder, base_path)
                 metadata_tuple = extract_metadata_from_pdf(full_path)
-                # Aggiungi info file: (titolo, nome file, autore, anno, cat vuota, estensione, "file", percorso relativo)
                 all_data.append(metadata_tuple + (relative_folder,))
     return all_data
 
 def write_to_csv(data, output_csv):
-    # Assicura che la directory di output esista
     output_dir = os.path.dirname(output_csv)
-    if output_dir: # Controlla se il percorso non è vuoto (es. se è nella stessa cartella)
+    if output_dir:
         os.makedirs(output_dir, exist_ok=True)
 
     with open(output_csv, 'w', newline='', encoding='utf-8') as csvfile:
@@ -53,7 +51,6 @@ def write_to_csv(data, output_csv):
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for entry in data:
-            # Assicurati che ci siano 8 elementi nella tupla
             if len(entry) == 8:
                 titolo, filename, autore, anno, categoria, estensione, tipo, relpath = entry
                 writer.writerow({'titolo': titolo, 'filename': filename, 'autore': autore, 'anno': anno, 'category': categoria, 'extension': estensione, 'type': tipo, 'relative_path': relpath})

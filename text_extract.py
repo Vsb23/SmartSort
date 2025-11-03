@@ -102,7 +102,6 @@ def process_all_documents(csv_path, output_csv, base_data_folder):
         if row['type'] == 'file' and row['extension'] == '.pdf':
             relative_path = row['relative_path'] if pd.notna(row['relative_path']) and row['relative_path'].strip() != '.' else ''
             pdf_filename = row['filename']
-            # << MODIFICA >>: Usa il parametro 'base_data_folder' per costruire il percorso
             pdf_path = os.path.normpath(os.path.join(base_data_folder, relative_path, pdf_filename))
 
             if pdf_path not in extracted_data_cache:
@@ -174,7 +173,7 @@ if __name__ == "__main__":
     training_folder = './training_data'
     
     # Dati di Test
-    test_input_csv = './test_result/test_output.csv'  # Assicurati che questo file esista!
+    test_input_csv = './test_result/test_output.csv' 
     test_output_csv = './test_result/test_data_with_text.csv'
     test_folder = './test_data'
 

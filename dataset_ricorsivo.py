@@ -62,7 +62,6 @@ def setup_csp_problem(doc_probs, ontology_graph, ns):
     problem = Problem()
     prob_l3 = {k: v for k, v in doc_probs['L3'].items() if v > 0.05}
     if not prob_l3:
-        # <<< MODIFICA: Ritorna il flag di fallback
         return None, doc_probs['L3'], True 
 
     possible_l2 = set()
@@ -73,7 +72,6 @@ def setup_csp_problem(doc_probs, ontology_graph, ns):
         possible_l1.update(get_parents(ontology_graph, ns, l2_cat))
 
     if not possible_l1 or not possible_l2:
-        # <<< MODIFICA: Ritorna il flag di fallback
         return None, doc_probs['L3'], True
 
     valid_l1 = list(possible_l1 & doc_probs['L1'].keys())
@@ -81,7 +79,6 @@ def setup_csp_problem(doc_probs, ontology_graph, ns):
     valid_l3 = list(prob_l3.keys()) 
 
     if not valid_l1 or not valid_l2 or not valid_l3:
-        # <<< MODIFICA: Ritorna il flag di fallback
         return None, doc_probs['L3'], True
 
     problem.addVariable("L1Category", valid_l1)
@@ -94,13 +91,11 @@ def setup_csp_problem(doc_probs, ontology_graph, ns):
     problem.addConstraint(hierarchical_constraint, ("L2Category", "L3Category"))
     problem.addConstraint(hierarchical_constraint_l1, ("L1Category", "L2Category"))
     
-    # <<< MODIFICA: Ritorna il flag di fallback (False)
     return problem, None, False
 
 def find_best_csp_solution(problem_tuple, doc_probs, g, ns):
     problem, fallback_l3_probs, used_fallback_in_setup = problem_tuple
 
-    # --- PIANO A: Prova a risolvere il CSP ---
     if problem is not None:
         solutions = problem.getSolutions()
         if solutions:
@@ -114,14 +109,11 @@ def find_best_csp_solution(problem_tuple, doc_probs, g, ns):
             if best_solution:
                 l1, l2, l3 = best_solution["L1Category"], best_solution["L2Category"], best_solution["L3Category"]
                 probs_dict = {'L1_pred': l1, 'L2_pred': l2, 'L3_pred': l3, 'Combined_prob': max_prob}
-                # <<< MODIFICA: Ritorna il flag di fallback (False)
                 return l1, l2, l3, probs_dict, False
 
-    # --- PIANO B (FALLBACK): Se il Piano A fallisce ---
     if fallback_l3_probs is None:
         fallback_l3_probs = doc_probs['L3']
     if not fallback_l3_probs:
-         # <<< MODIFICA: Ritorna il flag di fallback (True)
          return "N/A", "N/A", "N/A", {}, True
          
     l3_pred = max(fallback_l3_probs, key=fallback_l3_probs.get)
@@ -133,12 +125,10 @@ def find_best_csp_solution(problem_tuple, doc_probs, g, ns):
     prob = doc_probs['L1'].get(l1_pred, 0) * doc_probs['L2'].get(l2_pred, 0) * doc_probs['L3'].get(l3_pred, 0)
     probs_dict = {'L1_pred': l1_pred, 'L2_pred': l2_pred, 'L3_pred': l3_pred, 'Combined_prob': prob}
     
-    # <<< MODIFICA: Ritorna il flag di fallback (True)
     return l1_pred, l2_pred, l3_pred, probs_dict, True
     
 # --- FUNZIONE PER VALUTAZIONE (USATA SOLO ALLA FINE) ---
 def evaluate_and_get_metrics(df_predictions, df_test_with_ground_truth):
-    # ... (Questa funzione rimane invariata) ...
     print("\n" + "--- VALUTAZIONE PERFORMANCE (ACCURACY, PRECISION, RECALL, F1) ---".center(90, "="))
     df_test_with_ground_truth['ground_truth_category'] = df_test_with_ground_truth['category']
     df_merged = pd.merge(df_predictions, df_test_with_ground_truth[['filename', 'ground_truth_category']], on='filename')
@@ -159,9 +149,7 @@ def evaluate_and_get_metrics(df_predictions, df_test_with_ground_truth):
     print("\n" + "="*90)
     return all_metrics
 
-    # =================================================================================
-# --- NUOVA FUNZIONE PER VALUTAZIONE SU SINGOLO TEST SET ---
-# =================================================================================
+
 def run_evaluation_on_test_set(test_data_path, test_labels_path, trained_models, vectorizer, ontology_keywords, g, ns, output_metrics_dir, suffix):
     """
     Esegue l'intera pipeline di predizione e valutazione su un dato test set.
@@ -276,7 +264,6 @@ if __name__ == "__main__":
     ONTOLOGY_KEYWORDS = estrai_category_keywords_da_ontologia(ontology_path)
 
     # --- 2. CARICAMENTO E PRE-PROCESSING DATI DI TRAINING ---
-    # (Questa sezione è INVARIATA e già corretta)
     print("\n" + "--- FASE 1: Caricamento e Processing Dati di Training ---".center(80, "="))
     df_train = load_training_data(train_csv_file)
     
@@ -313,7 +300,6 @@ if __name__ == "__main__":
 
 
     # --- 3. K-FOLD CROSS-VALIDATION ---
-    # (Questa sezione è INVARIATA e già corretta)
     print("\n" + f"--- FASE 2: Esecuzione K-Fold Cross-Validation (K={N_SPLITS_KFOLD}) ---".center(80, "="))
     
     skf = StratifiedKFold(n_splits=N_SPLITS_KFOLD, shuffle=True,  )
@@ -358,7 +344,6 @@ if __name__ == "__main__":
             print(f"  - {model_name} (F1-Weighted): {f1:.4f}")
 
     print("\n" + "--- Risultati K-Fold Cross-Validation (Medie) ---".center(80, "="))
-    # ... (Stampa e salvataggio risultati K-Fold, tutto invariato) ...
     print("\nSalvataggio risultati K-Fold su file...")
     df_kfold_metrics = pd.DataFrame(fold_metrics)
     kfold_output_path = os.path.join(output_metrics_dir, "kfold_metrics_raw.csv")
@@ -375,7 +360,6 @@ if __name__ == "__main__":
 
 
     # --- 4. ADDESTRAMENTO FINALE SUL TRAINING SET COMPLETO ---
-    #(Questa sezione è INVARIATA e già corretta)
     print("\n" + "--- FASE 3: Addestramento Modelli Finali (su 100% Training Set) ---".center(80, "="))
     
     final_training_needed = force_retrain or not all(os.path.exists(os.path.join(output_model_dir, f)) for f in [f"model_{lvl}_{mdl}.pkl" for lvl in levels for mdl in model_templates])
@@ -399,7 +383,6 @@ if __name__ == "__main__":
          print("✅ Tutti i modelli finali sono stati addestrati e salvati.")
 
     # --- 5. PREDIZIONE E VALUTAZIONE SUI TEST SET ESTERNI ---
-    # !!! QUESTA È LA SEZIONE MODIFICATA CON I PERCORSI CORRETTI !!!
     
     print("\n" + "--- FASE 4&5: Avvio Valutazione sui Test Set Esterni ---".center(80, "="))
     
@@ -416,7 +399,6 @@ if __name__ == "__main__":
     if trained_models:
         # --- Test Set 1 (Generale / test_result) ---
         run_evaluation_on_test_set(
-              # Percorsi corretti come da categorize_files.py
               test_data_path="test_result/test_data_with_text.csv", 
               test_labels_path="test_result/test_set_categorized.csv", 
             
@@ -431,7 +413,6 @@ if __name__ == "__main__":
         
          # --- Test Set 2 (Calcio / test_result_2) ---
         run_evaluation_on_test_set(
-             # Percorsi corretti come da categorize_files.py
              test_data_path="test_result_2/test_data_2_with_text.csv", 
              test_labels_path="test_result_2/test_set_2_categorized.csv",
             
@@ -445,7 +426,6 @@ if __name__ == "__main__":
         )
 
         run_evaluation_on_test_set(
-            # Percorsi corretti come da categorize_files.py
             test_data_path="test_result_3/test_data_3_with_text.csv", 
             test_labels_path="test_result_3/test_set_3_categorized.csv",
             
