@@ -14,7 +14,7 @@ from scipy.sparse import hstack, csr_matrix, save_npz
 from sklearn.base import clone
 from constraint import Problem
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support, classification_report, f1_score
-from sklearn.model_selection import StratifiedKFold # <<< MODIFICA: Importato K-Fold
+from sklearn.model_selection import StratifiedKFold
 import pickle
 import os
 
@@ -375,28 +375,28 @@ if __name__ == "__main__":
 
 
     # --- 4. ADDESTRAMENTO FINALE SUL TRAINING SET COMPLETO ---
-    # (Questa sezione è INVARIATA e già corretta)
+    #(Questa sezione è INVARIATA e già corretta)
     print("\n" + "--- FASE 3: Addestramento Modelli Finali (su 100% Training Set) ---".center(80, "="))
     
     final_training_needed = force_retrain or not all(os.path.exists(os.path.join(output_model_dir, f)) for f in [f"model_{lvl}_{mdl}.pkl" for lvl in levels for mdl in model_templates])
 
     if not final_training_needed:
-        print("✅ Modelli finali già presenti. Salto addestramento.")
-        trained_models = {'L1': {}, 'L2': {}, 'L3': {}}
-        for level in levels.keys():
-            for model in model_templates.keys():
-                with open(os.path.join(output_model_dir, f"model_{level}_{model}.pkl"), 'rb') as f: trained_models[level][model] = pickle.load(f)
+         print("✅ Modelli finali già presenti. Salto addestramento.")
+         trained_models = {'L1': {}, 'L2': {}, 'L3': {}}
+         for level in levels.keys():
+             for model in model_templates.keys():
+                 with open(os.path.join(output_model_dir, f"model_{level}_{model}.pkl"), 'rb') as f: trained_models[level][model] = pickle.load(f)
     else:
-        print("Avvio addestramento modelli finali...")
-        trained_models = {'L1': {}, 'L2': {}, 'L3': {}}
-        for level_name, y_train in [('L1', y_train_l1), ('L2', y_train_l2), ('L3', y_train_l3)]:
-            for model_name, model_template in model_templates.items():
-                print(f"Addestramento modello: {model_name} per Livello: {level_name}...")
-                model_to_fit = clone(model_template)
-                model_to_fit.fit(X_train_combined, y_train)
-                trained_models[level_name][model_name] = model_to_fit
-                with open(os.path.join(output_model_dir, f"model_{level_name}_{model_name}.pkl"), 'wb') as f: pickle.dump(model_to_fit, f)
-        print("✅ Tutti i modelli finali sono stati addestrati e salvati.")
+         print("Avvio addestramento modelli finali...")
+         trained_models = {'L1': {}, 'L2': {}, 'L3': {}}
+         for level_name, y_train in [('L1', y_train_l1), ('L2', y_train_l2), ('L3', y_train_l3)]:
+             for model_name, model_template in model_templates.items():
+                 print(f"Addestramento modello: {model_name} per Livello: {level_name}...")
+                 model_to_fit = clone(model_template)
+                 model_to_fit.fit(X_train_combined, y_train)
+                 trained_models[level_name][model_name] = model_to_fit
+                 with open(os.path.join(output_model_dir, f"model_{level_name}_{model_name}.pkl"), 'wb') as f: pickle.dump(model_to_fit, f)
+         print("✅ Tutti i modelli finali sono stati addestrati e salvati.")
 
     # --- 5. PREDIZIONE E VALUTAZIONE SUI TEST SET ESTERNI ---
     # !!! QUESTA È LA SEZIONE MODIFICATA CON I PERCORSI CORRETTI !!!
@@ -416,38 +416,38 @@ if __name__ == "__main__":
     if trained_models:
         # --- Test Set 1 (Generale / test_result) ---
         run_evaluation_on_test_set(
-            # Percorsi corretti come da categorize_files.py
-            test_data_path="test_result/test_data_with_text.csv", 
-            test_labels_path="test_result/test_set_categorized.csv", 
+              # Percorsi corretti come da categorize_files.py
+              test_data_path="test_result/test_data_with_text.csv", 
+              test_labels_path="test_result/test_set_categorized.csv", 
             
-            trained_models=trained_models,
-            vectorizer=vectorizer_final,
-            ontology_keywords=ONTOLOGY_KEYWORDS,
-            g=g, # <-- Passa 'g'
-            ns=NS, # <-- Passa 'NS'
-            output_metrics_dir=output_metrics_dir,
-            suffix="_primo" # Questo crea i file ..._primo.csv
+             trained_models=trained_models,
+             vectorizer=vectorizer_final,
+             ontology_keywords=ONTOLOGY_KEYWORDS,
+             g=g, # <-- Passa 'g'
+             ns=NS, # <-- Passa 'NS'
+             output_metrics_dir=output_metrics_dir,
+             suffix="_primo" # Questo crea i file ..._primo.csv
         )
         
-        # --- Test Set 2 (Calcio / test_result_2) ---
+         # --- Test Set 2 (Calcio / test_result_2) ---
         run_evaluation_on_test_set(
-            # Percorsi corretti come da categorize_files.py
-            test_data_path="test_result_2/test_data_with_text_2.csv", 
-            test_labels_path="test_result_2/test_set_categorized_2.csv",
+             # Percorsi corretti come da categorize_files.py
+             test_data_path="test_result_2/test_data_2_with_text.csv", 
+             test_labels_path="test_result_2/test_set_2_categorized.csv",
             
-            trained_models=trained_models,
-            vectorizer=vectorizer_final,
-            ontology_keywords=ONTOLOGY_KEYWORDS,
-            g=g, # <-- Passa 'g'
-            ns=NS, # <-- Passa 'NS'
-            output_metrics_dir=output_metrics_dir,
-            suffix="_secondo" # Questo crea i file ..._secondo.csv
+             trained_models=trained_models,
+             vectorizer=vectorizer_final,
+             ontology_keywords=ONTOLOGY_KEYWORDS,
+             g=g, # <-- Passa 'g'
+             ns=NS, # <-- Passa 'NS'
+             output_metrics_dir=output_metrics_dir,
+             suffix="_secondo" # Questo crea i file ..._secondo.csv
         )
 
         run_evaluation_on_test_set(
             # Percorsi corretti come da categorize_files.py
-            test_data_path="test_result_3/test_data_with_text_3.csv", 
-            test_labels_path="test_result_3/test_set_categorized_3.csv",
+            test_data_path="test_result_3/test_data_3_with_text.csv", 
+            test_labels_path="test_result_3/test_set_3_categorized.csv",
             
             trained_models=trained_models,
             vectorizer=vectorizer_final,
