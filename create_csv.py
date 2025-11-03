@@ -110,6 +110,7 @@ if __name__ == "__main__":
     os.makedirs("./training_result", exist_ok=True)
     os.makedirs("./test_result", exist_ok=True)
     os.makedirs("./test_result_2", exist_ok=True)
+    os.makedirs("./test_result_3", exist_ok=True)
     total_files_processed = 0
     total_records_processed = 0
 

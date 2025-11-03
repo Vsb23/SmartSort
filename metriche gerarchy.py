@@ -52,6 +52,14 @@ def calcola_metriche(df_vere_etichette, df_predizioni, test_set_name):
     print(f"Calcolo metriche di valutazione per {test_set_name}...")
     df = pd.merge(df_vere_etichette, df_predizioni, on='filename', how='inner')
 
+    # --- NUOVO FILTRO: Esclude i file la cui etichetta vera L3 è 'Altro' ---
+    initial_count = len(df)
+    df = df[df['L3'] != 'Altro'].copy()
+    filtered_count = len(df)
+    
+    print(f"File originali: {initial_count}. Esclusi 'Altro': {initial_count - filtered_count}. File rimanenti: {filtered_count}")
+    # ----------------------------------------------------------------------
+
     livelli = ['L1', 'L2', 'L3']
     pred_cols = ['L1_pred', 'L2_pred', 'L3_pred_ensemble']
 
@@ -74,7 +82,7 @@ def calcola_metriche(df_vere_etichette, df_predizioni, test_set_name):
         print(f"\n{lvl} (Accuratezza Esemble):")
         print(f"- Accuratezza: {n_match / len(df):.4f} (su {len(df)} file)")
         
-        # Rimosso: Matrice di confusione e report dettagliato dei file errati.
+        
 
     return risultati
 
@@ -87,7 +95,29 @@ def process_test_set_evaluation(input_csv, predizioni_csv, ontology_path, test_s
         print(f"❌ ERRORE: File non trovato per {test_set_name}: {e}")
         return
 
+    # Pulizia dei NaN per le metriche
+    # Colonna 'category' vera (che diventa L3)
+    df_vere['category'] = df_vere['category'].fillna('Altro') 
+    
+    # Colonne di predizione (Ensemble e L1/L2)
+    pred_cols_to_clean = ['L1_pred', 'L2_pred', 'L3_pred_ensemble']
+    for col in pred_cols_to_clean:
+        if col in df_pred.columns:
+            # Sostituisce eventuali valori NaN con la categoria di fallback 'Altro'
+            df_pred[col] = df_pred[col].fillna('Altro')
+
     df_vere = prepare_hierarchies(df_vere, ontology_path)
+
+    # Conteggio dei file categorizzati come 'Altro' (dal categorizer)
+    fallback_count = df_vere['category'].eq('Altro').sum()
+    total_files = len(df_vere)
+    
+    print("\n--- Diagnostica del Rumore (Test Set 3) ---")
+    print(f"File totali nel set: {total_files}")
+    print(f"File etichettati come 'Altro' (Rumore/Corrotti): {fallback_count}")
+    print(f"Percentuale di Rumore da Dati Esterni: {(fallback_count / total_files) * 100:.2f}%")
+    print("------------------------------------------")
+
 
     metriche = calcola_metriche(df_vere, df_pred, test_set_name) 
 
@@ -95,6 +125,7 @@ def process_test_set_evaluation(input_csv, predizioni_csv, ontology_path, test_s
     for livello, valori in metriche.items():
         print(f"{livello}: Precision={valori['precision']:.3f}, Recall={valori['recall']:.3f}, F1={valori['f1']:.3f}")
     print("-" * 50)
+
 
 
 def main():
@@ -114,6 +145,13 @@ def main():
         'predizioni_csv': 'test_result_2/predictions_on_testset_2_full_comparison_gerarchy.csv'
     }
 
+    # Configurazione Test Set 3
+    config_test_3 = {
+        'name': 'Test_Set_3',
+        'input_csv': 'test_result_3/test_set_3_categorized.csv',
+        'predizioni_csv': 'test_result_3/predictions_on_testset_3_full_comparison_gerarchy.csv'
+    }
+
     print("=========================================")
     process_test_set_evaluation(
         config_test_1['input_csv'], 
@@ -127,6 +165,14 @@ def main():
         config_test_2['predizioni_csv'], 
         ontology_path, 
         config_test_2['name']
+    )
+
+    print("=========================================")
+    process_test_set_evaluation(
+        config_test_3['input_csv'], 
+        config_test_3['predizioni_csv'], 
+        ontology_path, 
+        config_test_3['name']
     )
     print("🎉 Valutazione completata per tutti i set!")
 

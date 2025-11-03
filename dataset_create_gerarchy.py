@@ -408,6 +408,7 @@ if __name__ == "__main__":
     train_csv_file = "training_result/training_set_categorized.csv"
     test_csv_file = "test_result/test_set_categorized.csv"
     test_2_csv_file = "test_result_2/test_set_2_categorized.csv"
+    test_3_csv_file = "test_result_3/test_set_3_categorized.csv"
 
     output_cols = [
         'filename', 'L1_pred', 'L2_pred',
@@ -551,6 +552,17 @@ if __name__ == "__main__":
         csv_file=test_2_csv_file,
         output_folder="test_result_2",
         output_filename="predictions_on_testset_2_full_comparison_gerarchy.csv",
+        vectorizer=vectorizer,
+        ontology_keywords=ONTOLOGY_KEYWORDS,
+        final_pipeline=pipeline_finale,
+        g=g, NS=NS,
+        output_cols=output_cols
+    )
+    # 3.3 Predizione Test Set 3
+    df_result_3 = process_and_predict_test_set(
+        csv_file=test_3_csv_file,
+        output_folder="test_result_3",
+        output_filename="predictions_on_testset_3_full_comparison_gerarchy.csv",
         vectorizer=vectorizer,
         ontology_keywords=ONTOLOGY_KEYWORDS,
         final_pipeline=pipeline_finale,
