@@ -231,7 +231,7 @@ def run_evaluation_on_test_set(test_data_path, test_labels_path, trained_models,
     print(f"✅ Riepilogo metriche (Test Set {suffix}) salvato in '{output_metrics_filename}'.")
 
 # =================================================================================
-# --- BLOCCO DI ESECUZIONE PRINCIPALE (CORRETTO) ---
+# --- BLOCCO DI ESECUZIONE PRINCIPALE ---
 # =================================================================================
 if __name__ == "__main__":
     # --- 1. SETUP E CONFIGURAZIONE ---
