@@ -52,20 +52,19 @@ def calcola_metriche(df_vere_etichette, df_predizioni, test_set_name):
     print(f"Calcolo metriche di valutazione per {test_set_name}...")
     df = pd.merge(df_vere_etichette, df_predizioni, on='filename', how='inner')
 
-    # --- NUOVO FILTRO: Esclude i file la cui etichetta vera L3 è 'Altro' ---
+    # Filtro che Esclude i file la cui etichetta vera L3 è 'Altro'
     initial_count = len(df)
     df = df[df['L3'] != 'Altro'].copy()
     filtered_count = len(df)
     
     print(f"File originali: {initial_count}. Esclusi 'Altro': {initial_count - filtered_count}. File rimanenti: {filtered_count}")
-    # ----------------------------------------------------------------------
+    
 
     livelli = ['L1', 'L2', 'L3']
     pred_cols = ['L1_pred', 'L2_pred', 'L3_pred_ensemble']
 
     risultati = {}
     
-    # Rimosso il setup della cartella di output (non ci sono più immagini)
 
     for lvl, pred_col in zip(livelli, pred_cols):
         y_true = df[lvl]
@@ -78,7 +77,6 @@ def calcola_metriche(df_vere_etichette, df_predizioni, test_set_name):
         df['match'] = (y_true == y_pred)
         n_match = df['match'].sum()
         
-        # Stampa riassuntiva pulita (solo Accuratezza)
         print(f"\n{lvl} (Accuratezza Esemble):")
         print(f"- Accuratezza: {n_match / len(df):.4f} (su {len(df)} file)")
         

@@ -145,7 +145,7 @@ class HierarchicalClassifier(BaseEstimator, ClassifierMixin):
     
     def _is_child_of(self, child_category, parent_category):
         if child_category == "Altro" or parent_category == "Altro":
-            return True  # Permetti "Altro" 
+            return True   
         parents = get_parents(self.ontology_graph, self.namespace, child_category)
         return parent_category in parents
     @property
@@ -214,10 +214,10 @@ def train_hierarchical_models(X_train_combined, y_train_l1, y_train_l2, y_train_
     
     # Definisci i classificatori base
     base_l1 = make_pipeline(StandardScaler(with_mean=False), 
-                           LogisticRegression(max_iter=1000, random_state=42))
-    base_l2 = RandomForestClassifier(n_estimators=100, random_state=42)
-    base_l3_svm = SVC(probability=True, random_state=42)
-    base_l3_nb = MultinomialNB()  # NB non ha bisogno di scaling
+                           LogisticRegression(max_iter=1000))
+    base_l2 = RandomForestClassifier(n_estimators=100)
+    base_l3_svm = SVC(probability=True)
+    base_l3_nb = MultinomialNB()  
     
     # Training gerarchico con entrambi i modelli per L3
     pipeline.fit_hierarchical(X_train_combined, y_train_l1, y_train_l2, y_train_l3,
@@ -246,7 +246,7 @@ def plot_kfold_accuracies(folds, accuracy_svm, accuracy_nb, accuracy_ensemble):
     ax.legend(fontsize=12)
     ax.grid(axis='y', linestyle='--', alpha=0.7)
 
-    # Funzione per aggiungere valori sopra le barre
+    # Funzione per aggiungere valori sopra le barre del grafico
     def add_values(bars):
         for bar in bars:
             height = bar.get_height()
@@ -284,7 +284,7 @@ def plot_loss_curve(X_train, y_train, output_dir):
     random_state=42,
     learning_rate='adaptive',
     eta0=0.01,
-    alpha=0.001,  # o puoi provare 0.01 se necessario
+    alpha=0.001,  
     max_iter=1,
     tol=None,
     warm_start=True
@@ -300,7 +300,6 @@ def plot_loss_curve(X_train, y_train, output_dir):
         model.partial_fit(X_train_part_scaled, y_train_part, classes=classes)
         train_prob = model.predict_proba(X_train_part_scaled)
         val_prob = model.predict_proba(X_val_scaled)
-        # Sostituisce eventuali NaN e valori infiniti nelle probabilità con un valore molto piccolo per evitare errori nel calcolo della log loss e garantire stabilità numerica
         train_prob = np.nan_to_num(train_prob, nan=1e-15, posinf=1e-15, neginf=1e-15)
         val_prob = np.nan_to_num(val_prob, nan=1e-15, posinf=1e-15, neginf=1e-15)
         train_losses.append(log_loss(y_train_part, train_prob, labels=model.classes_))
